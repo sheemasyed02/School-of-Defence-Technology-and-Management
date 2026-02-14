@@ -12,9 +12,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-primary text-foreground-inverted">
-      {/* ── Top gold accent ── */}
-      <div className="h-1 w-full bg-gold-accent" />
-
       <div className="container-site py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* ── Brand column ── */}
@@ -98,10 +95,10 @@ export default function Footer() {
           {/* ── Quick links + Contact ── */}
           <div>
             <h4 className="text-sm font-semibold text-gold uppercase tracking-widest mb-6 font-body">
-              Quick Links
+              Community
             </h4>
             <ul className="space-y-3 mb-8">
-              {FOOTER_LINKS.quickLinks.map((link) => (
+              {FOOTER_LINKS.community.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

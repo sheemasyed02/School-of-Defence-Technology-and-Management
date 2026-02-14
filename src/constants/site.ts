@@ -21,33 +21,39 @@ export const SITE = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Home",       href: "/" },
-  { label: "About",      href: "/about" },
-  { label: "Programmes", href: "/programmes" },
-  { label: "Research",   href: "/research" },
-  { label: "Faculty",    href: "/faculty" },
-  { label: "Admissions", href: "/admissions" },
-  { label: "Contact",    href: "/contact" },
+  { label: "Home",          href: "/" },
+  { label: "About",         href: "/about" },
+  { label: "Faculty",       href: "/faculty" },
+  { label: "Programs",      href: "/programs" },
+  { label: "Students",      href: "/students" },
+  { label: "Alumni",        href: "/alumni" },
+  { label: "Placements",    href: "/placements" },
+  { label: "Events",        href: "/events" },
+  { label: "Research",      href: "/research" },
+  { label: "Gallery",       href: "/gallery" },
+  { label: "Repositories",  href: "/repositories" },
+  { label: "Announcements", href: "/announcements" },
+  { label: "Contact",       href: "/contact" },
 ] as const;
 
 export const FOOTER_LINKS = {
   institution: [
-    { label: "About Us",       href: "/about" },
-    { label: "Vision & Mission", href: "/about#vision" },
-    { label: "Leadership",     href: "/about#leadership" },
-    { label: "Infrastructure", href: "/about#infrastructure" },
+    { label: "About Us",        href: "/about" },
+    { label: "Faculty",         href: "/faculty" },
+    { label: "Research",        href: "/research" },
+    { label: "Gallery",         href: "/gallery" },
   ],
   academics: [
-    { label: "Programmes",     href: "/programmes" },
-    { label: "Research Labs",  href: "/research" },
-    { label: "Faculty",        href: "/faculty" },
-    { label: "Publications",   href: "/publications" },
+    { label: "Programs",        href: "/programs" },
+    { label: "Students",        href: "/students" },
+    { label: "Placements",      href: "/placements" },
+    { label: "Repositories",    href: "/repositories" },
   ],
-  quickLinks: [
-    { label: "Admissions",     href: "/admissions" },
-    { label: "Placements",     href: "/placements" },
-    { label: "Events",         href: "/events" },
-    { label: "Contact Us",     href: "/contact" },
+  community: [
+    { label: "Alumni",          href: "/alumni" },
+    { label: "Events",          href: "/events" },
+    { label: "Announcements",   href: "/announcements" },
+    { label: "Contact",         href: "/contact" },
   ],
 } as const;
 
