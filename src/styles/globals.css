@@ -149,4 +149,49 @@
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gold-accent;
   }
+
+  /* Glass card effect */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-brand shadow-brand border border-white/60
+           transition-all duration-400;
+  }
+  .glass-card:hover {
+    @apply shadow-brand-lg;
+  }
+
+  /* Gold gradient border top */
+  .border-gold-gradient {
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(90deg, #D4A843 0%, #E8C86A 50%, #D4A843 100%) 1;
+  }
+
+  /* Stat card with big number */
+  .stat-number {
+    @apply text-4xl md:text-5xl font-heading font-bold;
+    background: linear-gradient(135deg, #D4A843 0%, #E8C86A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section divider line */
+  .section-divider {
+    @apply w-20 h-1 bg-gold-accent rounded-full;
+  }
+
+  /* Card with left gold stripe */
+  .card-stripe {
+    @apply bg-background-paper rounded-brand shadow-brand border border-border-light
+           transition-all duration-300 hover:shadow-brand-lg relative overflow-hidden;
+  }
+  .card-stripe::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-1 bg-gold-accent;
+  }
+
+  /* Floating dot decoration */
+  .dot-pattern {
+    background-image: radial-gradient(rgba(10, 31, 68, 0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }

@@ -4,28 +4,93 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Faculty",
-  description: "Meet our distinguished faculty — experts in defence technology, strategic studies, cybersecurity, and management.",
+  description: "Meet our distinguished faculty — experts in technology management, data analytics, AI, operations, and entrepreneurship.",
 });
 
-const DEPARTMENTS = [
-  "Defence Technology",
-  "Strategic Studies",
-  "Cybersecurity & AI",
-  "Defence Management",
-  "Weapons Systems",
-  "Electronic Warfare",
+const FACULTY = [
+  {
+    name: "Dr. Sarah Johnson",
+    initials: "SJ",
+    designation: "Professor & Head of Department",
+    qualification: "Ph.D. in Technology Management, MIT",
+    specialization: "Innovation Management, Digital Transformation",
+    experience: "18 years in academia and industry research",
+    research: ["Digital Innovation", "Technology Strategy", "Organizational Change", "Industry 4.0"],
+    publications: [
+      'Johnson, S. (2024). "Digital Transformation in Manufacturing." Journal of Technology Management.',
+      'Johnson, S. & Lee, K. (2023). "Innovation Ecosystems in Tech Startups." Strategic Management Review.',
+    ],
+    email: "sarah.johnson@university.edu",
+    phone: "+1 (555) 123-4501",
+  },
+  {
+    name: "Dr. Michael Chen",
+    initials: "MC",
+    designation: "Associate Professor",
+    qualification: "Ph.D. in Information Systems, Stanford University",
+    specialization: "Data Analytics, Business Intelligence",
+    experience: "12 years in teaching and research",
+    research: ["Big Data Analytics", "Machine Learning Applications", "Business Intelligence", "Predictive Modeling"],
+    publications: [
+      'Chen, M. et al. (2024). "AI-Driven Decision Making in Supply Chains." Data Science Journal.',
+      'Chen, M. (2023). "Predictive Analytics for Customer Behavior." Information Systems Research.',
+    ],
+    email: "michael.chen@university.edu",
+    phone: null,
+  },
+  {
+    name: "Dr. Emily Rodriguez",
+    initials: "ER",
+    designation: "Associate Professor",
+    qualification: "Ph.D. in Operations Management, Harvard Business School",
+    specialization: "Supply Chain Management, Operations Strategy",
+    experience: "15 years in operations consulting and academia",
+    research: ["Supply Chain Optimization", "Sustainable Operations", "Logistics Management", "Quality Management"],
+    publications: [
+      'Rodriguez, E. (2024). "Sustainable Supply Chain Practices." Operations Management Quarterly.',
+      'Rodriguez, E. & Patel, R. (2023). "Blockchain in Supply Chain." Technology Review.',
+    ],
+    email: "emily.rodriguez@university.edu",
+    phone: "+1 (555) 123-4503",
+  },
+  {
+    name: "Dr. Rajesh Patel",
+    initials: "RP",
+    designation: "Assistant Professor",
+    qualification: "Ph.D. in Computer Science, Carnegie Mellon University",
+    specialization: "Artificial Intelligence, Cybersecurity",
+    experience: "8 years in industry and academia",
+    research: ["AI and Machine Learning", "Cybersecurity", "Cloud Computing", "IoT Security"],
+    publications: [
+      'Patel, R. (2024). "AI Security in Enterprise Systems." Cybersecurity Journal.',
+      'Patel, R. et al. (2023). "IoT Security Framework." IEEE Transactions.',
+    ],
+    email: "rajesh.patel@university.edu",
+    phone: null,
+  },
+  {
+    name: "Dr. Lisa Wang",
+    initials: "LW",
+    designation: "Assistant Professor",
+    qualification: "Ph.D. in Entrepreneurship, UC Berkeley",
+    specialization: "Technology Entrepreneurship, Innovation",
+    experience: "10 years including 5 years as startup founder",
+    research: ["Startup Ecosystems", "Technology Ventures", "Innovation Management", "Venture Capital"],
+    publications: [
+      'Wang, L. (2024). "Success Factors in Tech Startups." Entrepreneurship Research.',
+      'Wang, L. & Kim, J. (2023). "Funding Strategies for Tech Ventures." Venture Capital Review.',
+    ],
+    email: "lisa.wang@university.edu",
+    phone: null,
+  },
 ];
 
-const FACULTY = [
-  { name: "Prof. Rajiv Menon", dept: "Defence Technology", designation: "Professor & Head", specialization: "Missile Guidance Systems, Control Engineering", publications: 85 },
-  { name: "Dr. Sunita Krishnan", dept: "Cybersecurity & AI", designation: "Associate Professor", specialization: "Network Security, Machine Learning in Defence", publications: 62 },
-  { name: "Prof. Anil Deshpande", dept: "Strategic Studies", designation: "Professor", specialization: "Nuclear Strategy, Defence Policy", publications: 110 },
-  { name: "Dr. Kavita Rao", dept: "Defence Management", designation: "Assistant Professor", specialization: "Defence Procurement, Supply Chain", publications: 38 },
-  { name: "Prof. Vikram Singh", dept: "Weapons Systems", designation: "Professor & Head", specialization: "Ballistics, Armament Technology", publications: 95 },
-  { name: "Dr. Priya Nair", dept: "Electronic Warfare", designation: "Associate Professor", specialization: "Radar Systems, Signal Processing", publications: 54 },
-  { name: "Prof. Sanjay Gupta", dept: "Cybersecurity & AI", designation: "Professor", specialization: "Autonomous Systems, Deep Learning", publications: 78 },
-  { name: "Dr. Arjun Reddy", dept: "Defence Technology", designation: "Assistant Professor", specialization: "UAV Design, Aerospace Structures", publications: 42 },
-  { name: "Prof. Lakshmi Iyer", dept: "Strategic Studies", designation: "Professor", specialization: "Indo-Pacific Security, Maritime Strategy", publications: 88 },
+const COLORS = [
+  { from: "from-primary", to: "to-secondary" },
+  { from: "from-gold", to: "to-gold-500" },
+  { from: "from-accent", to: "to-accent-600" },
+  { from: "from-secondary", to: "to-primary" },
+  { from: "from-gold-500", to: "to-gold-700" },
 ];
 
 export default function FacultyPage() {
@@ -33,79 +98,105 @@ export default function FacultyPage() {
     <>
       <PageHeader
         title="Our Faculty"
-        subtitle="Distinguished academicians and defence scientists driving excellence in education and research."
+        subtitle="Our faculty members are distinguished scholars and industry experts committed to excellence in teaching and research."
         breadcrumb="Faculty"
       />
 
-      {/* Departments */}
+      {/* Faculty Stats */}
+      <section className="py-10 bg-background-muted border-b border-border-light">
+        <div className="container-site">
+          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            {[
+              { value: "5", label: "Faculty Members" },
+              { value: "63+", label: "Years Experience" },
+              { value: "10+", label: "Publications" },
+              { value: "20+", label: "Research Areas" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="stat-number text-3xl mb-1">{s.value}</p>
+                <p className="text-xs text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
+              </div>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      {/* Faculty Members */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading">
-            <div className="gold-bar mx-auto mb-4" />
-            <h2>Departments</h2>
-          </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
-            {DEPARTMENTS.map((dept) => (
-              <div key={dept} className="card text-center py-6 hover:-translate-y-1 transition-transform duration-300">
-                <div className="w-10 h-10 rounded-full bg-primary/10 mx-auto mb-3 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-gold rounded-full" />
-                </div>
-                <h3 className="text-sm font-semibold text-primary">{dept}</h3>
-              </div>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* Faculty Grid */}
-      <section className="section-padding bg-background-muted">
-        <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading">
-            <div className="gold-bar mx-auto mb-4" />
+          <AnimateIn type="fadeUp" className="section-heading mb-14">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Meet Our Team</p>
             <h2>Faculty Members</h2>
-            <p>Our faculty brings a wealth of experience from academia, DRDO, armed forces, and industry.</p>
+            <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-            {FACULTY.map((f) => (
-              <div key={f.name} className="card group hover:-translate-y-1 transition-transform duration-300">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center">
-                    <span className="text-lg font-heading font-bold text-primary/40">{f.name.split(" ").map(n => n[0]).join("").slice(0, 2)}</span>
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-base font-heading font-bold text-primary mb-0.5 truncate">{f.name}</h3>
-                    <p className="text-xs text-accent font-semibold mb-1">{f.designation}</p>
-                    <p className="text-xs text-foreground-light">{f.dept}</p>
-                  </div>
-                </div>
-                <div className="mt-4 pt-4 border-t border-border-light">
-                  <p className="text-sm text-foreground-muted mb-2">
-                    <span className="font-semibold text-primary/80">Specialization:</span> {f.specialization}
-                  </p>
-                  <p className="text-xs text-foreground-light">{f.publications} Publications</p>
-                </div>
-              </div>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-primary">
-        <div className="container-site">
-          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { val: "150+", label: "Faculty Members" },
-              { val: "40+", label: "Ph.D. Holders" },
-              { val: "2000+", label: "Research Papers" },
-              { val: "6", label: "Departments" },
-            ].map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl md:text-4xl font-heading font-bold text-gold mb-1">{s.val}</div>
-                <div className="text-sm text-white/60">{s.label}</div>
-              </div>
+          <div className="space-y-10">
+            {FACULTY.map((f, idx) => (
+              <AnimateIn key={f.name} type={idx % 2 === 0 ? "slideLeft" : "slideRight"} delay={0.05}>
+                <div className="bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg">
+                  <div className="grid md:grid-cols-[240px_1fr]">
+                    {/* Left — Profile column */}
+                    <div className={`bg-gradient-to-br ${COLORS[idx % COLORS.length].from} ${COLORS[idx % COLORS.length].to} p-8 flex flex-col items-center justify-center text-center`}>
+                      <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center ring-4 ring-white/20 mb-4">
+                        <span className="text-2xl font-heading font-bold text-white/90">{f.initials}</span>
+                      </div>
+                      <h3 className="text-lg font-heading font-bold text-white">{f.name}</h3>
+                      <p className="text-xs text-gold-100 font-semibold mt-1">{f.designation}</p>
+                      {/* Contact */}
+                      <div className="mt-5 pt-4 border-t border-white/15 w-full space-y-1.5">
+                        <p className="text-xs text-white/70">{f.email}</p>
+                        {f.phone && <p className="text-xs text-white/70">{f.phone}</p>}
+                      </div>
+                    </div>
+
+                    {/* Right — Details */}
+                    <div className="p-8 space-y-5">
+                      {/* Top row: Qualification, Specialization, Experience */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="bg-background-muted rounded-lg p-4">
+                          <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Qualification</p>
+                          <p className="text-sm text-foreground-muted leading-snug">{f.qualification}</p>
+                        </div>
+                        <div className="bg-background-muted rounded-lg p-4">
+                          <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Specialization</p>
+                          <p className="text-sm text-foreground-muted leading-snug">{f.specialization}</p>
+                        </div>
+                        <div className="bg-background-muted rounded-lg p-4">
+                          <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Experience</p>
+                          <p className="text-sm text-foreground-muted leading-snug">{f.experience}</p>
+                        </div>
+                      </div>
+
+                      {/* Research Interests */}
+                      <div>
+                        <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-2">Research Interests</p>
+                        <div className="flex flex-wrap gap-2">
+                          {f.research.map((r) => (
+                            <span key={r} className="text-xs bg-gradient-to-r from-gold/10 to-gold/5 text-gold border border-gold/20 px-3.5 py-1.5 rounded-full font-medium">{r}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Publications */}
+                      <div>
+                        <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-2">Selected Publications</p>
+                        <ul className="space-y-2">
+                          {f.publications.map((pub, i) => (
+                            <li key={i} className="flex items-start gap-2.5 text-xs text-foreground-muted leading-relaxed">
+                              <svg className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                              </svg>
+                              {pub}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimateIn>
             ))}
-          </StaggerGroup>
+          </div>
         </div>
       </section>
     </>
