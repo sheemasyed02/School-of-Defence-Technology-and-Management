@@ -57,8 +57,7 @@ export const FOOTER_LINKS = {
 } as const;
 
 export const HERO_STATS = [
-  { value: 25, suffix: "+", label: "Years of Excellence" },
-  { value: 150, suffix: "+", label: "Faculty & Scientists" },
-  { value: 5000, suffix: "+", label: "Alumni Network" },
-  { value: 40, suffix: "+", label: "Research Labs" },
+  { value: 450, suffix: "+", label: "Active Students" },
+  { value: 28, suffix: "+", label: "Expert Faculty" },
+  { value: 98, suffix: "%", label: "Placement Rate" },
 ] as const;

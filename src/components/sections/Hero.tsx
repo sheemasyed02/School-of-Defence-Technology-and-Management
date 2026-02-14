@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { gsap, ScrollTrigger } from "@/animations/gsap-setup";
 import { HERO_STATS } from "@/constants";
@@ -72,11 +73,11 @@ export default function Hero() {
       tl.fromTo(
         statsRef.current?.children ?? [],
         { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.15 },
         "-=0.3"
       );
 
-      /* ── Hero image — slides in from right, subtle scale ── */
+      /* ── Hero image — slides in from right ── */
       if (imageRef.current) {
         tl.fromTo(
           imageRef.current,
@@ -84,15 +85,6 @@ export default function Hero() {
           { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
           0.4
         );
-
-        /* Gentle float animation on the image */
-        gsap.to(imageRef.current, {
-          y: -12,
-          duration: 3.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
       }
 
       /* ── Parallax on scroll ── */
@@ -138,7 +130,7 @@ export default function Hero() {
       <div className="absolute left-[5%] bottom-[10%] w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none" />
 
       {/* ── Content ── */}
-      <div className="relative z-10 container-site pt-36 pb-20 lg:pt-44 lg:pb-28">
+      <div className="relative z-10 container-site pt-40 pb-20 lg:pt-48 lg:pb-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── Left column: Text content ── */}
           <div>
@@ -186,7 +178,7 @@ export default function Hero() {
             {/* CTAs */}
             <div
               ref={ctaRef}
-              className="flex flex-wrap gap-4 mb-16"
+              className="flex flex-wrap gap-4 mb-14"
               style={{ opacity: 0 }}
             >
               <Link
@@ -206,7 +198,7 @@ export default function Hero() {
             {/* Stats */}
             <div
               ref={statsRef}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+              className="grid grid-cols-3 gap-6 md:gap-10"
             >
               {HERO_STATS.map((stat) => (
                 <div
@@ -237,17 +229,18 @@ export default function Hero() {
               <div className="absolute -inset-3 rounded-2xl border-2 border-gold/20" />
               <div className="absolute -inset-6 rounded-3xl border border-white/5" />
 
-              {/* Image placeholder — replace src with your campus/building image */}
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-white/5 border border-white/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary/40 via-primary/60 to-primary/80" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                  <svg className="w-16 h-16 text-gold/60 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.552 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
-                  </svg>
-                  <p className="text-sm text-foreground-inverted/50 max-w-[200px]">
-                    Campus image placeholder
-                  </p>
-                </div>
+              {/* Actual campus image */}
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/defence1.png"
+                  alt="School of Defence Technology and Management Campus"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 0vw, 50vw"
+                />
+                {/* Subtle gradient overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
 
                 {/* Corner accents */}
                 <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-gold/40 rounded-tl-xl" />
@@ -262,8 +255,8 @@ export default function Hero() {
 
               {/* Floating stat card */}
               <div className="absolute -top-3 -right-3 bg-gold/90 backdrop-blur-md rounded-lg shadow-card px-4 py-2.5">
-                <p className="text-2xl font-heading font-bold text-primary leading-none">25+</p>
-                <p className="text-[10px] font-semibold text-primary/70">Years of Excellence</p>
+                <p className="text-2xl font-heading font-bold text-primary leading-none">450+</p>
+                <p className="text-[10px] font-semibold text-primary/70">Active Students</p>
               </div>
             </div>
           </div>
