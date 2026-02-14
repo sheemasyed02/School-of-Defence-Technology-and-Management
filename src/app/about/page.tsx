@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="About SDTM"
+        title="About Us"
         subtitle="A premier centre of excellence dedicated to advancing defence education, applied research, and strategic leadership."
         breadcrumb="About"
       />
@@ -50,13 +50,13 @@ export default function AboutPage() {
           <AnimateIn type="fadeUp">
             <div className="prose prose-lg mx-auto text-foreground-muted leading-relaxed space-y-4">
               <p>
-                The School of Defence Technology and Management was established with the mandate to bridge the gap between academic research and the practical needs of India&apos;s defence ecosystem. Born from a partnership between the Ministry of Defence and leading academic institutions, SDTM has grown into one of the nation&apos;s foremost centres for defence education.
+                The School of Defence Technology and Management was established with the mandate to bridge the gap between academic research and the practical needs of India&apos;s defence ecosystem. Born from a partnership between the Ministry of Defence and leading academic institutions, the School has grown into one of the nation&apos;s foremost centres for defence education.
               </p>
               <p>
                 Over the past 25 years, the institution has consistently evolved its curriculum, research focus, and infrastructure to address emerging threats — from cybersecurity and electronic warfare to unmanned systems and artificial intelligence in defence applications.
               </p>
               <p>
-                Today, SDTM stands at the intersection of technology, management, and national security, producing graduates who serve with distinction across the armed forces, DRDO, defence PSUs, and the private sector.
+                Today, the School stands at the intersection of technology, management, and national security, producing graduates who serve with distinction across the armed forces, DRDO, defence PSUs, and the private sector.
               </p>
             </div>
           </AnimateIn>

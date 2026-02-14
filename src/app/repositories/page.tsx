@@ -10,13 +10,13 @@ export const metadata = createMetadata({
 const REPOSITORIES = [
   {
     title: "Thesis & Dissertation Archive",
-    desc: "Complete collection of M.Tech, MBA, M.Sc., and Ph.D. theses submitted by SDTM students, searchable by year, department, and topic.",
+    desc: "Complete collection of M.Tech, MBA, M.Sc., and Ph.D. theses submitted by students, searchable by year, department, and topic.",
     count: "2,500+",
     type: "Academic",
   },
   {
     title: "Research Publication Database",
-    desc: "Indexed repository of peer-reviewed journal papers, conference proceedings, and book chapters authored by SDTM faculty and researchers.",
+    desc: "Indexed repository of peer-reviewed journal papers, conference proceedings, and book chapters authored by our faculty and researchers.",
     count: "4,000+",
     type: "Research",
   },
@@ -40,7 +40,7 @@ const REPOSITORIES = [
   },
   {
     title: "Open Source Code Repository",
-    desc: "Open-source software tools, simulation frameworks, and datasets developed at SDTM for the research community.",
+    desc: "Open-source software tools, simulation frameworks, and datasets developed at the institution for the research community.",
     count: "120+",
     type: "Software",
   },
@@ -60,7 +60,7 @@ export default function RepositoriesPage() {
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp">
             <p className="text-lg text-foreground-muted leading-relaxed text-center">
-              SDTM maintains a robust digital repository ecosystem to support academic research, institutional
+              The School of Defence Technology and Management maintains a robust digital repository ecosystem to support academic research, institutional
               memory, and knowledge dissemination. Our repositories serve students, faculty, alumni, and
               authorized external researchers with access to a rich collection of scholarly and technical resources.
             </p>

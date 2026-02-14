@@ -44,67 +44,28 @@ export default function Navbar() {
           : "bg-primary/90 backdrop-blur-sm"
       )}
     >
-      <div className="container-site flex items-center justify-between h-16 xl:h-[4.5rem]">
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="relative w-10 h-10 md:w-12 md:h-12">
+      {/* ── Top row: Brand ── */}
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-16 xl:h-[4.25rem]">
+        {/* Brand — pushed to left edge */}
+        <Link href="/" className="flex items-center gap-3 shrink-0 -ml-1">
+          <div className="relative w-10 h-10 md:w-11 md:h-11">
             <Image
               src={SITE.logo}
-              alt={`${SITE.shortName} Logo`}
+              alt={`${SITE.name} Logo`}
               fill
               className="object-contain"
               priority
             />
           </div>
-          <div className="leading-tight">
-            <span
-              className={cn(
-                "block text-sm md:text-base font-heading font-bold tracking-wide transition-colors",
-                scrolled ? "text-primary" : "text-white"
-              )}
-            >
-              {SITE.shortName}
-            </span>
-            <span
-              className={cn(
-                "block text-[9px] md:text-[10px] font-body uppercase tracking-widest transition-colors",
-                scrolled ? "text-foreground-muted" : "text-white/60"
-              )}
-            >
-              Defence Technology &amp; Management
-            </span>
-          </div>
+          <span
+            className={cn(
+              "font-heading font-bold tracking-wide transition-colors text-sm md:text-[15px] leading-tight max-w-[280px] md:max-w-none",
+              scrolled ? "text-primary" : "text-white"
+            )}
+          >
+            School of Defence Technology and Management
+          </span>
         </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden xl:flex items-center gap-0.5">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "relative px-2.5 py-2 text-[13px] font-semibold tracking-wide transition-all duration-200 rounded-brand whitespace-nowrap",
-                scrolled
-                  ? isActive(link.href)
-                    ? "text-accent"
-                    : "text-primary/80 hover:text-primary hover:bg-primary/5"
-                  : isActive(link.href)
-                  ? "text-gold"
-                  : "text-white/80 hover:text-white hover:bg-white/10"
-              )}
-            >
-              {link.label}
-              {isActive(link.href) && (
-                <span
-                  className={cn(
-                    "absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4/5 rounded-full",
-                    scrolled ? "bg-accent" : "bg-gold"
-                  )}
-                />
-              )}
-            </Link>
-          ))}
-        </nav>
 
         {/* Mobile hamburger */}
         <button
@@ -121,6 +82,43 @@ export default function Navbar() {
           <span className={cn("block h-0.5 w-6 rounded-full transition-all duration-300 bg-current", mobileOpen && "-rotate-45 -translate-y-2")} />
         </button>
       </div>
+
+      {/* ── Bottom row: Desktop nav ── */}
+      <nav
+        className={cn(
+          "hidden xl:block border-t transition-colors",
+          scrolled ? "border-border-light" : "border-white/10"
+        )}
+      >
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-center gap-0.5 h-10">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "relative px-2.5 py-1.5 text-[12.5px] font-semibold tracking-wide transition-all duration-200 rounded-brand whitespace-nowrap",
+                scrolled
+                  ? isActive(link.href)
+                    ? "text-accent"
+                    : "text-primary/70 hover:text-primary hover:bg-primary/5"
+                  : isActive(link.href)
+                  ? "text-gold"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
+            >
+              {link.label}
+              {isActive(link.href) && (
+                <span
+                  className={cn(
+                    "absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-4/5 rounded-full",
+                    scrolled ? "bg-accent" : "bg-gold"
+                  )}
+                />
+              )}
+            </Link>
+          ))}
+        </div>
+      </nav>
 
       {/* Mobile menu */}
       <div

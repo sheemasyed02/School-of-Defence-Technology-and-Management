@@ -20,19 +20,14 @@ export default function Footer() {
               <div className="relative w-14 h-14">
                 <Image
                   src={SITE.logo}
-                  alt={`${SITE.shortName} Logo`}
+                  alt={`${SITE.name} Logo`}
                   fill
                   className="object-contain"
                 />
               </div>
-              <div className="leading-tight">
-                <span className="block text-base font-heading font-bold text-foreground-inverted tracking-wide">
-                  {SITE.shortName}
-                </span>
-                <span className="block text-xs text-foreground-inverted/60">
-                  Defence Education & Research
-                </span>
-              </div>
+              <span className="text-sm font-heading font-bold text-foreground-inverted tracking-wide leading-tight max-w-[200px]">
+                School of Defence Technology and Management
+              </span>
             </Link>
             <p className="text-sm text-foreground-inverted/70 leading-relaxed mb-6 max-w-xs">
               {SITE.tagline}. Preparing tomorrow&apos;s leaders for national

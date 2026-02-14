@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata = createMetadata({
   title: "Programs",
-  description: "Explore academic programs at SDTM — M.Tech, MBA, Ph.D., and professional certificate courses in defence technology and management.",
+  description: "Explore academic programs at the School of Defence Technology and Management — M.Tech, MBA, Ph.D., and professional certificate courses in defence technology and management.",
 });
 
 const PROGRAMS = [

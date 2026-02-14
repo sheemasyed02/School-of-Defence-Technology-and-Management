@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Events",
-  description: "Upcoming and past events at SDTM — conferences, seminars, workshops, and cultural programs.",
+  description: "Upcoming and past events at the School of Defence Technology and Management — conferences, seminars, workshops, and cultural programs.",
 });
 
 const UPCOMING = [
@@ -15,10 +15,10 @@ const UPCOMING = [
 ];
 
 const PAST = [
-  { title: "SDTM Foundation Day Celebration", date: "January 26, 2026", type: "Institutional", desc: "Annual celebration featuring the Director's address, awards ceremony, and cultural performances." },
+  { title: "Foundation Day Celebration", date: "January 26, 2026", type: "Institutional", desc: "Annual celebration featuring the Director's address, awards ceremony, and cultural performances." },
   { title: "Workshop on Quantum Computing for Defence", date: "December 10–11, 2025", type: "Workshop", desc: "Two-day hands-on workshop with experts from DRDO and IISc on quantum algorithms for cryptography." },
   { title: "Alumni Homecoming 2025", date: "November 15, 2025", type: "Alumni", desc: "Annual reunion bringing together 500+ alumni for networking, mentorship matching, and panel discussions." },
-  { title: "SDTM-DRDO Joint Symposium on Missile Technology", date: "October 8, 2025", type: "Symposium", desc: "Collaborative symposium showcasing latest developments in missile guidance, propulsion, and defence systems." },
+  { title: "Joint Symposium on Missile Technology with DRDO", date: "October 8, 2025", type: "Symposium", desc: "Collaborative symposium showcasing latest developments in missile guidance, propulsion, and defence systems." },
 ];
 
 function EventCard({ event }: { event: typeof UPCOMING[0] }) {
@@ -52,7 +52,7 @@ export default function EventsPage() {
     <>
       <PageHeader
         title="Events"
-        subtitle="Conferences, workshops, hackathons, and cultural programs that enrich the SDTM experience."
+        subtitle="Conferences, workshops, hackathons, and cultural programs that enrich the institutional experience."
         breadcrumb="Events"
       />
 

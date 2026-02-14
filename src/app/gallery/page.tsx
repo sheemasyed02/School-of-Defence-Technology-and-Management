@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Gallery",
-  description: "Photo gallery showcasing SDTM campus, events, research labs, and student life.",
+  description: "Photo gallery showcasing campus life, events, research labs, and student activities.",
 });
 
 const GALLERY_CATEGORIES = [
@@ -21,7 +21,7 @@ const GALLERY_CATEGORIES = [
     title: "Events & Conferences",
     images: [
       { alt: "International Conference 2025", desc: "Distinguished speakers and delegates at the Annual Defence Technology Conference." },
-      { alt: "Foundation Day Celebration", desc: "Students and faculty during the SDTM Foundation Day festivities." },
+      { alt: "Foundation Day Celebration", desc: "Students and faculty during the Foundation Day festivities." },
       { alt: "Hackathon 2025", desc: "Teams competing in the national cybersecurity hackathon." },
       { alt: "Guest Lecture Series", desc: "Senior defence leaders sharing insights with students." },
     ],
@@ -51,7 +51,7 @@ export default function GalleryPage() {
     <>
       <PageHeader
         title="Gallery"
-        subtitle="A visual journey through the SDTM campus, events, and student life."
+        subtitle="A visual journey through our campus, events, and student life."
         breadcrumb="Gallery"
       />
 

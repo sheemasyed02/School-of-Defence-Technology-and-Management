@@ -18,7 +18,7 @@ const PINNED = [
     title: "International Conference on Defence Innovation — Call for Papers",
     date: "08 January 2025",
     category: "Conference",
-    body: "SDTM is hosting ICDI-2025 on 20-22 March 2025. Researchers and practitioners are invited to submit papers on defence technology innovation, strategic management, and emerging threats.",
+    body: "The School of Defence Technology and Management is hosting ICDI-2025 on 20-22 March 2025. Researchers and practitioners are invited to submit papers on defence technology innovation, strategic management, and emerging threats.",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function AnnouncementsPage() {
     <>
       <PageHeader
         title="Announcements"
-        subtitle="Stay updated with the latest circulars, notices, and news from SDTM."
+        subtitle="Stay updated with the latest circulars, notices, and news from the School of Defence Technology and Management."
         breadcrumb="Announcements"
       />
 

@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Alumni",
-  description: "SDTM alumni network — distinguished graduates serving in armed forces, DRDO, defence industry, and public policy.",
+  description: "Alumni network of the School of Defence Technology and Management — distinguished graduates serving in armed forces, DRDO, defence industry, and public policy.",
 });
 
 const NOTABLE_ALUMNI = [

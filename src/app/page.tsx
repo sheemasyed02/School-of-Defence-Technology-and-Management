@@ -97,7 +97,7 @@ export default function HomePage() {
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <div className="gold-bar mx-auto mb-4" />
-            <h2>Explore SDTM</h2>
+            <h2>Explore Our Institution</h2>
           </AnimateIn>
           <StaggerGroup className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10">
             {[

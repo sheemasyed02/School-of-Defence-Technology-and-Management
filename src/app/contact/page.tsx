@@ -17,14 +17,14 @@ const OFFICES = [
   },
   {
     name: "Admissions Office",
-    address: "Room 102, Administrative Block, SDTM Campus, New Delhi – 110010",
+    address: "Room 102, Administrative Block, Campus, New Delhi – 110010",
     phone: "+91-11-2345-6790",
     email: "admissions@sdtm.edu.in",
     hours: "Mon–Sat: 9:30 AM – 4:30 PM",
   },
   {
     name: "Research & Collaboration Cell",
-    address: "Room 305, Research Block, SDTM Campus, New Delhi – 110010",
+    address: "Room 305, Research Block, Campus, New Delhi – 110010",
     phone: "+91-11-2345-6795",
     email: "research@sdtm.edu.in",
     hours: "Mon–Fri: 10:00 AM – 5:00 PM",
@@ -149,7 +149,7 @@ export default function ContactPage() {
           <AnimateIn type="fadeUp">
             <div className="mt-10 w-full h-72 md:h-96 rounded-xl overflow-hidden bg-primary/5 border border-border-light flex items-center justify-center">
               <p className="text-foreground-muted text-sm">
-                📍 Interactive Map — Embed your Google Maps iframe here
+                Interactive Map -- Embed your Google Maps iframe here
               </p>
             </div>
           </AnimateIn>

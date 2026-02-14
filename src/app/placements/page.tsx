@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Placements",
-  description: "Placement statistics and recruiting partners at SDTM — defence PSUs, armed forces, DRDO, and private sector.",
+  description: "Placement statistics and recruiting partners at the School of Defence Technology and Management — defence PSUs, armed forces, DRDO, and private sector.",
 });
 
 const RECRUITERS = [

@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Students",
-  description: "Student life at SDTM — campus facilities, clubs, resources, and support services for a holistic learning experience.",
+  description: "Student life at the School of Defence Technology and Management — campus facilities, clubs, resources, and support services for a holistic learning experience.",
 });
 
 export default function StudentsPage() {
@@ -21,7 +21,7 @@ export default function StudentsPage() {
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp">
             <p className="text-lg text-foreground-muted leading-relaxed text-center">
-              At SDTM, student life extends far beyond the classroom. Our campus provides a holistic environment that encourages intellectual curiosity, physical fitness, leadership development, and community engagement. Students benefit from world-class facilities, mentorship programs, and a close-knit peer community drawn from diverse backgrounds across India.
+              At the School of Defence Technology and Management, student life extends far beyond the classroom. Our campus provides a holistic environment that encourages intellectual curiosity, physical fitness, leadership development, and community engagement. Students benefit from world-class facilities, mentorship programs, and a close-knit peer community drawn from diverse backgrounds across India.
             </p>
           </AnimateIn>
         </div>

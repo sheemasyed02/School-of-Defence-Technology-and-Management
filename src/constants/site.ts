@@ -4,10 +4,9 @@
 
 export const SITE = {
   name: "School of Defence Technology and Management",
-  shortName: "SDTM",
   tagline: "Excellence in Defence Education & Research",
   description:
-    "The School of Defence Technology and Management (SDTM) is a premier institution dedicated to advancing defence education, research, and strategic management for national security.",
+    "The School of Defence Technology and Management is a premier institution dedicated to advancing defence education, research, and strategic management for national security.",
   url: "https://sdtm.edu.in",
   logo: "/logo.png",
   email: "info@sdtm.edu.in",

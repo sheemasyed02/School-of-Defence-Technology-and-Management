@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Research",
-  description: "Research at SDTM — labs, focus areas, publications, and sponsored projects advancing defence technology.",
+  description: "Research at the School of Defence Technology and Management — labs, focus areas, publications, and sponsored projects advancing defence technology.",
 });
 
 const LABS = [
