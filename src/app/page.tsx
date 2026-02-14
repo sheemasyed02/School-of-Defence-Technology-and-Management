@@ -309,7 +309,7 @@ export default function HomePage() {
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
               <Link href="/programs" className="btn-accent text-base px-8 py-3.5">Explore Programs</Link>
-              <Link href="/contact" className="btn-secondary border-foreground-inverted/40 text-foreground-inverted hover:bg-foreground-inverted hover:text-primary text-base px-8 py-3.5">Get in Touch</Link>
+              <Link href="/contact" className="btn-secondary border-foreground-inverted/40 text-foreground-inverted hover:bg-gold hover:text-foreground-inverted hover:border-gold text-base px-8 py-3.5">Get in Touch</Link>
             </div>
           </AnimateIn>
         </div>

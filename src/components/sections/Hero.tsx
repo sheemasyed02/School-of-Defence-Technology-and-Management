@@ -189,7 +189,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/about"
-                className="btn-secondary border-foreground-inverted/40 text-foreground-inverted hover:bg-foreground-inverted hover:text-primary text-base px-8 py-3.5"
+                className="btn-secondary border-foreground-inverted/40 text-foreground-inverted hover:bg-gold hover:text-foreground-inverted hover:border-gold text-base px-8 py-3.5"
               >
                 Learn More
               </Link>
@@ -225,11 +225,6 @@ export default function Hero() {
             style={{ opacity: 0 }}
           >
             <div className="relative w-full max-w-lg">
-              {/* Decorative border frame */}
-              <div className="absolute -inset-3 rounded-2xl border-2 border-gold/20" />
-              <div className="absolute -inset-6 rounded-3xl border border-white/5" />
-
-              {/* Actual campus image */}
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
                 <Image
                   src="/defence1.png"
@@ -239,24 +234,6 @@ export default function Hero() {
                   priority
                   sizes="(max-width: 1024px) 0vw, 50vw"
                 />
-                {/* Subtle gradient overlay for depth */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
-
-                {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-gold/40 rounded-tl-xl" />
-                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-gold/40 rounded-br-xl" />
-              </div>
-
-              {/* Floating info card */}
-              <div className="absolute -bottom-4 -left-4 bg-background-paper/95 backdrop-blur-md rounded-lg shadow-card px-5 py-3 border border-border-light">
-                <p className="text-xs font-semibold text-primary">Established under DRDO</p>
-                <p className="text-[10px] text-foreground-muted">Ministry of Defence, Government of India</p>
-              </div>
-
-              {/* Floating stat card */}
-              <div className="absolute -top-3 -right-3 bg-gold/90 backdrop-blur-md rounded-lg shadow-card px-4 py-2.5">
-                <p className="text-2xl font-heading font-bold text-primary leading-none">450+</p>
-                <p className="text-[10px] font-semibold text-primary/70">Active Students</p>
               </div>
             </div>
           </div>
