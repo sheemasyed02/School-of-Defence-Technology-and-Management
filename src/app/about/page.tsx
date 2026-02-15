@@ -83,7 +83,7 @@ export default function AboutPage() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-background-muted overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Our Purpose</p>
@@ -129,7 +129,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Objectives */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">What We Aim For</p>
@@ -188,7 +188,7 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Our Pride</p>
@@ -211,7 +211,7 @@ export default function AboutPage() {
       </section>
 
       {/* Accreditation & Rankings */}
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-background-muted overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Quality Assurance</p>
@@ -234,7 +234,7 @@ export default function AboutPage() {
       </section>
 
       {/* Infrastructure */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Our Facilities</p>

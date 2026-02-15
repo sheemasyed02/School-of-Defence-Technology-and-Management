@@ -226,7 +226,7 @@ export default function ResearchPage() {
       </section>
 
       {/* ─── Ongoing Projects ──────────────────────────── */}
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-background-muted overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Current Work</p>
@@ -268,7 +268,7 @@ export default function ResearchPage() {
       </section>
 
       {/* ─── Publications ──────────────────────────────── */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Published Work</p>
@@ -373,7 +373,7 @@ export default function ResearchPage() {
       </section>
 
       {/* ─── Research Funding ──────────────────────────── */}
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-background-muted overflow-hidden">
         <div className="container-site">
           <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-6 sm:gap-8 md:gap-10 items-center">
             <AnimateIn type="slideLeft">

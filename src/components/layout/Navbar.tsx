@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8 flex items-center justify-center h-14 sm:h-16 md:h-20 xl:h-[5.5rem] relative">
         {/* Brand — centered */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3 md:gap-4 shrink-0">
-          <div className="relative w-9 h-9 sm:w-10 sm:h-10 md:w-14 md:h-14 flex-shrink-0">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
             <Image
               src={SITE.logo}
               alt={`${SITE.name} Logo`}

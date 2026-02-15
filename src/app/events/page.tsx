@@ -54,7 +54,7 @@ export default function EventsPage() {
       />
 
       {/* Upcoming Events */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-background overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">What&apos;s Coming Up</p>
@@ -96,7 +96,7 @@ export default function EventsPage() {
       </section>
 
       {/* Past Events */}
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-background-muted overflow-hidden">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Look Back</p>
