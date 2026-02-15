@@ -1,15 +1,11 @@
-
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { createMetadata } from "@/lib/metadata";
+import { Navbar, Footer } from "@/components/layout";
 
-<<<<<<< Updated upstream
 /* ─── Fonts ─── */
 const notoSans = Noto_Sans({
-=======
-const inter = Inter({
->>>>>>> Stashed changes
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -36,13 +32,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased">
-<<<<<<< Updated upstream
         <Navbar />
         <main className="min-h-screen overflow-x-hidden">{children}</main>
         <Footer />
-=======
-        {children}
->>>>>>> Stashed changes
       </body>
     </html>
   );
