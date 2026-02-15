@@ -55,12 +55,13 @@ export default function PlacementsPage() {
           </AnimateIn>
 
           <AnimateIn type="fadeUp">
-            <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border-light shadow-brand">
+            <div className="mt-10 sm:mt-12 max-w-4xl mx-auto overflow-x-auto rounded-2xl border border-border-light shadow-brand">
+              <div className="min-w-[480px]">
               {/* Table header */}
               <div className="bg-gradient-to-r from-primary to-secondary grid grid-cols-4 text-center">
                 {["Academic Year", "Total no. of Students", "Students Placed", "Higher Studies"].map((h) => (
-                  <div key={h} className="py-4 px-3">
-                    <p className="text-xs font-bold text-white/80 uppercase tracking-wider">{h}</p>
+                  <div key={h} className="py-3 sm:py-4 px-2 sm:px-3">
+                    <p className="text-[10px] sm:text-xs font-bold text-white/80 uppercase tracking-wider">{h}</p>
                   </div>
                 ))}
               </div>
@@ -70,20 +71,21 @@ export default function PlacementsPage() {
                   key={row.year}
                   className={`grid grid-cols-4 text-center ${i % 2 === 0 ? "bg-background-paper" : "bg-background-muted"} border-t border-border-light`}
                 >
-                  <div className="py-5 px-3">
-                    <p className="text-sm font-semibold text-primary">{row.year}</p>
+                  <div className="py-3 sm:py-5 px-2 sm:px-3">
+                    <p className="text-xs sm:text-sm font-semibold text-primary">{row.year}</p>
                   </div>
-                  <div className="py-5 px-3">
-                    <p className="text-sm font-bold text-gold">{row.placed}</p>
+                  <div className="py-3 sm:py-5 px-2 sm:px-3">
+                    <p className="text-xs sm:text-sm font-bold text-gold">{row.placed}</p>
                   </div>
-                  <div className="py-5 px-3">
-                    <p className="text-sm font-bold text-gold">{row.highest}</p>
+                  <div className="py-3 sm:py-5 px-2 sm:px-3">
+                    <p className="text-xs sm:text-sm font-bold text-gold">{row.highest}</p>
                   </div>
-                  <div className="py-5 px-3">
-                    <p className="text-sm font-bold text-gold">{row.average}</p>
+                  <div className="py-3 sm:py-5 px-2 sm:px-3">
+                    <p className="text-xs sm:text-sm font-bold text-gold">{row.average}</p>
                   </div>
                 </div>
               ))}
+              </div>
             </div>
           </AnimateIn>
         </div>
@@ -110,17 +112,17 @@ export default function PlacementsPage() {
       {/* Internship Opportunities */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-10 items-center">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-6 sm:gap-8 md:gap-10 items-center">
             <AnimateIn type="slideLeft">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Hands-On Experience</p>
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary mb-4">Internship Opportunities</h2>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Hands-On Experience</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-primary mb-3 sm:mb-4">Internship Opportunities</h2>
               <div className="section-divider mb-6" />
               <p className="text-foreground-muted leading-relaxed">
                 We facilitate summer internships for all students after their second and third years. Our industry partnerships ensure students gain hands-on experience at leading technology companies, startups, and research organizations. Internships often lead to pre-placement offers.
               </p>
             </AnimateIn>
             <AnimateIn type="scaleIn">
-              <div className="w-36 h-36 md:w-44 md:h-44 rounded-2xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center shadow-lg">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-2xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center shadow-lg mx-auto md:mx-0">
                 <div className="text-center">
                   <svg className="w-10 h-10 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
@@ -142,11 +144,11 @@ export default function PlacementsPage() {
             <h2>Training Programs</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mt-10 sm:mt-12 max-w-5xl mx-auto">
             {TRAINING_PROGRAMS.map((tp) => (
-              <div key={tp.num} className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-base font-heading font-bold text-white">{tp.num}</span>
+              <div key={tp.num} className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-4 sm:p-5 md:p-6 flex items-start gap-3 sm:gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-sm sm:text-base font-heading font-bold text-white">{tp.num}</span>
                 </div>
                 <div>
                   <h3 className="text-base md:text-lg font-heading font-bold text-primary mb-1">{tp.title}</h3>
@@ -166,14 +168,14 @@ export default function PlacementsPage() {
             <h2>Recruiting Companies</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4 mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-5xl mx-auto">
             {RECRUITING_COMPANIES.map((c) => (
               <div
                 key={c}
-                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-5 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-0.5"
+                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-3 sm:p-4 md:p-5 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:bg-gold/10 transition-colors">
-                  <span className="text-sm font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{c[0]}</span>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-1.5 sm:mb-2 group-hover:bg-gold/10 transition-colors">
+                  <span className="text-xs sm:text-sm font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{c[0]}</span>
                 </div>
                 <p className="text-xs font-semibold text-primary">{c}</p>
               </div>

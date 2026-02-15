@@ -183,8 +183,8 @@ export default function ResearchPage() {
 
       {/* ─── Quick Stats Bar ───────────────────────────── */}
       <section className="bg-background-paper border-b border-border-light">
-        <div className="container-site py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="container-site py-6 sm:py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
             {[
               { value: "10", label: "Research Areas" },
               { value: "$5M+", label: "Annual Funding" },
@@ -192,7 +192,7 @@ export default function ResearchPage() {
               { value: "6", label: "Partners" },
             ].map((s) => (
               <div key={s.label}>
-                <p className="stat-number text-2xl md:text-3xl">{s.value}</p>
+                <p className="stat-number text-xl sm:text-2xl md:text-3xl">{s.value}</p>
                 <p className="text-xs text-foreground-muted mt-1 uppercase tracking-wider font-medium">{s.label}</p>
               </div>
             ))}
@@ -209,13 +209,13 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-12 max-w-6xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 mt-10 sm:mt-12 max-w-6xl mx-auto">
             {RESEARCH_AREAS.map((area) => (
               <div
                 key={area.name}
-                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-6 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-1"
+                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-4 sm:p-5 md:p-6 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-1"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center mx-auto mb-4 text-primary/60 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-500 group-hover:text-white transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl bg-primary/5 flex items-center justify-center mx-auto mb-3 sm:mb-4 text-primary/60 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-500 group-hover:text-white transition-all duration-300">
                   {Icons[area.icon as keyof typeof Icons]}
                 </div>
                 <p className="text-sm md:text-base font-semibold text-primary leading-snug">{area.name}</p>
@@ -240,7 +240,7 @@ export default function ResearchPage() {
                 <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                   <div className="flex flex-col md:flex-row">
                     {/* Side panel */}
-                    <div className="md:w-56 bg-gradient-to-br from-primary to-secondary p-6 flex flex-col items-center justify-center text-center shrink-0">
+                    <div className="md:w-48 lg:w-56 bg-gradient-to-br from-primary to-secondary p-4 sm:p-5 md:p-6 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-3 md:gap-0">
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-green-300 uppercase tracking-wider mb-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
                         {proj.status}
@@ -255,9 +255,9 @@ export default function ResearchPage() {
                       </div>
                     </div>
                     {/* Content */}
-                    <div className="p-6 flex-1 flex flex-col justify-center">
-                      <h3 className="text-lg font-heading font-bold text-primary mb-3">{proj.title}</h3>
-                      <p className="text-sm text-foreground-muted leading-relaxed">{proj.desc}</p>
+                    <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center">
+                      <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2 sm:mb-3">{proj.title}</h3>
+                      <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">{proj.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -375,10 +375,10 @@ export default function ResearchPage() {
       {/* ─── Research Funding ──────────────────────────── */}
       <section className="section-padding bg-background-muted">
         <div className="container-site">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-10 items-center">
+          <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-6 sm:gap-8 md:gap-10 items-center">
             <AnimateIn type="slideLeft">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Support</p>
-              <h2 className="text-2xl md:text-3xl font-heading font-bold text-primary mb-4">Research Funding</h2>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Support</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-primary mb-3 sm:mb-4">Research Funding</h2>
               <div className="section-divider mb-6" />
               <p className="text-foreground-muted leading-relaxed">
                 The department receives over <strong className="text-primary">$5 million annually</strong> in
@@ -388,13 +388,13 @@ export default function ResearchPage() {
               </p>
             </AnimateIn>
             <AnimateIn type="scaleIn">
-              <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg relative overflow-hidden">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg relative overflow-hidden mx-auto md:mx-0">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, rgba(212,168,67,0.3) 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
                 <div className="text-center relative z-10">
                   <svg className="w-8 h-8 text-gold mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.4}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="text-3xl font-heading font-bold text-white leading-none">$5M+</p>
+                  <p className="text-2xl sm:text-3xl font-heading font-bold text-white leading-none">$5M+</p>
                   <p className="text-xs text-white/60 mt-1 font-medium">Annual Funding</p>
                 </div>
               </div>
@@ -412,13 +412,13 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-5xl mx-auto">
             {COLLABORATIONS.map((inst) => (
               <div
                 key={inst}
-                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-5 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-1"
+                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-3 sm:p-4 md:p-5 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-1"
               >
-                <div className="w-11 h-11 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-3 group-hover:bg-gold/10 transition-colors">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-primary/5 flex items-center justify-center mx-auto mb-2 sm:mb-3 group-hover:bg-gold/10 transition-colors">
                   <svg className="w-5 h-5 text-primary/40 group-hover:text-gold transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.4}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                   </svg>
@@ -441,8 +441,8 @@ export default function ResearchPage() {
           </AnimateIn>
 
           <AnimateIn type="fadeUp">
-            <div className="max-w-3xl mx-auto mt-10 bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
-              <div className="p-8 text-center">
+              <div className="max-w-3xl mx-auto mt-8 sm:mt-10 bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
+              <div className="p-5 sm:p-6 md:p-8 text-center">
                 <p className="text-foreground-muted leading-relaxed mb-8">
                   We encourage students to participate in research from their second year onwards. Students can work
                   with faculty on funded projects, publish papers, file patents, and present at national and

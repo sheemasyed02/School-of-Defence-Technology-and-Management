@@ -87,7 +87,7 @@ export default function AnnouncementsPage() {
       {/* ─── Hero ──────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-primary overflow-hidden"
+        className="relative pt-28 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20 bg-primary overflow-hidden"
       >
         <div className="absolute inset-0 bg-hero-radial opacity-50" />
         <div
@@ -100,9 +100,9 @@ export default function AnnouncementsPage() {
         />
         <div className="container-site relative z-10 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold/90 mb-3">Home / Announcements</p>
-          <h1 className="ph-title text-3xl md:text-5xl font-heading font-bold text-white">Announcements</h1>
+          <h1 className="ph-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">Announcements</h1>
           <div className="ph-line mx-auto mt-4 h-[3px] w-16 rounded-full bg-gradient-to-r from-gold to-gold-500 origin-center" />
-          <p className="ph-sub mt-5 text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+          <p className="ph-sub mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto px-2">
             Stay informed with the latest updates and important notices from the department.
           </p>
         </div>
@@ -110,7 +110,7 @@ export default function AnnouncementsPage() {
 
       {/* ─── Toggle Bar ────────────────────────────────── */}
       <section className="bg-background-paper border-b border-border-light">
-        <div className="container-site py-4 flex items-center justify-between">
+        <div className="container-site py-3 sm:py-4 flex items-center justify-between gap-4">
           <p className="text-sm text-foreground-muted">
             Showing <span className="font-semibold text-primary">{filtered.length}</span> announcement{filtered.length !== 1 ? "s" : ""}
           </p>
@@ -157,7 +157,7 @@ export default function AnnouncementsPage() {
                           : "bg-gradient-to-b from-gold to-gold-500"
                       }`}
                     />
-                    <div className="p-6 flex-1">
+                    <div className="p-4 sm:p-5 md:p-6 flex-1">
                       {/* Top meta row */}
                       <div className="flex flex-wrap items-center gap-2 mb-3">
                         <span

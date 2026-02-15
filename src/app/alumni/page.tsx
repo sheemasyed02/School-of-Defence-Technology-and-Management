@@ -44,9 +44,9 @@ export default function AlumniPage() {
       />
 
       {/* Alumni Stats */}
-      <section className="py-12 bg-background-muted border-b border-border-light">
+      <section className="py-8 sm:py-10 md:py-12 bg-background-muted border-b border-border-light">
         <div className="container-site">
-          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
             {[
               { value: "15+", label: "Distinguished Alumni" },
               { value: "10+", label: "Companies Represented" },
@@ -54,8 +54,8 @@ export default function AlumniPage() {
               { value: "30+", label: "Organizations Worldwide" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="stat-number text-4xl mb-1">{s.value}</p>
-                <p className="text-sm text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
+                <p className="stat-number text-2xl sm:text-3xl md:text-4xl mb-1">{s.value}</p>
+                <p className="text-xs sm:text-sm text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
               </div>
             ))}
           </StaggerGroup>
@@ -65,13 +65,13 @@ export default function AlumniPage() {
       {/* Distinguished Alumni */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading mb-14">
-            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Pride</p>
-            <h2 className="text-3xl md:text-4xl">Distinguished Alumni</h2>
+          <AnimateIn type="fadeUp" className="section-heading mb-10 sm:mb-14">
+            <p className="text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Pride</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Distinguished Alumni</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-10 md:space-y-12">
             {BATCHES.map((batch) => {
               const batchAlumni = ALUMNI.filter((a) => a.batch === batch);
               return (
@@ -88,13 +88,13 @@ export default function AlumniPage() {
                     </div>
                   </AnimateIn>
 
-                  <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
                     {batchAlumni.map((a) => (
                       <div
                         key={`${a.name}-${a.batch}`}
-                        className="group bg-background-paper rounded-2xl shadow-brand border border-border-light p-6 flex items-center gap-5 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1"
+                        className="group bg-background-paper rounded-xl sm:rounded-2xl shadow-brand border border-border-light p-4 sm:p-5 md:p-6 flex items-center gap-3 sm:gap-4 md:gap-5 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1"
                       >
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden relative">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden relative">
                           {/* Initials fallback behind image */}
                           <span className="text-base font-heading font-bold text-white absolute z-0">
                             {a.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
@@ -108,7 +108,7 @@ export default function AlumniPage() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-heading font-bold text-primary truncate">{a.name}</h3>
+                          <h3 className="text-base sm:text-lg font-heading font-bold text-primary truncate">{a.name}</h3>
                           <p className="text-sm md:text-base text-foreground-muted mt-1">{a.role}</p>
                         </div>
                       </div>
@@ -125,18 +125,18 @@ export default function AlumniPage() {
       <section className="section-padding bg-background-muted">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Global Presence</p>
-            <h2 className="text-3xl md:text-4xl">Where Our Alumni Work</h2>
+            <p className="text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Global Presence</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Where Our Alumni Work</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-12 max-w-4xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-4xl mx-auto">
             {WHERE_ALUMNI_WORK.map((company) => (
               <div
                 key={company}
-                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-4 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-0.5"
+                className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-3 sm:p-4 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-0.5"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:bg-gold/10 transition-colors">
-                  <span className="text-base font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{company[0]}</span>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-1.5 sm:mb-2 group-hover:bg-gold/10 transition-colors">
+                  <span className="text-sm sm:text-base font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{company[0]}</span>
                 </div>
                 <p className="text-sm font-semibold text-primary">{company}</p>
               </div>

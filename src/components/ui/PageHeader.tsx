@@ -33,7 +33,7 @@ export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderPr
   return (
     <section
       ref={ref}
-      className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-primary overflow-hidden"
+      className="relative pt-20 pb-12 sm:pt-24 sm:pb-14 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 xl:pt-40 xl:pb-24 bg-primary overflow-hidden min-h-[50vh] sm:min-h-[60vh] flex items-center"
     >
       {/* background decoration */}
       <div className="absolute inset-0 bg-hero-radial opacity-50" />
@@ -42,25 +42,31 @@ export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderPr
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+          backgroundSize: "40px 40px sm:60px 60px",
         }}
       />
 
-      <div className="container-site relative z-10 text-center">
+      <div className="container-site relative z-10 text-center w-full">
         {breadcrumb && (
-          <p className="text-xs uppercase tracking-[0.25em] text-white/40 font-body mb-4">
-            Home &nbsp;/&nbsp; {breadcrumb}
+          <p className="text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.25em] text-white/40 font-body mb-3 sm:mb-4 md:mb-6">
+            <span className="inline-flex items-center gap-1 sm:gap-2">
+              <span>Home</span>
+              <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              <span>{breadcrumb}</span>
+            </span>
           </p>
         )}
         <h1
-          className="ph-title text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-white mb-4"
+          className="ph-title text-section sm:text-hero font-heading font-bold text-white mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-tight px-4 sm:px-0"
           style={{ opacity: 0 }}
         >
           {title}
         </h1>
-        <div className="ph-line h-1 w-16 bg-gold mx-auto rounded-full mb-4 origin-left" style={{ transform: "scaleX(0)" }} />
+        <div className="ph-line section-divider mx-auto mb-4 sm:mb-6 md:mb-8 origin-left" style={{ transform: "scaleX(0)" }} />
         {subtitle && (
-          <p className="ph-sub text-base md:text-lg text-white/70 max-w-2xl mx-auto" style={{ opacity: 0 }}>
+          <p className="ph-sub text-body-lg text-white/70 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto leading-relaxed px-4 sm:px-6 lg:px-0" style={{ opacity: 0 }}>
             {subtitle}
           </p>
         )}

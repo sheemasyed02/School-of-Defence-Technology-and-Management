@@ -109,9 +109,9 @@ export default function FacultyPage() {
       />
 
       {/* Faculty Stats */}
-      <section className="py-10 bg-background-muted border-b border-border-light">
+      <section className="py-8 sm:py-10 bg-background-muted border-b border-border-light">
         <div className="container-site">
-          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
             {[
               { value: "5", label: "Faculty Members" },
               { value: "63+", label: "Years Experience" },
@@ -119,7 +119,7 @@ export default function FacultyPage() {
               { value: "20+", label: "Research Areas" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="stat-number text-3xl mb-1">{s.value}</p>
+                <p className="stat-number text-2xl sm:text-3xl mb-1">{s.value}</p>
                 <p className="text-xs text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
               </div>
             ))}
@@ -130,19 +130,19 @@ export default function FacultyPage() {
       {/* Faculty Members */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading mb-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Meet Our Team</p>
-            <h2>Faculty Members</h2>
+          <AnimateIn type="fadeUp" className="section-heading mb-10 sm:mb-14">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Meet Our Team</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Faculty Members</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
             {FACULTY.map((f, idx) => (
               <AnimateIn key={f.name} type="fadeUp" delay={idx * 0.1}>
                 <div className="bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1 flex flex-col h-full">
                   {/* Top — Photo / Avatar */}
-                  <div className={`relative bg-gradient-to-br ${COLORS[idx % COLORS.length].from} ${COLORS[idx % COLORS.length].to} pt-8 pb-6 flex flex-col items-center text-center`}>
-                    <div className="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white/20 mb-4 bg-white/10 flex items-center justify-center relative">
+                  <div className={`relative bg-gradient-to-br ${COLORS[idx % COLORS.length].from} ${COLORS[idx % COLORS.length].to} pt-6 sm:pt-8 pb-5 sm:pb-6 flex flex-col items-center text-center`}>
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden ring-4 ring-white/20 mb-3 sm:mb-4 bg-white/10 flex items-center justify-center relative">
                       {/* Initials fallback (visible behind image) */}
                       <span className="text-2xl font-heading font-bold text-white/90 absolute z-0">{f.initials}</span>
                       <Image
@@ -153,7 +153,7 @@ export default function FacultyPage() {
                         sizes="112px"
                       />
                     </div>
-                    <h3 className="text-lg font-heading font-bold text-white">{f.name}</h3>
+                    <h3 className="text-base sm:text-lg font-heading font-bold text-white">{f.name}</h3>
                     <p className="text-xs text-gold-100 font-semibold mt-1">{f.designation}</p>
                     {/* Contact */}
                     <div className="mt-4 pt-3 border-t border-white/15 w-4/5 space-y-1">
@@ -163,26 +163,26 @@ export default function FacultyPage() {
                   </div>
 
                   {/* Bottom — Details */}
-                  <div className="p-6 space-y-4 flex-1 flex flex-col">
+                  <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4 flex-1 flex flex-col">
                     {/* Info chips */}
-                    <div className="space-y-3">
-                      <div className="bg-background-muted rounded-lg p-3">
-                        <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Qualification</p>
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="bg-background-muted rounded-lg p-2.5 sm:p-3">
+                        <p className="text-[10px] sm:text-[11px] font-bold text-primary/50 uppercase tracking-wider mb-1">Qualification</p>
                         <p className="text-sm text-foreground-muted leading-snug">{f.qualification}</p>
                       </div>
-                      <div className="bg-background-muted rounded-lg p-3">
-                        <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Specialization</p>
+                      <div className="bg-background-muted rounded-lg p-2.5 sm:p-3">
+                        <p className="text-[10px] sm:text-[11px] font-bold text-primary/50 uppercase tracking-wider mb-1">Specialization</p>
                         <p className="text-sm text-foreground-muted leading-snug">{f.specialization}</p>
                       </div>
-                      <div className="bg-background-muted rounded-lg p-3">
-                        <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-1">Experience</p>
+                      <div className="bg-background-muted rounded-lg p-2.5 sm:p-3">
+                        <p className="text-[10px] sm:text-[11px] font-bold text-primary/50 uppercase tracking-wider mb-1">Experience</p>
                         <p className="text-sm text-foreground-muted leading-snug">{f.experience}</p>
                       </div>
                     </div>
 
                     {/* Research Interests */}
                     <div className="flex-1">
-                      <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-2">Research Interests</p>
+                      <p className="text-[10px] sm:text-[11px] font-bold text-primary/50 uppercase tracking-wider mb-2">Research Interests</p>
                       <div className="flex flex-wrap gap-1.5">
                         {f.research.map((r) => (
                           <span key={r} className="text-[11px] bg-gradient-to-r from-gold/10 to-gold/5 text-gold border border-gold/20 px-2.5 py-1 rounded-full font-medium">{r}</span>
@@ -192,7 +192,7 @@ export default function FacultyPage() {
 
                     {/* Publications */}
                     <div>
-                      <p className="text-[10px] font-bold text-primary/50 uppercase tracking-wider mb-2">Selected Publications</p>
+                      <p className="text-[10px] sm:text-[11px] font-bold text-primary/50 uppercase tracking-wider mb-2">Selected Publications</p>
                       <ul className="space-y-2">
                         {f.publications.map((pub, i) => (
                           <li key={i} className="flex items-start gap-2 text-[11px] text-foreground-muted leading-relaxed">

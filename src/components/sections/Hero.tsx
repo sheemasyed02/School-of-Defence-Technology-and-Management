@@ -75,40 +75,40 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-primary overflow-hidden"
+      className="relative bg-primary overflow-hidden min-h-screen sm:min-h-[80vh] md:min-h-[90vh] lg:min-h-screen flex items-center"
     >
       {/* ── Top gold accent bar ── */}
-      <div className="h-0.5 bg-gold-accent w-full" />
+      <div className="h-0.5 bg-gold-accent w-full absolute top-0" />
 
       {/* ── Main content area ── */}
-      <div className="container-site py-20 pt-32 lg:pt-36 lg:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div className="container-site py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 pt-[72px] sm:pt-20 md:pt-28 lg:pt-32 xl:pt-36 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16 items-center">
 
           {/* ── Left: Text ── */}
-          <div>
+          <div className="text-center lg:text-left">
             <div
               ref={topBarRef}
-              className="flex items-center gap-3 mb-6"
+              className="flex items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-4 sm:mb-5 md:mb-6"
               style={{ opacity: 0 }}
             >
-              <div className="w-10 h-[2px] bg-gold" />
-              <span className="text-xs font-semibold text-gold tracking-[0.2em] uppercase">
+              <div className="w-8 sm:w-10 md:w-12 h-[2px] bg-gold" />
+              <span className="text-xs sm:text-sm md:text-base font-semibold text-gold tracking-[0.2em] uppercase">
                 Admissions Open 2026–27
               </span>
             </div>
 
             <h1
               ref={headingRef}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-white leading-tight mb-5"
+              className="text-hero font-heading font-bold text-white leading-tight mb-4 sm:mb-5 md:mb-6 lg:mb-8"
               style={{ opacity: 0 }}
             >
-              School of Defence<br />
-              Technology &amp;&nbsp;Management
+              <span className="block">School of Defence</span>
+              <span className="block">Technology &amp;&nbsp;Management</span>
             </h1>
 
             <p
               ref={subtitleRef}
-              className="text-base md:text-lg text-white/70 max-w-lg leading-relaxed mb-8"
+              className="text-body text-white/70 max-w-md lg:max-w-lg xl:max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6 sm:mb-7 md:mb-8 lg:mb-10"
               style={{ opacity: 0 }}
             >
               A premier institution dedicated to advancing defence education,
@@ -118,18 +118,18 @@ export default function Hero() {
 
             <div
               ref={ctaRef}
-              className="flex flex-wrap gap-3 mb-12"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-16"
               style={{ opacity: 0 }}
             >
               <Link
                 href="/programs"
-                className="inline-flex items-center justify-center bg-gold text-primary font-semibold text-sm px-7 py-3 rounded transition-colors hover:bg-gold-300"
+                className="btn-primary bg-gold hover:bg-gold-400 text-primary border-0 w-full sm:w-auto"
               >
                 Explore Programmes
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center justify-center border border-white/30 text-white font-semibold text-sm px-7 py-3 rounded transition-colors hover:bg-white/10"
+                className="btn-secondary border-white/30 text-white hover:bg-white/10 hover:border-white/50 w-full sm:w-auto"
               >
                 Learn More
               </Link>
@@ -138,15 +138,15 @@ export default function Hero() {
             {/* Stats row */}
             <div
               ref={statsRef}
-              className="flex gap-8 border-t border-white/10 pt-6"
+              className="grid grid-cols-2 sm:flex sm:justify-center lg:justify-start gap-4 sm:gap-6 md:gap-8 border-t border-white/10 pt-4 sm:pt-5 md:pt-6"
             >
               {HERO_STATS.map((stat) => (
-                <div key={stat.label} style={{ opacity: 0 }}>
-                  <p className="text-2xl md:text-3xl font-heading font-bold text-gold leading-none">
+                <div key={stat.label} className="text-center lg:text-left" style={{ opacity: 0 }}>
+                  <p className="stat-number text-gold leading-none">
                     {stat.value.toLocaleString()}
                     <span className="text-gold/60">{stat.suffix}</span>
                   </p>
-                  <p className="text-[11px] md:text-xs text-white/50 mt-1 uppercase tracking-wide">
+                  <p className="text-xs sm:text-sm text-white/50 mt-1 uppercase tracking-wide">
                     {stat.label}
                   </p>
                 </div>
@@ -157,11 +157,11 @@ export default function Hero() {
           {/* ── Right: Image Slideshow ── */}
           <div
             ref={imageRef}
-            className="hidden lg:block"
+            className="mt-8 lg:mt-0 order-first lg:order-last"
             style={{ opacity: 0 }}
           >
             <div className="relative">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden shadow-lg sm:shadow-xl">
                 {HERO_IMAGES.map((src, index) => (
                   <div
                     key={src}
@@ -174,26 +174,13 @@ export default function Hero() {
                       fill
                       className="object-cover"
                       priority={index === 0}
-                      sizes="(max-width: 1024px) 0vw, 50vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 50vw"
                     />
                   </div>
                 ))}
-              </div>
-
-              {/* Slide dots */}
-              <div className="flex items-center justify-center gap-2 mt-4">
-                {HERO_IMAGES.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`rounded-full transition-all duration-300 ${
-                      index === currentSlide
-                        ? "w-6 h-1.5 bg-gold"
-                        : "w-1.5 h-1.5 bg-white/25 hover:bg-white/40"
-                    }`}
-                    aria-label={`Slide ${index + 1}`}
-                  />
-                ))}
+                
+                {/* Mobile overlay for better text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent lg:hidden" />
               </div>
             </div>
           </div>
@@ -201,7 +188,7 @@ export default function Hero() {
       </div>
 
       {/* ── Bottom gold accent bar ── */}
-      <div className="h-0.5 bg-gold-accent w-full" />
+      <div className="h-0.5 bg-gold-accent w-full absolute bottom-0" />
     </section>
   );
 }

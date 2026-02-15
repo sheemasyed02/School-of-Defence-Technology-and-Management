@@ -67,7 +67,7 @@ export default function GalleryPage() {
       {/* ─── Hero ──────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-primary overflow-hidden"
+        className="relative pt-28 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20 bg-primary overflow-hidden"
       >
         <div className="absolute inset-0 bg-hero-radial opacity-50" />
         <div
@@ -80,23 +80,23 @@ export default function GalleryPage() {
         />
         <div className="container-site relative z-10 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold/90 mb-3">Home / Gallery</p>
-          <h1 className="ph-title text-3xl md:text-5xl font-heading font-bold text-white">Gallery</h1>
+          <h1 className="ph-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">Gallery</h1>
           <div className="ph-line mx-auto mt-4 h-[3px] w-16 rounded-full bg-gradient-to-r from-gold to-gold-500 origin-center" />
-          <p className="ph-sub mt-5 text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+          <p className="ph-sub mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto px-2">
             Explore moments from our events, state-of-the-art labs, and industrial visits.
           </p>
         </div>
       </section>
 
       {/* ─── Filter Tabs ───────────────────────────────── */}
-      <section className="bg-background-paper border-b border-border-light sticky top-[72px] z-30">
+      <section className="bg-background-paper border-b border-border-light sticky top-[56px] sm:top-[64px] md:top-[80px] xl:top-[128px] z-30">
         <div className="container-site">
-          <div className="flex items-center justify-center gap-2 py-4 overflow-x-auto">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 py-3 sm:py-4 overflow-x-auto scrollbar-hide">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.key}
                 onClick={() => setActive(cat.key)}
-                className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${
                   active === cat.key
                     ? "bg-gradient-to-r from-gold to-gold-500 text-white shadow-md"
                     : "bg-background-muted text-foreground-muted hover:text-primary hover:bg-primary/5"
@@ -112,9 +112,9 @@ export default function GalleryPage() {
       {/* ─── Photos Section ────────────────────────────── */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <div className="section-heading mb-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Photos</p>
-            <h2>Campus Highlights</h2>
+          <div className="section-heading mb-8 sm:mb-10">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Photos</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Campus Highlights</h2>
             <div className="section-divider mx-auto mt-4" />
           </div>
 
@@ -155,13 +155,13 @@ export default function GalleryPage() {
       {/* ─── Videos Section ────────────────────────────── */}
       <section className="section-padding bg-background-muted">
         <div className="container-site">
-          <div className="section-heading mb-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Videos</p>
-            <h2>Watch & Learn</h2>
+          <div className="section-heading mb-8 sm:mb-10">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Videos</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Watch & Learn</h2>
             <div className="section-divider mx-auto mt-4" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
             {VIDEOS.map((video) => (
               <div
                 key={video.embedId}
@@ -176,7 +176,7 @@ export default function GalleryPage() {
                     className="absolute inset-0 w-full h-full"
                   />
                 </div>
-                <div className="p-5 flex items-center gap-3">
+                <div className="p-4 sm:p-5 flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/10 transition-colors">
                     <svg className="w-4 h-4 text-primary/50 group-hover:text-gold transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />

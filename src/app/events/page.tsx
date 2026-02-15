@@ -57,8 +57,8 @@ export default function EventsPage() {
       <section className="section-padding bg-background">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">What&apos;s Coming Up</p>
-            <h2>Upcoming Events</h2>
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">What&apos;s Coming Up</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Upcoming Events</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
@@ -67,7 +67,7 @@ export default function EventsPage() {
               <AnimateIn key={evt.title} type={i % 2 === 0 ? "slideLeft" : "slideRight"}>
                 <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                   {/* Date panel */}
-                  <div className="md:w-52 bg-gradient-to-br from-primary to-secondary p-6 flex flex-col items-center justify-center text-center shrink-0">
+                  <div className="md:w-48 lg:w-52 bg-gradient-to-br from-primary to-secondary p-4 sm:p-5 md:p-6 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-3 md:gap-0">
                     <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-gold uppercase tracking-wider mb-2">
                       {evt.tag}
                     </span>
@@ -81,9 +81,9 @@ export default function EventsPage() {
                     </div>
                   </div>
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-center">
-                    <h3 className="text-lg font-heading font-bold text-primary mb-2">{evt.title}</h3>
-                    <p className="text-sm text-foreground-muted leading-relaxed mb-4">{evt.description}</p>
+                  <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center">
+                    <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2">{evt.title}</h3>
+                    <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed mb-3 sm:mb-4">{evt.description}</p>
                     <div>
                       <span className="inline-block btn-primary text-xs cursor-pointer">{evt.cta}</span>
                     </div>
@@ -99,8 +99,8 @@ export default function EventsPage() {
       <section className="section-padding bg-background-muted">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Look Back</p>
-            <h2>Past Events</h2>
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Look Back</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Past Events</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
@@ -109,7 +109,7 @@ export default function EventsPage() {
               <AnimateIn key={evt.title} type="fadeUp">
                 <div className="bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden flex flex-col md:flex-row opacity-90">
                   {/* Date panel */}
-                  <div className="md:w-52 bg-gradient-to-br from-primary/80 to-secondary/80 p-6 flex flex-col items-center justify-center text-center shrink-0">
+                  <div className="md:w-48 lg:w-52 bg-gradient-to-br from-primary/80 to-secondary/80 p-4 sm:p-5 md:p-6 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-3 md:gap-0">
                     <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-gold/80 uppercase tracking-wider mb-2">
                       {evt.tag}
                     </span>
@@ -123,9 +123,9 @@ export default function EventsPage() {
                     </div>
                   </div>
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-center">
-                    <h3 className="text-lg font-heading font-bold text-primary mb-2">{evt.title}</h3>
-                    <p className="text-sm text-foreground-muted leading-relaxed">{evt.description}</p>
+                  <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center">
+                    <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2">{evt.title}</h3>
+                    <p className="text-xs sm:text-sm text-foreground-muted leading-relaxed">{evt.description}</p>
                   </div>
                 </div>
               </AnimateIn>
