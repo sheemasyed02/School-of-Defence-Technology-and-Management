@@ -78,7 +78,7 @@ export default function Hero() {
       className="relative bg-primary overflow-hidden"
     >
       {/* ── Top gold accent bar ── */}
-      <div className="h-1 bg-gold-accent w-full" />
+      <div className="h-0.5 bg-gold-accent w-full" />
 
       {/* ── Main content area ── */}
       <div className="container-site py-20 pt-32 lg:pt-36 lg:pb-24">
@@ -201,7 +201,7 @@ export default function Hero() {
       </div>
 
       {/* ── Bottom gold accent bar ── */}
-      <div className="h-1 bg-gold-accent w-full" />
+      <div className="h-0.5 bg-gold-accent w-full" />
     </section>
   );
 }

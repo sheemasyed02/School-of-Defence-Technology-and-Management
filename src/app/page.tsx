@@ -62,7 +62,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-14">
             <AnimateIn type="slideLeft">
               <div className="group relative bg-background-paper rounded-brand shadow-brand border border-border-light p-8 h-full transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gold-accent rounded-t-brand" />
+                <div className="absolute top-0 left-0 right-0 h-0.1 bg-gold-accent rounded-t-brand" />
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
                     <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
