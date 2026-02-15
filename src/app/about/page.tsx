@@ -155,7 +155,7 @@ export default function AboutPage() {
         <div className="container-site max-w-5xl relative z-10">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Leadership</p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl">Message from Head of Department</h2>
+            <h2 className="text-xl sm:text-2xl md:text-3xl">Message from Director of the Program</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
           <AnimateIn type="scaleIn">
