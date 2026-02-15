@@ -86,7 +86,7 @@ export default function Navbar() {
       {/* ── Bottom row: Desktop nav ── */}
       <nav
         className={cn(
-          "hidden xl:block border-t transition-colors",
+          "hidden xl:block border-t transition-colors bg-[#F2F3F6]",
           "border-border-light"
         )}
       >
