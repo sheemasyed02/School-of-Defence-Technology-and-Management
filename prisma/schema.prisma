@@ -1,0 +1,73 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("EDITOR") // "SUPER_ADMIN", "EDITOR", "FACULTY_ADMIN"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Faculty {
+  id           String   @id @default(cuid())
+  name         String
+  designation  String
+  department   String
+  bio          String?
+  email        String?
+  imageUrl     String?
+  publications String? // JSON string
+  qualification String?
+  experience   String?
+  research     String? // JSON string
+  phone        String?
+  order        Int      @default(0)
+  isVisible    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime
+  venue       String?
+  imageUrl    String?
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String?
+  date      DateTime
+  priority  String   @default("REGULAR") // "IMPORTANT", "REGULAR"
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PageContent {
+  id        String   @id @default(cuid())
+  page      String
+  section   String
+  content   String   // JSON string storing title, subtitle, items
+  isVisible Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+
+  @@unique([page, section])
+}

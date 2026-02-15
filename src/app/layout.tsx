@@ -1,23 +1,21 @@
-/* ═══════════════════════════════════════════════════════
-   Root Layout — wraps every page
-   ═══════════════════════════════════════════════════════ */
 
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { createMetadata } from "@/lib/metadata";
-import { Navbar } from "@/components/layout";
-import { Footer } from "@/components/layout";
 
+<<<<<<< Updated upstream
 /* ─── Fonts ─── */
 const notoSans = Noto_Sans({
+=======
+const inter = Inter({
+>>>>>>> Stashed changes
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-/* ─── Metadata ─── */
 export const metadata: Metadata = createMetadata();
 
 export const viewport: Viewport = {
@@ -26,7 +24,6 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/* ─── Layout ─── */
 export default function RootLayout({
   children,
 }: {
@@ -39,9 +36,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased">
+<<<<<<< Updated upstream
         <Navbar />
         <main className="min-h-screen overflow-x-hidden">{children}</main>
         <Footer />
+=======
+        {children}
+>>>>>>> Stashed changes
       </body>
     </html>
   );

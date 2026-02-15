@@ -10,6 +10,7 @@ const nextConfig = {
       },
     ],
   },
+  serverExternalPackages: ['svg-captcha'],
 };
 
 module.exports = nextConfig;
