@@ -57,7 +57,7 @@ export default function PlacementsPage() {
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-2xl border border-border-light shadow-brand">
               {/* Table header */}
               <div className="bg-gradient-to-r from-primary to-secondary grid grid-cols-4 text-center">
-                {["Academic Year", "Students Placed", "Highest Package", "Average Package"].map((h) => (
+                {["Academic Year", "Total no. of Students", "Students Placed", "Higher Studies"].map((h) => (
                   <div key={h} className="py-4 px-3">
                     <p className="text-xs font-bold text-white/80 uppercase tracking-wider">{h}</p>
                   </div>

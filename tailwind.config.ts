@@ -87,13 +87,14 @@ const config: Config = {
       fontFamily: {
         heading: [
           "var(--font-heading)",
-          "Playfair Display",
+          "Merriweather",
           "Georgia",
+          "Times New Roman",
           "serif",
         ],
         body: [
           "var(--font-body)",
-          "Inter",
+          "Noto Sans",
           "system-ui",
           "sans-serif",
         ],

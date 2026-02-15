@@ -132,17 +132,17 @@ export default function AboutPage() {
       <section className="section-padding bg-background">
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">What We Aim For</p>
-            <h2>Our Objectives</h2>
+            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">What We Aim For</p>
+            <h2 className="text-3xl md:text-4xl">Our Objectives</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
           <StaggerGroup className="space-y-5 mt-12">
             {OBJECTIVES.map((obj, i) => (
               <div key={i} className="group flex items-start gap-5 bg-background-paper rounded-xl shadow-brand border border-border-light p-6 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-lg font-heading font-bold text-white">{i + 1}</span>
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-xl font-heading font-bold text-white">{i + 1}</span>
                 </div>
-                <p className="text-foreground-muted leading-relaxed pt-2.5">{obj}</p>
+                <p className="text-lg text-foreground-muted leading-relaxed pt-3">{obj}</p>
               </div>
             ))}
           </StaggerGroup>
@@ -237,19 +237,19 @@ export default function AboutPage() {
       <section className="section-padding bg-background">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Facilities</p>
-            <h2>Infrastructure</h2>
+            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Facilities</p>
+            <h2 className="text-3xl md:text-4xl">Infrastructure</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
           <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {INFRASTRUCTURE.map((item) => (
               <div key={item.name} className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:from-primary/20 transition-all">
-                  <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:from-primary/20 transition-all">
+                  <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                   </svg>
                 </div>
-                <p className="text-sm text-foreground-muted font-medium pt-2.5">{item.name}</p>
+                <p className="text-base md:text-lg text-foreground-muted font-medium pt-3">{item.name}</p>
               </div>
             ))}
           </StaggerGroup>

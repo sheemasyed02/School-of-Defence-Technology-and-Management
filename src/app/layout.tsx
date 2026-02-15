@@ -3,23 +3,25 @@
    ═══════════════════════════════════════════════════════ */
 
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Noto_Sans, Merriweather } from "next/font/google";
 import "@/styles/globals.css";
 import { createMetadata } from "@/lib/metadata";
 import { Navbar } from "@/components/layout";
 import { Footer } from "@/components/layout";
 
-/* ─── Fonts ─── */
-const inter = Inter({
+/* ─── Fonts (Government / Official style) ─── */
+const notoSans = Noto_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const playfair = Playfair_Display({
+const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
+  weight: ["400", "700", "900"],
 });
 
 /* ─── Metadata ─── */
@@ -40,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable}`}
+      className={`${notoSans.variable} ${merriweather.variable}`}
       suppressHydrationWarning
     >
       <body className="font-body antialiased">

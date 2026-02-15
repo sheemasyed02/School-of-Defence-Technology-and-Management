@@ -1,14 +1,23 @@
 /* ═══════════════════════════════════════════════════════
-   Hero Section — Full-viewport animated hero with image
+   Hero Section — Full-viewport hero with image slideshow
    ═══════════════════════════════════════════════════════ */
 
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap, ScrollTrigger } from "@/animations/gsap-setup";
 import { HERO_STATS } from "@/constants";
+
+const HERO_IMAGES = [
+  "/hero/hero1.jpeg",
+  "/hero/hero2.jpeg",
+  "/hero/hero3.jpeg",
+  "/hero/hero4.jpeg",
+];
+
+const SLIDE_INTERVAL = 5000;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -20,6 +29,19 @@ export default function Hero() {
   const badgeRef = useRef<HTMLDivElement>(null);
   const goldLineRef = useRef<HTMLDivElement>(null);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  /* ── Auto-advance slideshow ── */
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_IMAGES.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, SLIDE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  /* ── GSAP entrance animations ── */
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -77,7 +99,7 @@ export default function Hero() {
         "-=0.3"
       );
 
-      /* ── Hero image — slides in from right ── */
+      /* ── Slideshow — slides in from right ── */
       if (imageRef.current) {
         tl.fromTo(
           imageRef.current,
@@ -218,23 +240,51 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── Right column: Hero image ── */}
+          {/* ── Right column: Image Slideshow ── */}
           <div
             ref={imageRef}
             className="hidden lg:flex items-center justify-center"
             style={{ opacity: 0 }}
           >
             <div className="relative w-full max-w-lg">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/defence1.png"
-                  alt="School of Defence Technology and Management Campus"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 0vw, 50vw"
-                />
+              {/* Slideshow container */}
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                {HERO_IMAGES.map((src, index) => (
+                  <div
+                    key={src}
+                    className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+                    style={{ opacity: index === currentSlide ? 1 : 0 }}
+                  >
+                    <Image
+                      src={src}
+                      alt={`Campus view ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                      sizes="(max-width: 1024px) 0vw, 50vw"
+                    />
+                  </div>
+                ))}
               </div>
+
+              {/* Slide indicators */}
+              <div className="flex items-center justify-center gap-2.5 mt-5">
+                {HERO_IMAGES.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === currentSlide
+                        ? "w-7 h-2 bg-gold"
+                        : "w-2 h-2 bg-white/30 hover:bg-white/50"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Decorative accent border */}
+              <div className="absolute -bottom-3 -right-3 w-full h-full rounded-xl border-2 border-gold/20 -z-10" />
             </div>
           </div>
         </div>
