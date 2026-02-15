@@ -82,7 +82,7 @@ export default function Hero() {
 
       {/* ── Main content area ── */}
       <div className="container-site py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 pt-[72px] sm:pt-20 md:pt-28 lg:pt-32 xl:pt-36 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-14 xl:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 sm:gap-10 md:gap-12 lg:gap-10 xl:gap-14 items-start">
 
           {/* ── Left: Text ── */}
           <div className="text-center lg:text-left">
@@ -157,11 +157,11 @@ export default function Hero() {
           {/* ── Right: Image Slideshow ── */}
           <div
             ref={imageRef}
-            className="mt-8 lg:mt-0 order-first lg:order-last"
+            className="-mt-2 lg:mt-[4.5rem] order-first lg:order-last"
             style={{ opacity: 0 }}
           >
             <div className="relative">
-              <div className="relative aspect-[16/10] sm:aspect-[4/3] lg:aspect-[4/3] rounded-lg overflow-hidden shadow-lg sm:shadow-xl">
+              <div className="relative aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/4] xl:aspect-[5/4] rounded-lg overflow-hidden shadow-lg sm:shadow-xl">
                 {HERO_IMAGES.map((src, index) => (
                   <div
                     key={src}

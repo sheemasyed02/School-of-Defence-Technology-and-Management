@@ -33,7 +33,7 @@ export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderPr
   return (
     <section
       ref={ref}
-      className="relative pt-20 pb-12 sm:pt-24 sm:pb-14 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20 xl:pt-40 xl:pb-24 bg-primary overflow-hidden min-h-[50vh] sm:min-h-[60vh] flex items-center"
+      className="relative pt-20 pb-8 sm:pt-24 sm:pb-10 md:pt-28 md:pb-12 lg:pt-32 lg:pb-14 xl:pt-36 xl:pb-16 bg-primary overflow-hidden min-h-[35vh] sm:min-h-[40vh] flex items-center"
     >
       {/* background decoration */}
       <div className="absolute inset-0 bg-hero-radial opacity-50" />

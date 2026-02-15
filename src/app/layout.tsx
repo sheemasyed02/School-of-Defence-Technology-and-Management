@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { createMetadata } from "@/lib/metadata";
-import { Navbar, Footer } from "@/components/layout";
 
 /* ─── Fonts ─── */
 const notoSans = Noto_Sans({
@@ -32,9 +31,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased">
-        <Navbar />
-        <main className="min-h-screen overflow-x-hidden">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
