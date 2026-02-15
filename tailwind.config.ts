@@ -86,11 +86,10 @@ const config: Config = {
       /* ─── Typography ─── */
       fontFamily: {
         heading: [
-          "var(--font-heading)",
-          "Merriweather",
-          "Georgia",
-          "Times New Roman",
-          "serif",
+          "var(--font-body)",
+          "Noto Sans",
+          "system-ui",
+          "sans-serif",
         ],
         body: [
           "var(--font-body)",

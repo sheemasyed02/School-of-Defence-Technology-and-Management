@@ -53,7 +53,7 @@ export default function ContactPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Address */}
             <AnimateIn type="fadeUp">
               <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light p-8 h-full transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
