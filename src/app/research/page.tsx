@@ -215,10 +215,10 @@ export default function ResearchPage() {
                 key={area.name}
                 className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-6 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center mx-auto mb-4 text-primary/60 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-500 group-hover:text-white transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center mx-auto mb-4 text-primary/60 group-hover:bg-gradient-to-br group-hover:from-gold group-hover:to-gold-500 group-hover:text-white transition-all duration-300">
                   {Icons[area.icon as keyof typeof Icons]}
                 </div>
-                <p className="text-xs font-semibold text-primary leading-snug">{area.name}</p>
+                <p className="text-sm md:text-base font-semibold text-primary leading-snug">{area.name}</p>
               </div>
             ))}
           </StaggerGroup>

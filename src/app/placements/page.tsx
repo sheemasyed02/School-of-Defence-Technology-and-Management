@@ -144,12 +144,12 @@ export default function PlacementsPage() {
           <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12 max-w-5xl mx-auto">
             {TRAINING_PROGRAMS.map((tp) => (
               <div key={tp.num} className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-sm font-heading font-bold text-white">{tp.num}</span>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-base font-heading font-bold text-white">{tp.num}</span>
                 </div>
                 <div>
-                  <h3 className="text-sm font-heading font-bold text-primary mb-1">{tp.title}</h3>
-                  {tp.desc && <p className="text-xs text-foreground-muted">{tp.desc}</p>}
+                  <h3 className="text-base md:text-lg font-heading font-bold text-primary mb-1">{tp.title}</h3>
+                  {tp.desc && <p className="text-sm text-foreground-muted">{tp.desc}</p>}
                 </div>
               </div>
             ))}
