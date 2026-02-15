@@ -1,40 +1,28 @@
 import { createMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/ui";
 import { AnimateIn, StaggerGroup } from "@/components/animation";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "Students",
-  description: "Current active students at the School of Defence Technology and Management across undergraduate, postgraduate, and doctoral programs.",
+  description: "Current active students at the School of Defence Technology and Management across postgraduate and doctoral programs.",
 });
 
 const STUDENT_GROUPS = [
   {
-    label: "1st Year Active Students",
-    badge: "B.Tech Year 1",
-    students: [
-      "Aarav Sharma", "Ananya Patel", "Arjun Kumar", "Diya Singh", "Ishaan Reddy",
-      "Kavya Mehta", "Rohan Gupta", "Saanvi Joshi", "Vihaan Desai", "Zara Khan",
-      "Aditya Verma", "Myra Kapoor", "Kabir Malhotra", "Navya Iyer", "Reyansh Nair",
-    ],
-    color: "from-primary to-secondary",
-  },
-  {
-    label: "2nd Year Students",
-    badge: "B.Tech Year 2",
-    students: [
-      "Advait Rao", "Anika Bose", "Dhruv Saxena", "Ira Chatterjee", "Kiaan Agarwal",
-      "Larisa Menon", "Mihir Pandey", "Nisha Pillai", "Pranav Shetty", "Riya Banerjee",
-      "Siddharth Kulkarni", "Tara Bhatt", "Vivaan Jain", "Yash Thakur", "Zoya Mishra",
-    ],
-    color: "from-gold to-gold-500",
-  },
-  {
     label: "M.Tech Students",
     badge: "Postgraduate",
     students: [
-      "Akash Srinivasan", "Bhavna Krishnan", "Chetan Raghavan", "Deepika Venkatesh",
-      "Gaurav Subramanian", "Harini Ramesh", "Karthik Narayanan", "Lakshmi Balakrishnan",
-      "Manoj Sundaram", "Priya Natarajan",
+      { name: "Akash Srinivasan", image: "https://randomuser.me/api/portraits/men/11.jpg" },
+      { name: "Bhavna Krishnan", image: "https://randomuser.me/api/portraits/women/12.jpg" },
+      { name: "Chetan Raghavan", image: "https://randomuser.me/api/portraits/men/13.jpg" },
+      { name: "Deepika Venkatesh", image: "https://randomuser.me/api/portraits/women/14.jpg" },
+      { name: "Gaurav Subramanian", image: "https://randomuser.me/api/portraits/men/15.jpg" },
+      { name: "Harini Ramesh", image: "https://randomuser.me/api/portraits/women/16.jpg" },
+      { name: "Karthik Narayanan", image: "https://randomuser.me/api/portraits/men/17.jpg" },
+      { name: "Lakshmi Balakrishnan", image: "https://randomuser.me/api/portraits/women/18.jpg" },
+      { name: "Manoj Sundaram", image: "https://randomuser.me/api/portraits/men/19.jpg" },
+      { name: "Priya Natarajan", image: "https://randomuser.me/api/portraits/women/20.jpg" },
     ],
     color: "from-accent to-accent-600",
   },
@@ -42,9 +30,13 @@ const STUDENT_GROUPS = [
     label: "Ph.D. Students",
     badge: "Doctoral",
     students: [
-      "Dr. Candidate Arvind Mohan", "Dr. Candidate Divya Shankar", "Dr. Candidate Ganesh Iyer",
-      "Dr. Candidate Kavitha Raman", "Dr. Candidate Prakash Murthy", "Dr. Candidate Sneha Gopalan",
-      "Dr. Candidate Varun Krishnamurthy",
+      { name: "Arvind Mohan", image: "https://randomuser.me/api/portraits/men/21.jpg" },
+      { name: "Divya Shankar", image: "https://randomuser.me/api/portraits/women/22.jpg" },
+      { name: "Ganesh Iyer", image: "https://randomuser.me/api/portraits/men/23.jpg" },
+      { name: "Kavitha Raman", image: "https://randomuser.me/api/portraits/women/24.jpg" },
+      { name: "Prakash Murthy", image: "https://randomuser.me/api/portraits/men/25.jpg" },
+      { name: "Sneha Gopalan", image: "https://randomuser.me/api/portraits/women/26.jpg" },
+      { name: "Varun Krishnamurthy", image: "https://randomuser.me/api/portraits/men/27.jpg" },
     ],
     color: "from-secondary to-primary",
   },
@@ -55,14 +47,14 @@ export default function StudentsPage() {
     <>
       <PageHeader
         title="Students"
-        subtitle="Our department is proud to nurture talented students across undergraduate, postgraduate, and doctoral programs."
+        subtitle="Our department is proud to nurture talented students across postgraduate and doctoral programs."
         breadcrumb="Students"
       />
 
       {/* Summary stats */}
       <section className="py-10 bg-background-muted border-b border-border-light">
         <div className="container-site">
-          <StaggerGroup className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 gap-6 max-w-md mx-auto">
             {STUDENT_GROUPS.map((g) => (
               <div key={g.label} className="text-center">
                 <p className="stat-number text-3xl mb-1">{g.students.length}</p>
@@ -78,7 +70,7 @@ export default function StudentsPage() {
         <div className="container-site max-w-4xl">
           <AnimateIn type="fadeUp">
             <p className="text-base text-foreground-muted leading-relaxed text-center">
-              Below is the list of our current active students pursuing excellence in technology management. Our students come from diverse backgrounds and are shaping the future of technology-driven industries.
+              Below is the list of our current active students pursuing excellence in technology management across our postgraduate and doctoral programs.
             </p>
           </AnimateIn>
         </div>
@@ -107,12 +99,13 @@ export default function StudentsPage() {
               </div>
             </AnimateIn>
             <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {group.students.map((name) => (
-                <div key={name} className="group bg-background-paper rounded-xl shadow-brand border border-border-light flex items-center gap-3 p-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${group.color} flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
-                    <span className="text-sm font-heading font-bold text-white">{name[0]}</span>
+              {group.students.map((student) => (
+                <div key={student.name} className="group bg-background-paper rounded-xl shadow-brand border border-border-light flex items-center gap-3 p-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
+                  <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300 relative bg-gradient-to-br from-primary to-secondary">
+                    <span className="text-sm font-heading font-bold text-white absolute inset-0 flex items-center justify-center z-0">{student.name[0]}</span>
+                    <Image src={student.image} alt={student.name} fill className="object-cover relative z-10" sizes="40px" />
                   </div>
-                  <p className="text-sm font-medium text-primary truncate">{name}</p>
+                  <p className="text-sm font-medium text-primary truncate">{student.name}</p>
                 </div>
               ))}
             </StaggerGroup>

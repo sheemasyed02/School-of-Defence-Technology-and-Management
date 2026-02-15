@@ -9,21 +9,21 @@ export const metadata = createMetadata({
 });
 
 const ALUMNI = [
-  { name: "Rajiv Mehta", batch: "2020", role: "Software Engineer at Google", image: "/alumni/rajiv-mehta.jpg" },
-  { name: "Priya Sharma", batch: "2020", role: "Product Manager at Microsoft", image: "/alumni/priya-sharma.jpg" },
-  { name: "Amit Kumar", batch: "2019", role: "Data Scientist at Amazon", image: "/alumni/amit-kumar.jpg" },
-  { name: "Sneha Patel", batch: "2019", role: "Tech Lead at Meta", image: "/alumni/sneha-patel.jpg" },
-  { name: "Vikram Singh", batch: "2018", role: "Founder & CEO at TechStart Inc.", image: "/alumni/vikram-singh.jpg" },
-  { name: "Neha Gupta", batch: "2018", role: "Senior Consultant at McKinsey", image: "/alumni/neha-gupta.jpg" },
-  { name: "Arjun Reddy", batch: "2017", role: "Engineering Manager at Apple", image: "/alumni/arjun-reddy.jpg" },
-  { name: "Kavya Iyer", batch: "2017", role: "AI Research Scientist at IBM", image: "/alumni/kavya-iyer.jpg" },
-  { name: "Rohan Desai", batch: "2016", role: "VP Technology at Flipkart", image: "/alumni/rohan-desai.jpg" },
-  { name: "Ananya Nair", batch: "2016", role: "Director of Operations at Tesla", image: "/alumni/ananya-nair.jpg" },
-  { name: "Siddharth Joshi", batch: "2015", role: "CTO at FinTech Solutions", image: "/alumni/siddharth-joshi.jpg" },
-  { name: "Diya Kapoor", batch: "2015", role: "Principal Engineer at Netflix", image: "/alumni/diya-kapoor.jpg" },
-  { name: "Karan Malhotra", batch: "2014", role: "Head of Innovation at Accenture", image: "/alumni/karan-malhotra.jpg" },
-  { name: "Riya Banerjee", batch: "2014", role: "Senior Manager at Deloitte", image: "/alumni/riya-banerjee.jpg" },
-  { name: "Aditya Verma", batch: "2013", role: "Co-Founder at CloudTech Ventures", image: "/alumni/aditya-verma.jpg" },
+  { name: "Rajiv Mehta", batch: "2020", role: "Software Engineer at Google", image: "https://randomuser.me/api/portraits/men/41.jpg" },
+  { name: "Priya Sharma", batch: "2020", role: "Product Manager at Microsoft", image: "https://randomuser.me/api/portraits/women/42.jpg" },
+  { name: "Amit Kumar", batch: "2019", role: "Data Scientist at Amazon", image: "https://randomuser.me/api/portraits/men/43.jpg" },
+  { name: "Sneha Patel", batch: "2019", role: "Tech Lead at Meta", image: "https://randomuser.me/api/portraits/women/45.jpg" },
+  { name: "Vikram Singh", batch: "2018", role: "Founder & CEO at TechStart Inc.", image: "https://randomuser.me/api/portraits/men/46.jpg" },
+  { name: "Neha Gupta", batch: "2018", role: "Senior Consultant at McKinsey", image: "https://randomuser.me/api/portraits/women/47.jpg" },
+  { name: "Arjun Reddy", batch: "2017", role: "Engineering Manager at Apple", image: "https://randomuser.me/api/portraits/men/48.jpg" },
+  { name: "Kavya Iyer", batch: "2017", role: "AI Research Scientist at IBM", image: "https://randomuser.me/api/portraits/women/49.jpg" },
+  { name: "Rohan Desai", batch: "2016", role: "VP Technology at Flipkart", image: "https://randomuser.me/api/portraits/men/50.jpg" },
+  { name: "Ananya Nair", batch: "2016", role: "Director of Operations at Tesla", image: "https://randomuser.me/api/portraits/women/51.jpg" },
+  { name: "Siddharth Joshi", batch: "2015", role: "CTO at FinTech Solutions", image: "https://randomuser.me/api/portraits/men/52.jpg" },
+  { name: "Diya Kapoor", batch: "2015", role: "Principal Engineer at Netflix", image: "https://randomuser.me/api/portraits/women/53.jpg" },
+  { name: "Karan Malhotra", batch: "2014", role: "Head of Innovation at Accenture", image: "https://randomuser.me/api/portraits/men/54.jpg" },
+  { name: "Riya Banerjee", batch: "2014", role: "Senior Manager at Deloitte", image: "https://randomuser.me/api/portraits/women/55.jpg" },
+  { name: "Aditya Verma", batch: "2013", role: "Co-Founder at CloudTech Ventures", image: "https://randomuser.me/api/portraits/men/56.jpg" },
 ];
 
 const WHERE_ALUMNI_WORK = [

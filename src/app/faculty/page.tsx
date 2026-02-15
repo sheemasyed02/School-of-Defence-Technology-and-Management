@@ -12,7 +12,7 @@ const FACULTY = [
   {
     name: "Dr. Sarah Johnson",
     initials: "SJ",
-    image: "/faculty/sarah-johnson.jpg",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
     designation: "Professor & Head of Department",
     qualification: "Ph.D. in Technology Management, MIT",
     specialization: "Innovation Management, Digital Transformation",
@@ -28,7 +28,7 @@ const FACULTY = [
   {
     name: "Dr. Michael Chen",
     initials: "MC",
-    image: "/faculty/michael-chen.jpg",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
     designation: "Associate Professor",
     qualification: "Ph.D. in Information Systems, Stanford University",
     specialization: "Data Analytics, Business Intelligence",
@@ -44,7 +44,7 @@ const FACULTY = [
   {
     name: "Dr. Emily Rodriguez",
     initials: "ER",
-    image: "/faculty/emily-rodriguez.jpg",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
     designation: "Associate Professor",
     qualification: "Ph.D. in Operations Management, Harvard Business School",
     specialization: "Supply Chain Management, Operations Strategy",
@@ -60,7 +60,7 @@ const FACULTY = [
   {
     name: "Dr. Rajesh Patel",
     initials: "RP",
-    image: "/faculty/rajesh-patel.jpg",
+    image: "https://randomuser.me/api/portraits/men/75.jpg",
     designation: "Assistant Professor",
     qualification: "Ph.D. in Computer Science, Carnegie Mellon University",
     specialization: "Artificial Intelligence, Cybersecurity",
@@ -76,7 +76,7 @@ const FACULTY = [
   {
     name: "Dr. Lisa Wang",
     initials: "LW",
-    image: "/faculty/lisa-wang.jpg",
+    image: "https://randomuser.me/api/portraits/women/90.jpg",
     designation: "Assistant Professor",
     qualification: "Ph.D. in Entrepreneurship, UC Berkeley",
     specialization: "Technology Entrepreneurship, Innovation",

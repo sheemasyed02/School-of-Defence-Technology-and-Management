@@ -189,7 +189,7 @@ export default function ResearchPage() {
               { value: "10", label: "Research Areas" },
               { value: "$5M+", label: "Annual Funding" },
               { value: "5", label: "Research Labs" },
-              { value: "6", label: "Global Partners" },
+              { value: "6", label: "Partners" },
             ].map((s) => (
               <div key={s.label}>
                 <p className="stat-number text-2xl md:text-3xl">{s.value}</p>
@@ -407,7 +407,7 @@ export default function ResearchPage() {
       <section className="section-padding bg-background">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Global Partners</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Partners</p>
             <h2>Research Collaborations</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
