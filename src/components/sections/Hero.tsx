@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   Hero Section — Full-viewport hero with image slideshow
+   Hero Section — Clean, professional government-style
    ═══════════════════════════════════════════════════════ */
 
 "use client";
@@ -7,7 +7,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap, ScrollTrigger } from "@/animations/gsap-setup";
+import { gsap } from "@/animations/gsap-setup";
 import { HERO_STATS } from "@/constants";
 
 const HERO_IMAGES = [
@@ -21,17 +21,15 @@ const SLIDE_INTERVAL = 5000;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const topBarRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const goldLineRef = useRef<HTMLDivElement>(null);
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  /* ── Auto-advance slideshow ── */
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % HERO_IMAGES.length);
   }, []);
@@ -41,214 +39,129 @@ export default function Hero() {
     return () => clearInterval(timer);
   }, [nextSlide]);
 
-  /* ── GSAP entrance animations ── */
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out" },
-        delay: 0.2,
+        defaults: { ease: "power2.out" },
+        delay: 0.15,
       });
 
-      /* ── Badge entrance ── */
-      tl.fromTo(
-        badgeRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 }
-      );
-
-      /* ── Gold accent line ── */
-      tl.fromTo(
-        goldLineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.5, ease: "power2.out" },
-        "-=0.3"
-      );
-
-      /* ── Heading entrance ── */
-      tl.fromTo(
-        headingRef.current,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-        "-=0.2"
-      );
-
-      /* ── Subtitle ── */
-      tl.fromTo(
-        subtitleRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        "-=0.5"
-      );
-
-      /* ── CTA buttons ── */
-      tl.fromTo(
-        ctaRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7 },
-        "-=0.4"
-      );
-
-      /* ── Stats stagger ── */
+      tl.fromTo(topBarRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+      tl.fromTo(headingRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.2");
+      tl.fromTo(subtitleRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.3");
+      tl.fromTo(ctaRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, "-=0.2");
       tl.fromTo(
         statsRef.current?.children ?? [],
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.15 },
-        "-=0.3"
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 },
+        "-=0.2"
       );
-
-      /* ── Slideshow — slides in from right ── */
       if (imageRef.current) {
         tl.fromTo(
           imageRef.current,
-          { x: 80, opacity: 0, scale: 0.95 },
-          { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
-          0.4
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          0.3
         );
       }
-
-      /* ── Parallax on scroll ── */
-      gsap.to(section.querySelector(".hero-bg"), {
-        yPercent: 25,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
     }, section);
 
-    return () => {
-      ctx.revert();
-      ScrollTrigger.refresh();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative bg-primary overflow-hidden"
     >
-      {/* ── Background layers ── */}
-      <div className="hero-bg absolute inset-0 bg-hero-gradient" />
-      <div className="absolute inset-0 bg-hero-radial" />
+      {/* ── Top gold accent bar ── */}
+      <div className="h-1 bg-gold-accent w-full" />
 
-      {/* ── Grid pattern overlay ── */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+      {/* ── Main content area ── */}
+      <div className="container-site py-20 pt-32 lg:pt-36 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
 
-      {/* ── Decorative glows ── */}
-      <div className="absolute right-[5%] top-[15%] w-80 h-80 rounded-full bg-gold/8 blur-3xl pointer-events-none hidden lg:block" />
-      <div className="absolute left-[5%] bottom-[10%] w-96 h-96 rounded-full bg-secondary/15 blur-3xl pointer-events-none" />
-
-      {/* ── Content ── */}
-      <div className="relative z-10 container-site pt-40 pb-20 lg:pt-48 lg:pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* ── Left column: Text content ── */}
+          {/* ── Left: Text ── */}
           <div>
-            {/* Badge */}
             <div
-              ref={badgeRef}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-1.5 mb-8"
+              ref={topBarRef}
+              className="flex items-center gap-3 mb-6"
               style={{ opacity: 0 }}
             >
-              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-              <span className="text-xs font-semibold text-foreground-inverted/80 tracking-wider uppercase">
-                Admissions Open 2026 - 27
+              <div className="w-10 h-[2px] bg-gold" />
+              <span className="text-xs font-semibold text-gold tracking-[0.2em] uppercase">
+                Admissions Open 2026–27
               </span>
             </div>
 
-            {/* Gold accent line */}
-            <div
-              ref={goldLineRef}
-              className="w-16 h-1 bg-gold rounded-full mb-6 origin-left"
-              style={{ transform: "scaleX(0)" }}
-            />
-
-            {/* Heading */}
             <h1
               ref={headingRef}
-              className="text-4xl sm:text-5xl lg:text-display xl:text-display-xl font-heading font-bold text-foreground-inverted leading-[1.08] mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-white leading-tight mb-5"
               style={{ opacity: 0 }}
             >
-              School of Defence{" "}
-              <span className="gradient-text">Technology</span>{" "}
-              <br className="hidden md:block" />
-              &amp; Management
+              School of Defence<br />
+              Technology &amp;&nbsp;Management
             </h1>
 
-            {/* Subtitle */}
             <p
               ref={subtitleRef}
-              className="text-lg md:text-xl text-foreground-inverted/75 max-w-xl leading-relaxed mb-10"
+              className="text-base md:text-lg text-white/70 max-w-lg leading-relaxed mb-8"
               style={{ opacity: 0 }}
             >
               A premier institution dedicated to advancing defence education,
-              cutting-edge research, and strategic leadership for national security.
+              cutting-edge research, and strategic leadership for national
+              security.
             </p>
 
-            {/* CTAs */}
             <div
               ref={ctaRef}
-              className="flex flex-wrap gap-4 mb-14"
+              className="flex flex-wrap gap-3 mb-12"
               style={{ opacity: 0 }}
             >
               <Link
                 href="/programs"
-                className="btn-primary text-base px-8 py-3.5"
+                className="inline-flex items-center justify-center bg-gold text-primary font-semibold text-sm px-7 py-3 rounded transition-colors hover:bg-gold-300"
               >
                 Explore Programmes
               </Link>
               <Link
                 href="/about"
-                className="btn-secondary border-foreground-inverted/40 text-foreground-inverted hover:bg-gold hover:text-foreground-inverted hover:border-gold text-base px-8 py-3.5"
+                className="inline-flex items-center justify-center border border-white/30 text-white font-semibold text-sm px-7 py-3 rounded transition-colors hover:bg-white/10"
               >
                 Learn More
               </Link>
             </div>
 
-            {/* Stats */}
+            {/* Stats row */}
             <div
               ref={statsRef}
-              className="grid grid-cols-3 gap-6 md:gap-10"
+              className="flex gap-8 border-t border-white/10 pt-6"
             >
               {HERO_STATS.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="text-center md:text-left"
-                  style={{ opacity: 0 }}
-                >
-                  <div className="text-3xl md:text-4xl font-heading font-bold text-gold mb-1">
+                <div key={stat.label} style={{ opacity: 0 }}>
+                  <p className="text-2xl md:text-3xl font-heading font-bold text-gold leading-none">
                     {stat.value.toLocaleString()}
-                    <span className="text-gold/70">{stat.suffix}</span>
-                  </div>
-                  <div className="text-xs md:text-sm text-foreground-inverted/60 font-body">
+                    <span className="text-gold/60">{stat.suffix}</span>
+                  </p>
+                  <p className="text-[11px] md:text-xs text-white/50 mt-1 uppercase tracking-wide">
                     {stat.label}
-                  </div>
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Right column: Image Slideshow ── */}
+          {/* ── Right: Image Slideshow ── */}
           <div
             ref={imageRef}
-            className="hidden lg:flex items-center justify-center"
+            className="hidden lg:block"
             style={{ opacity: 0 }}
           >
-            <div className="relative w-full max-w-lg">
-              {/* Slideshow container */}
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <div className="relative">
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg">
                 {HERO_IMAGES.map((src, index) => (
                   <div
                     key={src}
@@ -267,38 +180,28 @@ export default function Hero() {
                 ))}
               </div>
 
-              {/* Slide indicators */}
-              <div className="flex items-center justify-center gap-2.5 mt-5">
+              {/* Slide dots */}
+              <div className="flex items-center justify-center gap-2 mt-4">
                 {HERO_IMAGES.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`transition-all duration-300 rounded-full ${
+                    className={`rounded-full transition-all duration-300 ${
                       index === currentSlide
-                        ? "w-7 h-2 bg-gold"
-                        : "w-2 h-2 bg-white/30 hover:bg-white/50"
+                        ? "w-6 h-1.5 bg-gold"
+                        : "w-1.5 h-1.5 bg-white/25 hover:bg-white/40"
                     }`}
-                    aria-label={`Go to slide ${index + 1}`}
+                    aria-label={`Slide ${index + 1}`}
                   />
                 ))}
               </div>
-
-              {/* Decorative accent border */}
-              <div className="absolute -bottom-3 -right-3 w-full h-full rounded-xl border-2 border-gold/20 -z-10" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-fade-in">
-        <span className="text-[10px] text-foreground-inverted/40 uppercase tracking-widest font-body">
-          Scroll
-        </span>
-        <div className="w-5 h-8 rounded-full border-2 border-foreground-inverted/30 flex justify-center pt-1.5">
-          <div className="w-1 h-2 rounded-full bg-gold animate-bounce" />
-        </div>
-      </div>
+      {/* ── Bottom gold accent bar ── */}
+      <div className="h-1 bg-gold-accent w-full" />
     </section>
   );
 }

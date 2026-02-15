@@ -1,6 +1,7 @@
 import { createMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/ui";
 import { AnimateIn, StaggerGroup } from "@/components/animation";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "Alumni",
@@ -8,21 +9,21 @@ export const metadata = createMetadata({
 });
 
 const ALUMNI = [
-  { name: "Rajiv Mehta", batch: "2020", role: "Software Engineer at Google" },
-  { name: "Priya Sharma", batch: "2020", role: "Product Manager at Microsoft" },
-  { name: "Amit Kumar", batch: "2019", role: "Data Scientist at Amazon" },
-  { name: "Sneha Patel", batch: "2019", role: "Tech Lead at Meta" },
-  { name: "Vikram Singh", batch: "2018", role: "Founder & CEO at TechStart Inc." },
-  { name: "Neha Gupta", batch: "2018", role: "Senior Consultant at McKinsey" },
-  { name: "Arjun Reddy", batch: "2017", role: "Engineering Manager at Apple" },
-  { name: "Kavya Iyer", batch: "2017", role: "AI Research Scientist at IBM" },
-  { name: "Rohan Desai", batch: "2016", role: "VP Technology at Flipkart" },
-  { name: "Ananya Nair", batch: "2016", role: "Director of Operations at Tesla" },
-  { name: "Siddharth Joshi", batch: "2015", role: "CTO at FinTech Solutions" },
-  { name: "Diya Kapoor", batch: "2015", role: "Principal Engineer at Netflix" },
-  { name: "Karan Malhotra", batch: "2014", role: "Head of Innovation at Accenture" },
-  { name: "Riya Banerjee", batch: "2014", role: "Senior Manager at Deloitte" },
-  { name: "Aditya Verma", batch: "2013", role: "Co-Founder at CloudTech Ventures" },
+  { name: "Rajiv Mehta", batch: "2020", role: "Software Engineer at Google", image: "/alumni/rajiv-mehta.jpg" },
+  { name: "Priya Sharma", batch: "2020", role: "Product Manager at Microsoft", image: "/alumni/priya-sharma.jpg" },
+  { name: "Amit Kumar", batch: "2019", role: "Data Scientist at Amazon", image: "/alumni/amit-kumar.jpg" },
+  { name: "Sneha Patel", batch: "2019", role: "Tech Lead at Meta", image: "/alumni/sneha-patel.jpg" },
+  { name: "Vikram Singh", batch: "2018", role: "Founder & CEO at TechStart Inc.", image: "/alumni/vikram-singh.jpg" },
+  { name: "Neha Gupta", batch: "2018", role: "Senior Consultant at McKinsey", image: "/alumni/neha-gupta.jpg" },
+  { name: "Arjun Reddy", batch: "2017", role: "Engineering Manager at Apple", image: "/alumni/arjun-reddy.jpg" },
+  { name: "Kavya Iyer", batch: "2017", role: "AI Research Scientist at IBM", image: "/alumni/kavya-iyer.jpg" },
+  { name: "Rohan Desai", batch: "2016", role: "VP Technology at Flipkart", image: "/alumni/rohan-desai.jpg" },
+  { name: "Ananya Nair", batch: "2016", role: "Director of Operations at Tesla", image: "/alumni/ananya-nair.jpg" },
+  { name: "Siddharth Joshi", batch: "2015", role: "CTO at FinTech Solutions", image: "/alumni/siddharth-joshi.jpg" },
+  { name: "Diya Kapoor", batch: "2015", role: "Principal Engineer at Netflix", image: "/alumni/diya-kapoor.jpg" },
+  { name: "Karan Malhotra", batch: "2014", role: "Head of Innovation at Accenture", image: "/alumni/karan-malhotra.jpg" },
+  { name: "Riya Banerjee", batch: "2014", role: "Senior Manager at Deloitte", image: "/alumni/riya-banerjee.jpg" },
+  { name: "Aditya Verma", batch: "2013", role: "Co-Founder at CloudTech Ventures", image: "/alumni/aditya-verma.jpg" },
 ];
 
 const WHERE_ALUMNI_WORK = [
@@ -53,8 +54,8 @@ export default function AlumniPage() {
               { value: "30+", label: "Organizations Worldwide" },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <p className="stat-number text-3xl mb-1">{s.value}</p>
-                <p className="text-xs text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
+                <p className="stat-number text-4xl mb-1">{s.value}</p>
+                <p className="text-sm text-foreground-muted font-semibold uppercase tracking-wide">{s.label}</p>
               </div>
             ))}
           </StaggerGroup>
@@ -65,8 +66,8 @@ export default function AlumniPage() {
       <section className="section-padding bg-background">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading mb-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Pride</p>
-            <h2>Distinguished Alumni</h2>
+            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Pride</p>
+            <h2 className="text-3xl md:text-4xl">Distinguished Alumni</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
@@ -93,14 +94,22 @@ export default function AlumniPage() {
                         key={`${a.name}-${a.batch}`}
                         className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-5 flex items-center gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
-                          <span className="text-sm font-heading font-bold text-white">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden relative">
+                          {/* Initials fallback behind image */}
+                          <span className="text-sm font-heading font-bold text-white absolute z-0">
                             {a.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                           </span>
+                          <Image
+                            src={a.image}
+                            alt={a.name}
+                            fill
+                            className="object-cover relative z-10"
+                            sizes="56px"
+                          />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-sm font-heading font-bold text-primary truncate">{a.name}</h3>
-                          <p className="text-xs text-foreground-muted mt-0.5">{a.role}</p>
+                          <h3 className="text-base font-heading font-bold text-primary truncate">{a.name}</h3>
+                          <p className="text-sm text-foreground-muted mt-0.5">{a.role}</p>
                         </div>
                       </div>
                     ))}
@@ -116,8 +125,8 @@ export default function AlumniPage() {
       <section className="section-padding bg-background-muted">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Global Presence</p>
-            <h2>Where Our Alumni Work</h2>
+            <p className="text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Global Presence</p>
+            <h2 className="text-3xl md:text-4xl">Where Our Alumni Work</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
           <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-12 max-w-4xl mx-auto">
@@ -126,10 +135,10 @@ export default function AlumniPage() {
                 key={company}
                 className="group bg-background-paper rounded-xl border border-border-light shadow-sm p-4 text-center transition-all duration-300 hover:shadow-brand hover:border-gold/30 hover:-translate-y-0.5"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:bg-gold/10 transition-colors">
-                  <span className="text-sm font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{company[0]}</span>
+                <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mx-auto mb-2 group-hover:bg-gold/10 transition-colors">
+                  <span className="text-base font-heading font-bold text-primary/40 group-hover:text-gold transition-colors">{company[0]}</span>
                 </div>
-                <p className="text-xs font-semibold text-primary">{company}</p>
+                <p className="text-sm font-semibold text-primary">{company}</p>
               </div>
             ))}
           </StaggerGroup>
