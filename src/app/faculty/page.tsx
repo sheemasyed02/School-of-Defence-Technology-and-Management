@@ -130,7 +130,7 @@ export default function FacultyPage() {
       {/* Faculty Members */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading mb-10 sm:mb-14">
+          <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Meet Our Team</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Faculty Members</h2>
             <div className="section-divider mx-auto mt-4" />

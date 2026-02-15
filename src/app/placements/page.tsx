@@ -55,7 +55,7 @@ export default function PlacementsPage() {
           </AnimateIn>
 
           <AnimateIn type="fadeUp">
-            <div className="mt-10 sm:mt-12 max-w-4xl mx-auto overflow-x-auto rounded-2xl border border-border-light shadow-brand">
+            <div className="max-w-4xl mx-auto overflow-x-auto rounded-2xl border border-border-light shadow-brand">
               <div className="min-w-[480px]">
               {/* Table header */}
               <div className="bg-gradient-to-r from-primary to-secondary grid grid-cols-4 text-center">
@@ -100,7 +100,7 @@ export default function PlacementsPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
           <AnimateIn type="fadeUp">
-            <div className="max-w-4xl mx-auto mt-10">
+            <div className="max-w-4xl mx-auto">
               <p className="text-foreground-muted leading-relaxed text-center">
                 Our placement process is designed to ensure every student gets the best opportunity. It includes pre-placement training, resume building workshops, mock interviews, aptitude tests, and direct interaction with recruiters. The placement cell works year-round to bring top companies to campus and prepare students for successful careers.
               </p>
@@ -144,7 +144,7 @@ export default function PlacementsPage() {
             <h2>Training Programs</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mt-10 sm:mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
             {TRAINING_PROGRAMS.map((tp) => (
               <div key={tp.num} className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-4 sm:p-5 md:p-6 flex items-start gap-3 sm:gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
@@ -168,7 +168,7 @@ export default function PlacementsPage() {
             <h2>Recruiting Companies</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 max-w-5xl mx-auto">
             {RECRUITING_COMPANIES.map((c) => (
               <div
                 key={c}
@@ -192,7 +192,7 @@ export default function PlacementsPage() {
             <h2>Where Our Alumni Work</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-12 max-w-4xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
             {ALUMNI_COMPANIES.map((c) => (
               <div
                 key={c}
@@ -218,7 +218,7 @@ export default function PlacementsPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
           <AnimateIn type="scaleIn">
-            <div className="max-w-md mx-auto mt-10 bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
+            <div className="max-w-md mx-auto bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
               <div className="bg-gradient-to-r from-primary to-secondary p-6 text-center">
                 <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto ring-4 ring-white/20 mb-3 overflow-hidden relative">
                   <span className="text-2xl font-heading font-bold text-white/90 absolute z-0">RK</span>

@@ -59,7 +59,7 @@ export default function HomePage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="grid-responsive-2 mt-10 sm:mt-12 md:mt-14">
+          <div className="grid-responsive-2">
             <AnimateIn type="slideLeft">
               <div className="group relative bg-background-paper rounded-brand shadow-brand border border-border-light p-6 sm:p-7 md:p-8 h-full transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gold-accent rounded-t-brand" />
@@ -100,7 +100,7 @@ export default function HomePage() {
           </div>
 
           {/* Strengths cards */}
-          <div className="mt-10 sm:mt-12 md:mt-16">
+          <div className="mt-6 sm:mt-8 md:mt-10">
             <StaggerGroup className="grid-responsive-3">
               <div className="group text-center p-6 sm:p-7 md:p-8 rounded-2xl bg-gradient-to-br from-primary/[0.03] to-primary/[0.08] border border-primary/10 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5 md:mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -152,7 +152,7 @@ export default function HomePage() {
             <div className="section-divider mx-auto mt-4 mb-4" />
             <p className="text-body">Comprehensive academic programs designed to equip students with domain expertise in defence technology and strategic management.</p>
           </AnimateIn>
-          <StaggerGroup className="grid-responsive-4 mt-8 sm:mt-10 md:mt-12">
+          <StaggerGroup className="grid-responsive-4">
             {[
               { title: "M.Tech in Defence Technology", desc: "Advanced engineering program focused on weapons systems, radar, and electronic warfare.", num: "01" },
               { title: "MBA in Defence Management", desc: "Strategic management program for defence procurement, logistics, and policy.", num: "02" },
@@ -167,7 +167,7 @@ export default function HomePage() {
               </div>
             ))}
           </StaggerGroup>
-          <AnimateIn type="fadeUp" className="text-center mt-8 sm:mt-10 md:mt-12">
+          <AnimateIn type="fadeUp" className="text-center mt-6 sm:mt-8">
             <Link href="/programs" className="btn-primary px-6 sm:px-8">View All Programs</Link>
           </AnimateIn>
         </div>
@@ -298,7 +298,7 @@ export default function HomePage() {
             <div className="section-divider mx-auto mt-4 mb-3" />
             <p className="text-body text-foreground-muted">Academic Year 2025-26</p>
           </AnimateIn>
-          <StaggerGroup className="grid-responsive-3 mt-8 sm:mt-10 md:mt-12 max-w-4xl mx-auto">
+          <StaggerGroup className="grid-responsive-3 max-w-4xl mx-auto">
             {[
               { value: "142", label: "Students Placed", icon: "M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" },
               { value: "$125,000", label: "Highest Package", icon: "M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
@@ -315,7 +315,7 @@ export default function HomePage() {
               </div>
             ))}
           </StaggerGroup>
-          <AnimateIn type="fadeUp" className="text-center mt-8 sm:mt-10">
+          <AnimateIn type="fadeUp" className="text-center mt-6 sm:mt-8">
             <Link href="/placements" className="btn-primary px-6 sm:px-8">View Detailed Statistics</Link>
           </AnimateIn>
         </div>
@@ -329,7 +329,7 @@ export default function HomePage() {
             <h2 className="text-section">Quick Links</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid-responsive-3 mt-8 sm:mt-10 md:mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid-responsive-3 max-w-5xl mx-auto">
             <div className="group relative bg-background-paper rounded-2xl shadow-brand border border-border-light p-6 sm:p-7 md:p-8 text-center transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-2 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-primary/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative z-10">
@@ -385,7 +385,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section className="relative py-16 sm:py-20 md:py-24 bg-primary overflow-hidden">
+      <section className="relative py-10 sm:py-12 md:py-16 bg-primary overflow-hidden">
         <div className="absolute inset-0 bg-hero-radial opacity-60" />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px)", backgroundSize: "30px 30px sm:40px 40px" }} />
         <div className="absolute -top-16 -right-16 sm:-top-20 sm:-right-20 w-48 h-48 sm:w-64 sm:h-64 rounded-full border border-white/5" />

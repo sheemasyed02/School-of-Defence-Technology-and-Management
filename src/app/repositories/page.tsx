@@ -266,7 +266,7 @@ export default function RepositoriesPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-8 sm:mt-10 md:mt-12 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
             {[
               {
                 title: "Offline Submission",

@@ -112,7 +112,7 @@ export default function GalleryPage() {
       {/* ─── Photos Section ────────────────────────────── */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <div className="section-heading mb-8 sm:mb-10">
+          <div className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Photos</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Campus Highlights</h2>
             <div className="section-divider mx-auto mt-4" />
@@ -155,7 +155,7 @@ export default function GalleryPage() {
       {/* ─── Videos Section ────────────────────────────── */}
       <section className="section-padding bg-background-muted">
         <div className="container-site">
-          <div className="section-heading mb-8 sm:mb-10">
+          <div className="section-heading">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Videos</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Watch & Learn</h2>
             <div className="section-divider mx-auto mt-4" />

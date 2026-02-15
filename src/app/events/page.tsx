@@ -62,7 +62,7 @@ export default function EventsPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-5xl mx-auto space-y-6">
+          <div className="max-w-5xl mx-auto space-y-6">
             {UPCOMING_EVENTS.map((evt, i) => (
               <AnimateIn key={evt.title} type={i % 2 === 0 ? "slideLeft" : "slideRight"}>
                 <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
@@ -104,7 +104,7 @@ export default function EventsPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-5xl mx-auto space-y-6">
+          <div className="max-w-5xl mx-auto space-y-6">
             {PAST_EVENTS.map((evt) => (
               <AnimateIn key={evt.title} type="fadeUp">
                 <div className="bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden flex flex-col md:flex-row opacity-90">

@@ -87,15 +87,15 @@
   }
 
   .section-padding {
-    @apply py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24;
-  }
-
-  .section-padding-sm {
     @apply py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16;
   }
 
+  .section-padding-sm {
+    @apply py-4 sm:py-6 md:py-8 lg:py-10 xl:py-12;
+  }
+
   .section-heading {
-    @apply text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 xl:mb-20;
+    @apply text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-12;
   }
 
   .section-heading h2 {
@@ -269,7 +269,7 @@
   }
 
   .responsive-padding-y {
-    @apply py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20;
+    @apply py-4 sm:py-6 md:py-8 lg:py-10 xl:py-12;
   }
 
   .responsive-margin-x {
@@ -277,7 +277,7 @@
   }
 
   .responsive-margin-y {
-    @apply my-6 sm:my-8 md:my-12 lg:my-16 xl:my-20;
+    @apply my-4 sm:my-6 md:my-8 lg:my-10 xl:py-12;
   }
 
   /* Image responsive utilities */

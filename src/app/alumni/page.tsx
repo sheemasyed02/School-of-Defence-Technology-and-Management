@@ -65,7 +65,7 @@ export default function AlumniPage() {
       {/* Distinguished Alumni */}
       <section className="section-padding bg-background">
         <div className="container-site">
-          <AnimateIn type="fadeUp" className="section-heading mb-10 sm:mb-14">
+          <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Pride</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Distinguished Alumni</h2>
             <div className="section-divider mx-auto mt-4" />
@@ -129,7 +129,7 @@ export default function AlumniPage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Where Our Alumni Work</h2>
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-4xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 max-w-4xl mx-auto">
             {WHERE_ALUMNI_WORK.map((company) => (
               <div
                 key={company}

@@ -209,7 +209,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 mt-10 sm:mt-12 max-w-6xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 max-w-6xl mx-auto">
             {RESEARCH_AREAS.map((area) => (
               <div
                 key={area.name}
@@ -234,7 +234,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-5xl mx-auto space-y-6">
+          <div className="max-w-5xl mx-auto space-y-6">
             {ONGOING_PROJECTS.map((proj, i) => (
               <AnimateIn key={proj.title} type={i % 2 === 0 ? "slideLeft" : "slideRight"}>
                 <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
@@ -276,7 +276,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="mt-12 max-w-4xl mx-auto space-y-4">
+          <StaggerGroup className="max-w-4xl mx-auto space-y-4">
             {PUBLICATIONS.map((pub) => (
               <div
                 key={pub.title}
@@ -312,7 +312,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="mt-12 max-w-3xl mx-auto space-y-4">
+          <StaggerGroup className="max-w-3xl mx-auto space-y-4">
             {PATENTS.map((pat) => (
               <div
                 key={pat.title}
@@ -350,7 +350,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {RESEARCH_LABS.map((lab) => (
               <div
                 key={lab.name}
@@ -412,7 +412,7 @@ export default function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-10 sm:mt-12 max-w-5xl mx-auto">
+          <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 max-w-5xl mx-auto">
             {COLLABORATIONS.map((inst) => (
               <div
                 key={inst}
@@ -441,7 +441,7 @@ export default function ResearchPage() {
           </AnimateIn>
 
           <AnimateIn type="fadeUp">
-              <div className="max-w-3xl mx-auto mt-8 sm:mt-10 bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
+              <div className="max-w-3xl mx-auto bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
               <div className="p-5 sm:p-6 md:p-8 text-center">
                 <p className="text-foreground-muted leading-relaxed mb-8">
                   We encourage students to participate in research from their second year onwards. Students can work

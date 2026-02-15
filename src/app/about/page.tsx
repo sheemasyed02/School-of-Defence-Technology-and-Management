@@ -90,7 +90,7 @@ export default function AboutPage() {
             <h2 className="text-xl sm:text-2xl md:text-3xl">Vision &amp; Mission</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 md:mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <AnimateIn type="slideLeft">
               <div className="group relative bg-background-paper rounded-xl md:rounded-2xl shadow-brand border border-border-light p-6 md:p-8 h-full transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1 overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gold-accent" />
@@ -136,7 +136,7 @@ export default function AboutPage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Our Objectives</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="space-y-4 md:space-y-5 mt-8 md:mt-12">
+          <StaggerGroup className="space-y-4 md:space-y-5">
             {OBJECTIVES.map((obj, i) => (
               <div key={i} className="group flex items-start gap-4 md:gap-5 bg-background-paper rounded-lg md:rounded-xl shadow-brand border border-border-light p-4 md:p-6 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-gold to-gold-500 flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300">
@@ -159,7 +159,7 @@ export default function AboutPage() {
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
           <AnimateIn type="scaleIn">
-            <div className="bg-background-paper rounded-xl md:rounded-2xl shadow-brand-lg border border-border-light overflow-hidden mt-8 md:mt-10">
+            <div className="bg-background-paper rounded-xl md:rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr]">
                 {/* Left column — photo & info */}
                 <div className="bg-gradient-to-br from-primary to-secondary p-6 md:p-8 flex flex-col items-center justify-center text-center order-2 md:order-1">
@@ -195,7 +195,7 @@ export default function AboutPage() {
             <h2 className="text-xl sm:text-2xl md:text-3xl">Achievements</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-responsive-2 gap-4 md:gap-5 mt-8 md:mt-12">
+          <StaggerGroup className="grid grid-responsive-2 gap-4 md:gap-5">
             {ACHIEVEMENTS.map((ach, i) => (
               <div key={ach} className="group flex items-center gap-3 md:gap-4 bg-background-paper rounded-lg md:rounded-xl shadow-brand border border-border-light p-4 md:p-5 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                 <div className="w-9 h-9 md:w-10 md:h-10 rounded-md md:rounded-lg bg-gradient-to-br from-gold/20 to-gold/5 flex items-center justify-center flex-shrink-0 group-hover:from-gold/30 transition-all">
@@ -218,7 +218,7 @@ export default function AboutPage() {
             <h2 className="text-xl sm:text-2xl md:text-3xl">Accreditation &amp; Rankings</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-responsive-4 gap-5 md:gap-6 mt-8 md:mt-12">
+          <StaggerGroup className="grid grid-responsive-4 gap-5 md:gap-6">
             {ACCREDITATIONS.map((acc) => (
               <div key={acc.name} className="group bg-background-paper rounded-xl md:rounded-2xl shadow-brand border border-border-light p-6 md:p-8 text-center transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
                 <div className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-gold/10 to-gold/5 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-5 group-hover:scale-110 transition-transform duration-300 ring-1 ring-gold/20">
@@ -241,7 +241,7 @@ export default function AboutPage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl">Infrastructure</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-responsive-3 gap-5 md:gap-6 mt-8 md:mt-12">
+          <StaggerGroup className="grid grid-responsive-3 gap-5 md:gap-6">
             {INFRASTRUCTURE.map((item) => (
               <div key={item.name} className="group bg-background-paper rounded-lg md:rounded-xl shadow-brand border border-border-light p-5 md:p-6 flex items-start gap-3 md:gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:from-primary/20 transition-all">
@@ -265,7 +265,7 @@ export default function AboutPage() {
             <h2 className="text-xl sm:text-2xl md:text-3xl">Industry Collaborations</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-responsive-3 gap-5 md:gap-6 mt-8 md:mt-12">
+          <StaggerGroup className="grid grid-responsive-3 gap-5 md:gap-6">
             {INDUSTRY_COLLABORATIONS.map((collab) => (
               <div key={collab.company} className="group bg-background-paper rounded-xl md:rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
                 <div className="h-1.5 bg-gold-accent" />

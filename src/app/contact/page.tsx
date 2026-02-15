@@ -53,7 +53,7 @@ export default function ContactPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Address */}
             <AnimateIn type="fadeUp">
               <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light p-5 sm:p-6 md:p-8 h-full transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
@@ -222,7 +222,7 @@ export default function ContactPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="mt-12 max-w-4xl mx-auto space-y-4">
+          <div className="max-w-4xl mx-auto space-y-4">
             {FAQS.map((faq, i) => (
               <AnimateIn key={i} type="fadeUp" delay={i * 0.05}>
                 <details className="group bg-background-paper rounded-xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg">
