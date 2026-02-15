@@ -41,7 +41,7 @@ export default function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-background-paper/95 backdrop-blur-md shadow-brand"
-          : "bg-primary/90 backdrop-blur-sm"
+          : "bg-white shadow-sm"
       )}
     >
       {/* ── Top row: Centered Brand ── */}
@@ -60,7 +60,7 @@ export default function Navbar() {
           <span
             className={cn(
               "font-heading font-bold tracking-wide transition-colors text-base md:text-xl lg:text-2xl leading-tight",
-              scrolled ? "text-primary" : "text-white"
+              "text-primary"
             )}
           >
             School of Defence Technology and Management
@@ -72,7 +72,7 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           className={cn(
             "xl:hidden absolute right-4 sm:right-6 w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-brand transition-colors",
-            scrolled ? "text-primary" : "text-white"
+            "text-primary"
           )}
           aria-label="Toggle navigation menu"
           aria-expanded={mobileOpen}
@@ -87,7 +87,7 @@ export default function Navbar() {
       <nav
         className={cn(
           "hidden xl:block border-t transition-colors",
-          scrolled ? "border-border-light" : "border-white/10"
+          "border-border-light"
         )}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-center gap-0.5 h-10">
@@ -97,13 +97,9 @@ export default function Navbar() {
               href={link.href}
               className={cn(
                 "relative px-2.5 py-1.5 text-[12.5px] font-semibold tracking-wide transition-all duration-200 rounded-brand whitespace-nowrap",
-                scrolled
-                  ? isActive(link.href)
-                    ? "text-gold"
-                    : "text-primary/70 hover:text-gold hover:bg-gold/5"
-                  : isActive(link.href)
+                isActive(link.href)
                   ? "text-gold"
-                  : "text-white/70 hover:text-gold hover:bg-white/10"
+                  : "text-primary/70 hover:text-gold hover:bg-gold/5"
               )}
             >
               {link.label}

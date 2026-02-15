@@ -11,6 +11,44 @@ export default function HomePage() {
     <>
       <Hero />
 
+      {/* ── Scrolling Marquee ── */}
+      <section className="bg-primary py-3 overflow-hidden">
+        <div className="relative flex">
+          <div className="animate-marquee flex items-center gap-10 whitespace-nowrap">
+            {[
+              "Admissions Open for M.Tech & Ph.D. 2026-27",
+              "National Conference on Defence Technology — March 2026",
+              "100% Placement Record for 2025 Batch",
+              "New Research Lab Inaugurated — AI & Machine Learning",
+              "MoU Signed with MIT for Joint Research Program",
+              "Ranked Among Top 10 Defence Technology Schools in India",
+              "Last Date for Scholarship Applications — 28 Feb 2026",
+            ].map((text, i) => (
+              <span key={i} className="text-sm font-semibold text-white/90 tracking-wide flex items-center gap-2">
+                {text}
+                <span className="text-gold">•</span>
+              </span>
+            ))}
+          </div>
+          <div className="animate-marquee2 flex items-center gap-10 whitespace-nowrap absolute top-0">
+            {[
+              "Admissions Open for M.Tech & Ph.D. 2026-27",
+              "National Conference on Defence Technology — March 2026",
+              "100% Placement Record for 2025 Batch",
+              "New Research Lab Inaugurated — AI & Machine Learning",
+              "MoU Signed with MIT for Joint Research Program",
+              "Ranked Among Top 10 Defence Technology Schools in India",
+              "Last Date for Scholarship Applications — 28 Feb 2026",
+            ].map((text, i) => (
+              <span key={i} className="text-sm font-semibold text-white/90 tracking-wide flex items-center gap-2">
+                {text}
+                <span className="text-gold">•</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Mission & Vision ── */}
       <section className="section-padding bg-background relative overflow-hidden">
         <div className="absolute top-0 right-0 w-72 h-72 dot-pattern opacity-40 rounded-full -translate-y-1/3 translate-x-1/4" />
