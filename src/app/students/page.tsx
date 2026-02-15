@@ -98,14 +98,14 @@ export default function StudentsPage() {
                 </div>
               </div>
             </AnimateIn>
-            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {group.students.map((student) => (
-                <div key={student.name} className="group bg-background-paper rounded-xl shadow-brand border border-border-light flex items-center gap-3 p-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                  <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300 relative bg-gradient-to-br from-primary to-secondary">
-                    <span className="text-sm font-heading font-bold text-white absolute inset-0 flex items-center justify-center z-0">{student.name[0]}</span>
-                    <Image src={student.image} alt={student.name} fill className="object-cover relative z-10" sizes="40px" />
+                <div key={student.name} className="group bg-background-paper rounded-2xl shadow-brand border border-border-light flex items-center gap-4 p-5 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
+                  <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 shadow-md group-hover:scale-110 transition-transform duration-300 relative bg-gradient-to-br from-primary to-secondary">
+                    <span className="text-base font-heading font-bold text-white absolute inset-0 flex items-center justify-center z-0">{student.name[0]}</span>
+                    <Image src={student.image} alt={student.name} fill className="object-cover relative z-10" sizes="56px" />
                   </div>
-                  <p className="text-sm font-medium text-primary truncate">{student.name}</p>
+                  <p className="text-base font-semibold text-primary truncate">{student.name}</p>
                 </div>
               ))}
             </StaggerGroup>

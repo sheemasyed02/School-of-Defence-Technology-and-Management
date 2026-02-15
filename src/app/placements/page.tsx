@@ -1,6 +1,7 @@
 import { createMetadata } from "@/lib/metadata";
 import { PageHeader } from "@/components/ui";
 import { AnimateIn, StaggerGroup } from "@/components/animation";
+import Image from "next/image";
 
 export const metadata = createMetadata({
   title: "Placements",
@@ -217,8 +218,9 @@ export default function PlacementsPage() {
           <AnimateIn type="scaleIn">
             <div className="max-w-md mx-auto mt-10 bg-background-paper rounded-2xl shadow-brand-lg border border-border-light overflow-hidden">
               <div className="bg-gradient-to-r from-primary to-secondary p-6 text-center">
-                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto ring-4 ring-white/20 mb-3">
-                  <span className="text-2xl font-heading font-bold text-white/90">RK</span>
+                <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto ring-4 ring-white/20 mb-3 overflow-hidden relative">
+                  <span className="text-2xl font-heading font-bold text-white/90 absolute z-0">RK</span>
+                  <Image src="https://randomuser.me/api/portraits/men/60.jpg" alt="Dr. Rajesh Kumar" fill className="object-cover relative z-10" sizes="80px" />
                 </div>
                 <h3 className="text-lg font-heading font-bold text-white">Dr. Rajesh Kumar</h3>
                 <p className="text-xs text-gold font-semibold mt-1">Placement Officer</p>

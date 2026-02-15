@@ -88,15 +88,15 @@ export default function AlumniPage() {
                     </div>
                   </AnimateIn>
 
-                  <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {batchAlumni.map((a) => (
                       <div
                         key={`${a.name}-${a.batch}`}
-                        className="group bg-background-paper rounded-xl shadow-brand border border-border-light p-5 flex items-center gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1"
+                        className="group bg-background-paper rounded-2xl shadow-brand border border-border-light p-6 flex items-center gap-5 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1"
                       >
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden relative">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden relative">
                           {/* Initials fallback behind image */}
-                          <span className="text-sm font-heading font-bold text-white absolute z-0">
+                          <span className="text-base font-heading font-bold text-white absolute z-0">
                             {a.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                           </span>
                           <Image
@@ -104,12 +104,12 @@ export default function AlumniPage() {
                             alt={a.name}
                             fill
                             className="object-cover relative z-10"
-                            sizes="56px"
+                            sizes="64px"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-base font-heading font-bold text-primary truncate">{a.name}</h3>
-                          <p className="text-sm text-foreground-muted mt-0.5">{a.role}</p>
+                          <h3 className="text-lg font-heading font-bold text-primary truncate">{a.name}</h3>
+                          <p className="text-sm md:text-base text-foreground-muted mt-1">{a.role}</p>
                         </div>
                       </div>
                     ))}
