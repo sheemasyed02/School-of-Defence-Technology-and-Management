@@ -385,12 +385,8 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section className="relative py-10 sm:py-12 md:py-16 bg-primary overflow-hidden">
-        <div className="absolute inset-0 bg-hero-radial opacity-60" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px)", backgroundSize: "30px 30px sm:40px 40px" }} />
-        <div className="absolute -top-16 -right-16 sm:-top-20 sm:-right-20 w-48 h-48 sm:w-64 sm:h-64 rounded-full border border-white/5" />
-        <div className="absolute -bottom-24 -left-16 sm:-bottom-32 sm:-left-20 w-60 h-60 sm:w-80 sm:h-80 rounded-full border border-white/5" />
-        <div className="container-site relative z-10 text-center">
+      <section className="py-10 sm:py-12 md:py-16 bg-primary">
+        <div className="container-site text-center">
           <AnimateIn type="scaleIn">
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gold mb-4">Take The Next Step</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground-inverted mb-4 sm:mb-5 leading-tight">
