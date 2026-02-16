@@ -1,47 +1,43 @@
-import { DataTable } from "@/components/admin/DataTable";
-import { columns } from "./columns";
-import { Button } from "@/components/ui/Button";
-import { Plus } from "lucide-react";
-import Link from "next/link";
 import { supabase } from "@/lib/supabase";
+import { EventsManagement } from "@/components/admin/EventsManagement";
 
 export const dynamic = 'force-dynamic';
 
-async function getData() {
-  const { data: events, error } = await supabase
+async function getEvents() {
+  const { data, error } = await supabase
     .from("Event")
     .select("*")
     .order("date", { ascending: false });
 
   if (error) {
-    console.error(error);
+    console.error("Error fetching events:", error);
     return [];
   }
-  return events;
+  return data || [];
+}
+
+async function getRegistrations() {
+  const { data, error } = await supabase
+    .from("EventRegistration")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching registrations:", error);
+    return [];
+  }
+  return data || [];
 }
 
 export default async function EventsPage() {
-  const data = await getData();
+  const [events, registrations] = await Promise.all([
+    getEvents(),
+    getRegistrations()
+  ]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-           <h1 className="text-3xl font-heading font-bold text-primary">Events</h1>
-           <p className="text-foreground-muted mt-1">Manage upcoming and past events.</p>
-        </div>
-        <Link href="/admin/events/new">
-          <Button className="gap-2">
-              <Plus className="w-4 h-4" />
-               New Event
-          </Button>
-        </Link>
-      </div>
-
-      <div className="bg-white rounded-lg border shadow-sm p-4">
-        {/* @ts-ignore */}
-        <DataTable columns={columns} data={data || []} searchKey="title" />
-      </div>
+    <div className="p-6 sm:p-10 bg-gray-50/50 min-h-screen">
+      <EventsManagement initialEvents={events} initialRegistrations={registrations} />
     </div>
   );
 }

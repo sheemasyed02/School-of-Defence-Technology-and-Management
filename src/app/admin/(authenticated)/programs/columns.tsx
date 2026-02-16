@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ConfirmModal } from "@/components/admin/ConfirmModal";
-import { supabase } from "@/lib/supabase";
+import { deleteRecord } from "@/app/actions";
 
 export type Program = {
   id: string;
@@ -29,11 +29,13 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.from("Program").delete().eq("id", data.id);
-      if (error) throw error;
+      const result = await deleteRecord("Program", data.id, "/admin/programs");
+      if (!result.success) throw new Error(result.error);
+      // router.refresh() is handled by deleteRecord via revalidatePath, but refreshing client router doesn't hurt.
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      alert(error.message || "Failed to delete program");
     } finally {
       setLoading(false);
       setOpen(false);

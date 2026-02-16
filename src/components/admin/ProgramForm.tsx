@@ -14,6 +14,9 @@ type ProgramFormValues = {
   duration: string;
   description: string;
   curriculum: string;
+  eligibility: string;
+  intake: string;
+  outcomes: string;
   isVisible: boolean;
 };
 
@@ -58,12 +61,16 @@ export const ProgramForm: React.FC<ProgramFormProps> = ({ initialData }) => {
     defaultValues: initialData ? {
         ...initialData,
         curriculum: jsonToText(initialData.curriculum),
+        outcomes: jsonToText(initialData.outcomes),
     } : {
       title: "",
       degree: "M.Tech",
       duration: "2 Years",
       description: "",
       curriculum: "",
+      eligibility: "",
+      intake: "",
+      outcomes: "",
       isVisible: true,
     },
   });
@@ -76,6 +83,7 @@ export const ProgramForm: React.FC<ProgramFormProps> = ({ initialData }) => {
       const payload = {
         ...data,
         curriculum: textToJson(data.curriculum),
+        outcomes: textToJson(data.outcomes),
         updatedAt: new Date().toISOString()
       };
 
@@ -147,15 +155,36 @@ export const ProgramForm: React.FC<ProgramFormProps> = ({ initialData }) => {
             />
         </div>
 
+        <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Intake Capacity</label>
+                <Input disabled={loading} placeholder="30 students per year" {...register("intake")} />
+            </div>
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Eligibility Criteria</label>
+                <Input disabled={loading} placeholder="B.Tech with 60%..." {...register("eligibility")} />
+            </div>
+        </div>
+
         <div className="space-y-2">
-            <label className="text-sm font-medium">Curriculum (One item per line)</label>
+            <label className="text-sm font-medium">Learning Outcomes (One item per line)</label>
+            <textarea
+                className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono"
+                disabled={loading}
+                placeholder="Advanced knowledge...&#10;Research skills..."
+                {...register("outcomes")}
+            />
+        </div>
+
+        <div className="space-y-2">
+            <label className="text-sm font-medium">Curriculum (One semester per line, e.g. 'Semester 1: Subjects...')</label>
             <textarea
                 className="flex min-h-[150px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono"
                 disabled={loading}
-                placeholder="Semester 1: Core Subjects&#10;Semester 2: Electives&#10;Internship"
+                placeholder="Semester 1: Core Subjects, Math, Physics&#10;Semester 2: Electives, Chem"
                 {...register("curriculum")}
             />
-            <p className="text-xs text-muted-foreground">Enter each curriculum item or module on a new line.</p>
+            <p className="text-xs text-muted-foreground">Each line represents a semester/module. Use format 'Title: Details'.</p>
         </div>
 
         <div className="flex items-center space-x-2 border p-4 rounded-md">

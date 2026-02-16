@@ -1,5 +1,4 @@
-import { DataTable } from "@/components/admin/DataTable";
-import { columns } from "./columns";
+import { AdminFacultyGrid } from "@/components/admin/AdminFacultyGrid";
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -38,9 +37,8 @@ export default async function FacultyPage() {
         </Link>
       </div>
 
-      <div className="bg-white rounded-lg border shadow-sm p-4">
-        {/* @ts-ignore: Supabase types might be slightly off from component expectation, but structure matches */}
-        <DataTable columns={columns} data={data || []} searchKey="name" />
+      <div className="bg-transparent border-none shadow-none p-0">
+        <AdminFacultyGrid initialData={data || []} />
       </div>
     </div>
   );

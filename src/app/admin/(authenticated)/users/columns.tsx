@@ -21,6 +21,7 @@ interface CellActionProps {
   data: User;
 }
 
+
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -29,20 +30,30 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.from("User").delete().eq("id", data.id);
-      if (error) throw error;
+      const res = await fetch(`/api/admin/users/${data.id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+          const body = await res.json();
+          throw new Error(body.error || "Failed to delete user");
+      }
+
       router.refresh();
+      setOpen(false);
     } catch (error) {
       console.error(error);
+      alert("Failed to delete user");
     } finally {
       setLoading(false);
-      setOpen(false);
     }
   };
 
   return (
     <>
       <ConfirmModal
+        title="Delete User"
+        description="Are you sure you want to delete this user? This action cannot be undone."
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
@@ -50,14 +61,14 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       />
       <div className="flex items-center gap-2">
         <Link href={`/admin/users/${data.id}`}>
-          <Button size="icon" variant="ghost">
+          <Button size="sm" variant="ghost">
             <Pencil className="w-4 h-4" />
           </Button>
         </Link>
         <Button
-          size="icon"
+          size="sm"
           variant="ghost"
-          className="text-red-500 hover:text-red-600"
+          className="text-red-500 hover:text-red-600 hover:bg-red-50"
           onClick={() => setOpen(true)}
         >
           <Trash className="w-4 h-4" />

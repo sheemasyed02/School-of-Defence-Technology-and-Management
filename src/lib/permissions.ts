@@ -3,25 +3,67 @@ import { authOptions } from "@/lib/auth";
 
 export type Role = "SUPER_ADMIN" | "EDITOR" | "FACULTY_ADMIN";
 
+// Resource-action permission matrix
+const PERMISSIONS: Record<Role, Record<string, ("read" | "write" | "delete")[]>> = {
+  SUPER_ADMIN: {
+    // Super admin can do everything
+    faculty: ["read", "write", "delete"],
+    events: ["read", "write", "delete"],
+    announcements: ["read", "write", "delete"],
+    programs: ["read", "write", "delete"],
+    research: ["read", "write", "delete"],
+    gallery: ["read", "write", "delete"],
+    placements: ["read", "write", "delete"],
+    users: ["read", "write", "delete"],
+    settings: ["read", "write", "delete"],
+    contacts: ["read", "write", "delete"],
+    pages: ["read", "write", "delete"],
+    "audit-logs": ["read"],
+    "login-logs": ["read"],
+    "blocked-ips": ["read", "write", "delete"],
+  },
+  EDITOR: {
+    faculty: ["read", "write", "delete"],
+    events: ["read", "write", "delete"],
+    announcements: ["read", "write", "delete"],
+    programs: ["read", "write", "delete"],
+    research: ["read", "write", "delete"],
+    gallery: ["read", "write", "delete"],
+    placements: ["read", "write", "delete"],
+    contacts: ["read", "write"],
+    pages: ["read", "write"],
+    // No access to users, settings, audit-logs, login-logs, blocked-ips
+  },
+  FACULTY_ADMIN: {
+    faculty: ["read", "write"],
+    research: ["read", "write"],
+    // No access to other resources
+  },
+};
+
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
   return session?.user;
 }
 
-export function hasPermission(userRole: string, resource: string, action: "read" | "write" | "delete") {
-  if (userRole === "SUPER_ADMIN") return true;
+export function hasPermission(
+  userRole: string,
+  resource: string,
+  action: "read" | "write" | "delete"
+): boolean {
+  const role = userRole as Role;
+  const rolePerms = PERMISSIONS[role];
+  if (!rolePerms) return false;
 
-  if (userRole === "EDITOR") {
-    // Editor can read/write most content, but maybe specific restrictions on users/settings
-    if (resource === "users" || resource === "settings") return false;
-    return true;
-  }
+  const resourcePerms = rolePerms[resource];
+  if (!resourcePerms) return false;
 
-  if (userRole === "FACULTY_ADMIN") {
-    // Only faculty and research
-    if (["faculty", "research"].includes(resource)) return true;
-    return false;
-  }
+  return resourcePerms.includes(action);
+}
 
-  return false;
+export function getAccessibleResources(userRole: string): string[] {
+  const role = userRole as Role;
+  const rolePerms = PERMISSIONS[role];
+  if (!rolePerms) return [];
+  return Object.keys(rolePerms);
 }

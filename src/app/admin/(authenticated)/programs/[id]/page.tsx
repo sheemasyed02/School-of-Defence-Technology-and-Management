@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { ProgramForm } from "@/components/admin/ProgramForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditProgramPage({ params }: PageProps) {
+export default async function EditProgramPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: program, error } = await supabase
     .from("Program")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !program) {

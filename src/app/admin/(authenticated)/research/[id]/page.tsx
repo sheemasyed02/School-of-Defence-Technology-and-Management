@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { ResearchForm } from "@/components/admin/ResearchForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditResearchPage({ params }: PageProps) {
+export default async function EditResearchPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: research, error } = await supabase
     .from("Research")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !research) {

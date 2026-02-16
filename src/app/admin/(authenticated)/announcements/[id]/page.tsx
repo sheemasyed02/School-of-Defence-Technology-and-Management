@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { AnnouncementForm } from "@/components/admin/AnnouncementForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditAnnouncementPage({ params }: PageProps) {
+export default async function EditAnnouncementPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: announcement, error } = await supabase
     .from("Announcement")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !announcement) {

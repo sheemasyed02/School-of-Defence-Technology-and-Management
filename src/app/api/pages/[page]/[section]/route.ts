@@ -3,15 +3,18 @@ import { supabase } from "@/lib/supabase";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
+
 export async function PUT(
   req: Request,
-  { params }: { params: { page: string; section: string } }
+  { params }: { params: Promise<{ page: string; section: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    const { page, section } = await params;
 
     // Check role - Editor and above can edit content
     const userRole = session.user.role;
@@ -28,8 +31,8 @@ export async function PUT(
     }
 
     const payload = {
-        page: params.page,
-        section: params.section,
+        page,
+        section,
         content: JSON.stringify(content),
         isVisible: isVisible ?? true,
         updatedAt: new Date().toISOString()

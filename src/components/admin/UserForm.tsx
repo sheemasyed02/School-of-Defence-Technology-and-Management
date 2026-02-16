@@ -6,8 +6,6 @@ import { Input } from "@/components/ui/Input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
-import bcrypt from "bcryptjs";
 
 type UserFormValues = {
   name: string;
@@ -45,42 +43,45 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       setLoading(true);
       setError("");
 
-      let payload: any = {
-        name: data.name,
-        email: data.email,
-        role: data.role,
-        updatedAt: new Date().toISOString()
-      };
+      let res;
+      if (initialData) {
+        // Updated
+        const payload: any = {
+            name: data.name,
+            email: data.email,
+            role: data.role,
+        };
+        if (data.password) {
+            payload.password = data.password;
+        }
 
-      // Handle password only if provided or new user
-      if (data.password) {
-          // In a real app, hash on server side via API. But here we are client-side executing DB calls (not ideal for production but okay for prototype)
-          // Ideally, call an API route to hash password.
-          // For now, we'll assume we HAVE to do it here or call an API.
-          // Let's rely on an API route for user creation to be secure?
-          // Actually, we replaced API routes with direct DB calls in previous steps for other things.
-          // For users, hashing is critical.
-          // Since I can't import bcryptjs on client directly easily without issues, I should probably use an API route for this specific form.
-          // OR import bcryptjs.
-          const salt = bcrypt.genSaltSync(10);
-          payload.password = bcrypt.hashSync(data.password, salt);
-      } else if (!initialData) {
-          setError("Password is required for new users");
-          setLoading(false);
-          return;
+        res = await fetch(`/api/admin/users/${initialData.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+      } else {
+        // Create
+        if (!data.password) {
+            setError("Password is required for new users");
+            setLoading(false);
+            return;
+        }
+
+        res = await fetch("/api/admin/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
       }
 
-      if (initialData) {
-        const { error } = await supabase
-            .from("User")
-            .update(payload)
-            .eq("id", initialData.id);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-            .from("User")
-            .insert([payload]);
-        if (error) throw error;
+      if (!res.ok) {
+          const body = await res.json();
+          throw new Error(body.error || "Failed to save user");
       }
 
       router.refresh();

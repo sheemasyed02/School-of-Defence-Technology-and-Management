@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { UserForm } from "@/components/admin/UserForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditUserPage({ params }: PageProps) {
+export default async function EditUserPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: user, error } = await supabase
     .from("User")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !user) {

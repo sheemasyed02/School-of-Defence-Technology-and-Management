@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { EventForm } from "@/components/admin/EventForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditEventPage({ params }: PageProps) {
+export default async function EditEventPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: event, error } = await supabase
     .from("Event")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !event) {

@@ -12,8 +12,11 @@ type AnnouncementFormValues = {
   title: string;
   body: string;
   date: string;
+  expiresAt: string;
   priority: "IMPORTANT" | "REGULAR";
   isVisible: boolean;
+  isScrolling: boolean;
+  attachment_url?: string;
 };
 
 interface AnnouncementFormProps {
@@ -35,13 +38,16 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ initialData 
   } = useForm<AnnouncementFormValues>({
     defaultValues: initialData ? {
         ...initialData,
-        date: initialData.date ? new Date(initialData.date).toISOString().slice(0, 16) : ''
+        date: initialData.date ? new Date(initialData.date).toISOString().slice(0, 16) : '',
+        expiresAt: initialData.expiresAt ? new Date(initialData.expiresAt).toISOString().slice(0, 16) : '',
     } : {
       title: "",
       body: "",
       date: new Date().toISOString().slice(0, 16),
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16),
       priority: "REGULAR",
       isVisible: true,
+      isScrolling: false,
     },
   });
 
@@ -53,6 +59,7 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ initialData 
       const payload = {
         ...data,
         date: new Date(data.date).toISOString(),
+        expiresAt: data.expiresAt ? new Date(data.expiresAt).toISOString() : null,
         updatedAt: new Date().toISOString()
       };
 
@@ -110,9 +117,16 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ initialData 
 
         <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-                <label className="text-sm font-medium">Date</label>
+                <label className="text-sm font-medium">Publish Date</label>
                 <Input type="datetime-local" disabled={loading} {...register("date", { required: true })} />
             </div>
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Expiry Date</label>
+                <Input type="datetime-local" disabled={loading} {...register("expiresAt")} />
+            </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
              <div className="space-y-2">
                 <label className="text-sm font-medium">Priority</label>
                 <select
@@ -124,20 +138,36 @@ export const AnnouncementForm: React.FC<AnnouncementFormProps> = ({ initialData 
                     <option value="IMPORTANT">Important</option>
                 </select>
             </div>
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Attachment URL (Optional)</label>
+                <Input disabled={loading} placeholder="/docs/notice.pdf" {...register("attachment_url")} />
+            </div>
         </div>
 
-        <div className="flex items-center space-x-2 border p-4 rounded-md">
-            <input
-                type="checkbox"
-                id="isVisible"
-                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                disabled={loading}
-                {...register("isVisible")}
-            />
-            <label htmlFor="isVisible" className="text-sm font-medium">Visible</label>
+        <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center space-x-2 border p-3 rounded-md">
+                <input
+                    type="checkbox"
+                    id="isVisible"
+                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    disabled={loading}
+                    {...register("isVisible")}
+                />
+                <label htmlFor="isVisible" className="text-sm font-medium">Publicly Visible</label>
+            </div>
+            <div className="flex items-center space-x-2 border p-3 rounded-md">
+                <input
+                    type="checkbox"
+                    id="isScrolling"
+                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    disabled={loading}
+                    {...register("isScrolling")}
+                />
+                <label htmlFor="isScrolling" className="text-sm font-medium">Scroll on Home</label>
+            </div>
         </div>
 
-        <Button disabled={loading} className="w-full" type="submit">
+        <Button disabled={loading} className="w-full h-11" type="submit">
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {action}
         </Button>

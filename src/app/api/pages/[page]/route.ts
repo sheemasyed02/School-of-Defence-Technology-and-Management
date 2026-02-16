@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
+
 export async function GET(
   req: Request,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
+    const { page } = await params;
     const { data: pageContent, error } = await supabase
       .from("PageContent")
       .select("*")
-      .eq("page", params.page);
+      .eq("page", page);
 
     if (error) throw error;
 

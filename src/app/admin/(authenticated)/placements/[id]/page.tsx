@@ -2,17 +2,16 @@ import { supabase } from "@/lib/supabase";
 import { PlacementForm } from "@/components/admin/PlacementForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditPlacementPage({ params }: PageProps) {
+export default async function EditPlacementPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const { data: placement, error } = await supabase
     .from("Placement")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (error || !placement) {

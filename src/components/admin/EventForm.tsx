@@ -1,22 +1,14 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, Calendar, MapPin, Image as ImageIcon, Shield, Plus, Trash2, Settings2 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
-
-// Defining basic types manually since validation package doesn't have Event schema yet
-type EventFormValues = {
-  title: string;
-  description: string;
-  date: string;
-  venue: string;
-  imageUrl: string;
-  isVisible: boolean;
-};
+import { eventSchema, EventFormValues } from "@/lib/validations";
 
 interface EventFormProps {
   initialData?: any;
@@ -28,27 +20,43 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
   const [error, setError] = useState("");
 
   const title = initialData ? "Edit Event" : "Create Event";
-  const action = initialData ? "Save changes" : "Create";
+  const action = initialData ? "Save changes" : "Create Event";
 
   const {
     register,
     handleSubmit,
+    control,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<EventFormValues>({
+    // @ts-ignore - mismatch in zod version vs resolver types
+    resolver: zodResolver(eventSchema),
     defaultValues: initialData ? {
         ...initialData,
-        date: initialData.date ? new Date(initialData.date).toISOString().slice(0, 16) : ''
+        date: initialData.date ? new Date(initialData.date).toISOString().slice(0, 16) : '',
+        form_config: initialData.form_config || []
     } : {
       title: "",
       description: "",
       date: "",
       venue: "",
       imageUrl: "",
+      type: "Workshop",
+      registration_enabled: false,
+      form_config: [],
       isVisible: true,
     },
   });
 
-  const onSubmit = async (data: EventFormValues) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "form_config",
+  });
+
+  const registrationEnabled = watch("registration_enabled");
+
+  async function onSubmit(data: EventFormValues) {
     try {
       setLoading(true);
       setError("");
@@ -60,88 +68,226 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
       };
 
       if (initialData) {
-        const { error } = await supabase
+        const { error: updateError } = await supabase
             .from("Event")
             .update(payload)
             .eq("id", initialData.id);
-        if (error) throw error;
+        if (updateError) throw updateError;
       } else {
-        const { error } = await supabase
+        const { error: insertError } = await supabase
             .from("Event")
             .insert([payload]);
-        if (error) throw error;
+        if (insertError) throw insertError;
       }
 
       router.refresh();
       router.push("/admin/events");
-    } catch (error: any) {
-      console.error(error);
-      setError(error.message || "Something went wrong");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Something went wrong. Please check if database columns exist (type, registration_enabled, form_config).");
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
-    <div className="max-w-xl mx-auto space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{title}</h1>
+    <div className="max-w-4xl mx-auto space-y-8 pb-10">
+      <div className="flex flex-col gap-2 border-b border-primary/10 pb-6">
+        <h1 className="text-3xl font-heading font-bold text-primary">{title}</h1>
+        <p className="text-foreground-muted text-sm">
+          Plan and organize campus activities, workshops, and symposiums.
+        </p>
       </div>
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <span className="block sm:inline">{error}</span>
+        <div className="bg-accent/10 border border-accent/20 text-accent px-4 py-3 rounded-brand flex items-center gap-3 animate-fade-in" role="alert">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-sm font-medium">{error}</span>
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-8">
 
-        <div className="space-y-2">
-            <label className="text-sm font-medium">Title</label>
-            <Input disabled={loading} placeholder="Annual Science Fair" {...register("title", { required: true })} />
-        </div>
-
-        <div className="space-y-2">
-            <label className="text-sm font-medium">Description</label>
-            <textarea
-                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                disabled={loading}
-                placeholder="Event details..."
-                {...register("description")}
-            />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-                <label className="text-sm font-medium">Date & Time</label>
-                <Input type="datetime-local" disabled={loading} {...register("date", { required: true })} />
+        {/* Core Details Card */}
+        <div className="bg-white p-6 sm:p-8 rounded-brand shadow-brand border border-border-light space-y-8">
+            <div className="flex items-center gap-2 border-b border-gray-100 pb-2">
+                <div className="w-1 h-4 bg-gold rounded-full" />
+                <h3 className="font-heading font-bold text-lg text-primary">Core Details</h3>
             </div>
-            <div className="space-y-2">
-                <label className="text-sm font-medium">Venue</label>
-                <Input disabled={loading} placeholder="Main Auditorium" {...register("venue")} />
+
+            <div className="space-y-5">
+                <div>
+                    <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Title *</label>
+                    <Input disabled={loading} placeholder="e.g. Annual Tech Symposium 2026" className="focus-visible:ring-primary h-11" {...register("title")} />
+                    {errors.title && <p className="text-xs text-accent mt-1.5 font-medium">{errors.title.message}</p>}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Type</label>
+                        <select
+                            className="flex h-11 w-full rounded-brand border border-input bg-background px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%228%22%20viewBox%3D%220%200%2014%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L7%207L13%201%22%20stroke%3D%22%23667085%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat"
+                            {...register("type")}
+                            disabled={loading}
+                        >
+                            <option value="Workshop">Workshop</option>
+                            <option value="Symposium">Symposium</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Panel Discussion">Panel Discussion</option>
+                            <option value="Hackathon">Hackathon</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Date & Time *</label>
+                        <div className="relative">
+                            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40" />
+                            <Input type="datetime-local" disabled={loading} className="pl-10 focus-visible:ring-primary h-11" {...register("date")} />
+                        </div>
+                        {errors.date && <p className="text-xs text-accent mt-1.5 font-medium">{errors.date.message}</p>}
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Venue</label>
+                        <div className="relative">
+                            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40" />
+                            <Input disabled={loading} placeholder="Main Auditorium" className="pl-10 focus-visible:ring-primary h-11" {...register("venue")} />
+                        </div>
+                    </div>
+                    <div>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Image Preview URL</label>
+                        <div className="relative">
+                            <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40" />
+                            <Input disabled={loading} placeholder="https://..." className="pl-10 focus-visible:ring-primary h-11" {...register("imageUrl")} />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Brief Description</label>
+                    <textarea
+                        className="flex min-h-[120px] w-full rounded-brand border border-input bg-background px-3 py-3 text-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all"
+                        disabled={loading}
+                        placeholder="Detail what attendees can expect..."
+                        {...register("description")}
+                    />
+                </div>
             </div>
         </div>
 
-        <div className="space-y-2">
-            <label className="text-sm font-medium">Image URL</label>
-            <Input disabled={loading} placeholder="https://..." {...register("imageUrl")} />
+        {/* Registration & Form Builder Card */}
+        <div className="bg-white p-6 sm:p-8 rounded-brand shadow-brand border border-border-light space-y-8">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+                <div className="flex items-center gap-2">
+                    <div className="w-1 h-4 bg-gold rounded-full" />
+                    <h3 className="font-heading font-bold text-lg text-primary">Registration Settings</h3>
+                </div>
+                <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setValue("registration_enabled", !registrationEnabled)}>
+                    <div className={`w-10 h-6 rounded-full transition-all duration-300 relative ${registrationEnabled ? "bg-primary" : "bg-gray-200"}`}>
+                        <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-300 ${registrationEnabled ? "left-5" : "left-1"}`} />
+                    </div>
+                    <span className="text-sm font-bold text-primary select-none">Accept Registrations</span>
+                </div>
+            </div>
+
+            {registrationEnabled && (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="bg-primary/5 p-4 rounded-brand border border-primary/10 flex items-start gap-3">
+                        <Settings2 className="w-5 h-5 text-primary mt-0.5" />
+                        <div>
+                            <p className="text-sm font-bold text-primary">Dynamic Form Builder</p>
+                            <p className="text-xs text-primary/60">Define the fields attendees must fill to register for this event.</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        {fields.map((field, index) => (
+                            <div key={field.id} className="flex flex-col sm:flex-row gap-3 p-4 bg-gray-50 rounded-brand border border-gray-200 relative group transition-all">
+                                <div className="flex-1 space-y-3">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div>
+                                            <label className="text-[10px] font-bold text-primary/60 uppercase mb-1 block">Field Label</label>
+                                            <Input
+                                                disabled={loading}
+                                                placeholder="e.g. Full Name"
+                                                className="h-9 text-xs"
+                                                {...register(`form_config.${index}.label` as const)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-bold text-primary/60 uppercase mb-1 block">Input Type</label>
+                                            <select
+                                                className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-xs appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%228%22%20viewBox%3D%220%200%2014%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L7%207L13%201%22%20stroke%3D%22%23667085%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E')] bg-[length:10px_6px] bg-[right_0.5rem_center] bg-no-repeat"
+                                                {...register(`form_config.${index}.type` as const)}
+                                            >
+                                                <option value="text">Text Input</option>
+                                                <option value="email">Email</option>
+                                                <option value="textarea">Large Text</option>
+                                                <option value="select">Dropdown</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input type="checkbox" className="w-3.5 h-3.5 rounded border-gray-300 text-primary" {...register(`form_config.${index}.required` as const)} />
+                                            <span className="text-[11px] font-medium text-primary/80">Required Field</span>
+                                        </label>
+
+                                        {watch(`form_config.${index}.type`) === 'select' && (
+                                            <div className="flex-1 transition-all">
+                                                <Input
+                                                    disabled={loading}
+                                                    placeholder="Options (comma separated)"
+                                                    className="h-8 text-[10px]"
+                                                    {...register(`form_config.${index}.options` as const)}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-accent hover:text-accent/80 hover:bg-accent/5 self-start sm:self-center"
+                                    onClick={() => remove(index)}
+                                >
+                                    <Trash2 className="w-4 h-4" />
+                                </Button>
+                            </div>
+                        ))}
+
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="w-full border-dashed border-2 hover:bg-primary/5 hover:border-primary/50 text-primary/60 hover:text-primary gap-2 h-12"
+                            onClick={() => append({ label: "", type: "text", required: true })}
+                        >
+                            <Plus className="w-4 h-4" />
+                            Add Form Field
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
 
-        <div className="flex items-center space-x-2 border p-4 rounded-md">
-            <input
-                type="checkbox"
-                id="isVisible"
-                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                disabled={loading}
-                {...register("isVisible")}
-            />
-            <label htmlFor="isVisible" className="text-sm font-medium">Visible</label>
-        </div>
+        {/* Global Options & Actions */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6">
+            <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => setValue("isVisible", !watch("isVisible"))}>
+                <div className={`w-10 h-6 rounded-full transition-all duration-300 relative ${watch("isVisible") ? "bg-primary" : "bg-gray-200"}`}>
+                    <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all duration-300 ${watch("isVisible") ? "left-5" : "left-1"}`} />
+                </div>
+                <input type="checkbox" className="hidden" {...register("isVisible")} />
+                <span className="text-sm font-bold text-primary group-hover:text-primary/70 select-none">Publicly Visible</span>
+            </div>
 
-        <Button disabled={loading} className="w-full" type="submit">
-          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {action}
-        </Button>
+            <Button disabled={loading} className="w-full sm:w-auto min-w-[200px] h-12 bg-primary hover:bg-primary/90 text-white shadow-brand-lg" type="submit">
+                {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Shield className="mr-2 h-5 w-5" />}
+                {action}
+            </Button>
+        </div>
       </form>
     </div>
   );

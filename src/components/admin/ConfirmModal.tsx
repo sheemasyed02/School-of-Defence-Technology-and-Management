@@ -40,7 +40,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="bg-destructive hover:bg-destructive/90"
+            className="bg-red-600 text-white hover:bg-red-700 focus:ring-red-600"
             disabled={loading}
             onClick={onConfirm}
           >

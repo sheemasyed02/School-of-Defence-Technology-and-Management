@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-// This type should match your Prisma model
+// Type matching the Supabase Faculty table
 export type Faculty = {
   id: string;
   name: string;
@@ -80,6 +80,28 @@ export const columns: ColumnDef<Faculty>[] = [
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const name = row.original.name;
+      const imageUrl = row.original.imageUrl;
+      const initials = name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase();
+
+      return (
+        <div className="flex items-center gap-3">
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={name}
+              className="w-9 h-9 rounded-full object-cover border border-gray-200"
+            />
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+              <span className="text-xs font-bold text-white">{initials}</span>
+            </div>
+          )}
+          <span className="font-medium">{name}</span>
+        </div>
       );
     },
   },

@@ -4,8 +4,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
+import { hasPermission } from "@/lib/permissions";
+import { getClientIP, getUserAgent } from "@/lib/security";
 
-// --- SECURITY UTILS ---
+// ─── Security Utils ────────────────────────────────────────────────────────
 async function getAuthenticatedUser() {
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
@@ -14,36 +16,73 @@ async function getAuthenticatedUser() {
   return session.user;
 }
 
-async function logAudit(action: string, entity: string, entityId: string, details: any) {
+async function logAudit(
+  action: string,
+  entity: string,
+  entityId: string,
+  details: any
+) {
   try {
     const user = await getAuthenticatedUser();
+    const ip = getClientIP();
+    const ua = getUserAgent();
+
     await supabase.from("AuditLog").insert({
-      userId: user.id, // Store NextAuth User ID (UUID)
+      userId: user.id,
       action,
       entity,
       entityId,
       details: JSON.stringify(details),
-      ipAddress: "server-side", // In real deployment, extract from headers if needed
+      ipAddress: ip,
+      userAgent: ua,
       createdAt: new Date().toISOString(),
     });
   } catch (e) {
     console.error("Audit Log Error:", e);
-    // Don't fail the main action if logging fails, but alert admins in real prod.
   }
 }
 
-// --- GENERIC MUTATIONS ---
+// ─── Resource name mapping ─────────────────────────────────────────────────
+function tableToResource(table: string): string {
+  const map: Record<string, string> = {
+    Faculty: "faculty",
+    Event: "events",
+    Announcement: "announcements",
+    Program: "programs",
+    Research: "research",
+    Gallery: "gallery",
+    Placement: "placements",
+    User: "users",
+    Settings: "settings",
+    Contact: "contacts",
+    PageContent: "pages",
+  };
+  return map[table] || table.toLowerCase();
+}
 
-type MutationResult = { success: true; data?: any } | { success: false; error: string };
+// ─── Generic Mutations ─────────────────────────────────────────────────────
+type MutationResult =
+  | { success: true; data?: any }
+  | { success: false; error: string };
 
-export async function createRecord(table: string, data: any, path: string): Promise<MutationResult> {
+export async function createRecord(
+  table: string,
+  data: any,
+  path: string
+): Promise<MutationResult> {
   try {
     const user = await getAuthenticatedUser();
-    if (user.role !== "SUPER_ADMIN" && user.role !== "EDITOR" && user.role !== "FACULTY_ADMIN") {
-         return { success: false, error: "Insufficient permissions" };
+    const resource = tableToResource(table);
+
+    if (!hasPermission(user.role, resource, "write")) {
+      return { success: false, error: "Insufficient permissions" };
     }
 
-    const { data: result, error } = await supabase.from(table).insert(data).select().single();
+    const { data: result, error } = await supabase
+      .from(table)
+      .insert(data)
+      .select()
+      .single();
 
     if (error) throw error;
 
@@ -56,11 +95,18 @@ export async function createRecord(table: string, data: any, path: string): Prom
   }
 }
 
-export async function updateRecord(table: string, id: string, data: any, path: string): Promise<MutationResult> {
+export async function updateRecord(
+  table: string,
+  id: string,
+  data: any,
+  path: string
+): Promise<MutationResult> {
   try {
     const user = await getAuthenticatedUser();
-     if (user.role !== "SUPER_ADMIN" && user.role !== "EDITOR" && user.role !== "FACULTY_ADMIN") {
-         return { success: false, error: "Insufficient permissions" };
+    const resource = tableToResource(table);
+
+    if (!hasPermission(user.role, resource, "write")) {
+      return { success: false, error: "Insufficient permissions" };
     }
 
     const { error } = await supabase.from(table).update(data).eq("id", id);
@@ -71,18 +117,22 @@ export async function updateRecord(table: string, id: string, data: any, path: s
     revalidatePath(path);
     return { success: true };
   } catch (error: any) {
-     console.error(`Update ${table} Error:`, error);
+    console.error(`Update ${table} Error:`, error);
     return { success: false, error: error.message };
   }
 }
 
-export async function deleteRecord(table: string, id: string, path: string): Promise<MutationResult> {
+export async function deleteRecord(
+  table: string,
+  id: string,
+  path: string
+): Promise<MutationResult> {
   try {
     const user = await getAuthenticatedUser();
-    // Only Super Admins can delete critical data? Or standard roles?
-    // Let's stick to standard roles for now but log heavily.
-     if (user.role !== "SUPER_ADMIN" && user.role !== "EDITOR") {
-         return { success: false, error: "Insufficient permissions" };
+    const resource = tableToResource(table);
+
+    if (!hasPermission(user.role, resource, "delete")) {
+      return { success: false, error: "Insufficient permissions" };
     }
 
     const { error } = await supabase.from(table).delete().eq("id", id);
@@ -93,7 +143,65 @@ export async function deleteRecord(table: string, id: string, path: string): Pro
     revalidatePath(path);
     return { success: true };
   } catch (error: any) {
-      console.error(`Delete ${table} Error:`, error);
+    console.error(`Delete ${table} Error:`, error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ─── Block/Unblock IP ──────────────────────────────────────────────────────
+export async function blockIPAction(
+  ipAddress: string,
+  reason: string,
+  expiresAt?: string
+): Promise<MutationResult> {
+  try {
+    const user = await getAuthenticatedUser();
+    if (!hasPermission(user.role, "blocked-ips", "write")) {
+      return { success: false, error: "Insufficient permissions" };
+    }
+
+    const { error } = await supabase.from("BlockedIP").upsert(
+      {
+        ipAddress,
+        reason,
+        blockedBy: user.id,
+        expiresAt: expiresAt || null,
+        isActive: true,
+        blockedAt: new Date().toISOString(),
+      },
+      { onConflict: "ipAddress" }
+    );
+
+    if (error) throw error;
+
+    await logAudit("BLOCK_IP", "BlockedIP", ipAddress, { reason });
+    revalidatePath("/admin/blocked-ips");
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
+export async function unblockIPAction(
+  id: string
+): Promise<MutationResult> {
+  try {
+    const user = await getAuthenticatedUser();
+    if (!hasPermission(user.role, "blocked-ips", "delete")) {
+      return { success: false, error: "Insufficient permissions" };
+    }
+
+    const { error } = await supabase
+      .from("BlockedIP")
+      .update({ isActive: false })
+      .eq("id", id);
+
+    if (error) throw error;
+
+    await logAudit("UNBLOCK_IP", "BlockedIP", id, {});
+    revalidatePath("/admin/blocked-ips");
+    return { success: true };
+  } catch (error: any) {
     return { success: false, error: error.message };
   }
 }

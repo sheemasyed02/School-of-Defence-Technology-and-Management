@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    // Role check: Only allow if SUPER_ADMIN, EDITOR, or FACULTY_ADMIN
+    
     const userRole = session.user.role;
     if (!["SUPER_ADMIN", "EDITOR", "FACULTY_ADMIN"].includes(userRole)) {
       return new NextResponse("Forbidden", { status: 403 });

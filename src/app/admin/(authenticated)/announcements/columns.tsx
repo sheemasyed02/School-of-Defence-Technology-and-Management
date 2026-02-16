@@ -15,6 +15,7 @@ export type Announcement = {
   date: string;
   priority: "IMPORTANT" | "REGULAR";
   isVisible: boolean;
+  isScrolling: boolean;
 };
 
 interface CellActionProps {
@@ -104,7 +105,7 @@ export const columns: ColumnDef<Announcement>[] = [
   },
   {
     accessorKey: "isVisible",
-    header: "Status",
+    header: "Visibility",
     cell: ({ row }) => (
       <span
         className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -114,6 +115,21 @@ export const columns: ColumnDef<Announcement>[] = [
         }`}
       >
         {row.original.isVisible ? "Visible" : "Hidden"}
+      </span>
+    ),
+  },
+  {
+    accessorKey: "isScrolling",
+    header: "Marquee",
+    cell: ({ row }) => (
+      <span
+        className={`px-2 py-1 rounded-full text-xs font-medium ${
+          row.original.isScrolling
+            ? "bg-amber-100 text-amber-800"
+            : "bg-gray-100 text-gray-800"
+        }`}
+      >
+        {row.original.isScrolling ? "Scrolling" : "Static"}
       </span>
     ),
   },

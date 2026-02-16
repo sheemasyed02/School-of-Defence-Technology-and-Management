@@ -13,7 +13,7 @@ interface PageHeaderProps {
   breadcrumb?: string;
 }
 
-export default function PageHeader({ title, subtitle, breadcrumb }: PageHeaderProps) {
+export function PageHeader({ title, subtitle, breadcrumb }: PageHeaderProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {

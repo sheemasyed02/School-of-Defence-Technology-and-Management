@@ -8,6 +8,15 @@ import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Lock, Loader2, ArrowLeft, RefreshCw, Smartphone } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,6 +26,8 @@ export default function LoginPage() {
     password: "",
     captchaAnswer: "",
   });
+  const [errorDialog, setErrorDialog] = useState<string | null>(null);
+  const [isBlocked, setIsBlocked] = useState(false);
 
   const [captcha, setCaptcha] = useState<{ id: string; svg: string } | null>(null);
   const [captchaLoading, setCaptchaLoading] = useState(true);
@@ -43,7 +54,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.captchaAnswer) {
-      alert("Please enter the captcha solution.");
+      setErrorDialog("Please enter the captcha solution.");
       return;
     }
 
@@ -59,10 +70,15 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        alert(result.error); // Show specific error (e.g. Invalid Captcha)
+        if (result.error.includes("BLOCK_SCREEN:")) {
+          setIsBlocked(true);
+          setErrorDialog(result.error.replace("BLOCK_SCREEN:", "").trim());
+        } else {
+          setErrorDialog(result.error);
+        }
         setLoading(false);
         setFormData(prev => ({ ...prev, captchaAnswer: "" }));
-        fetchCaptcha(); // Refresh captcha on failure
+        fetchCaptcha();
       } else {
         router.push("/admin");
       }
@@ -71,6 +87,34 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  if (isBlocked) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-8">
+        <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-xl shadow-xl border border-red-100 text-center">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-red-100 mb-6">
+                <Lock className="h-10 w-10 text-red-600" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">Temporarily Blocked</h2>
+            <div className="space-y-4 text-gray-600">
+                <p className="text-lg">
+                    {errorDialog || "Your account access has been restricted due to multiple failed login attempts."}
+                </p>
+                <div className="bg-red-50 p-4 rounded-lg border border-red-100 text-red-800 text-sm">
+                   <strong>Next Step:</strong> Please wait for 2 hours and try again, or contact your
+                   <span className="font-bold underline ml-1">Super Admin</span> for immediate assistance.
+                </div>
+            </div>
+            <div className="mt-8">
+                <Link href="/" className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Return to Website
+                </Link>
+            </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-8">
@@ -190,6 +234,20 @@ export default function LoginPage() {
             </Link>
         </div>
       </div>
+
+      <AlertDialog open={!!errorDialog && !isBlocked} onOpenChange={() => setErrorDialog(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600">Login Failed</AlertDialogTitle>
+            <AlertDialogDescription>
+              {errorDialog}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setErrorDialog(null)}>Try Again</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

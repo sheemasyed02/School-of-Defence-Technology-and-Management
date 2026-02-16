@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { createMetadata } from "@/lib/metadata";
+import { DevToolsBlocker } from "@/components/DevToolsBlocker";
 
 /* ─── Fonts ─── */
 const notoSans = Noto_Sans({
@@ -31,6 +32,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-body antialiased">
+        <DevToolsBlocker />
         {children}
       </body>
     </html>

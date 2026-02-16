@@ -5,15 +5,18 @@ import { authOptions } from "@/lib/auth";
 import { facultySchema } from "@/lib/validations";
 import { z } from "zod";
 
+
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    const { id } = await params;
 
     const userRole = session.user.role;
     if (!["SUPER_ADMIN", "EDITOR", "FACULTY_ADMIN"].includes(userRole)) {
@@ -26,7 +29,7 @@ export async function PUT(
     const { data: faculty, error } = await supabase
       .from("Faculty")
       .update(validatedData)
-      .eq("id", params.id)
+      .eq("id", id)
       .select()
       .single();
 
@@ -46,13 +49,15 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    const { id } = await params;
 
     const userRole = session.user.role;
     if (!["SUPER_ADMIN", "EDITOR", "FACULTY_ADMIN"].includes(userRole)) {
@@ -62,7 +67,7 @@ export async function DELETE(
     const { data: faculty, error } = await supabase
       .from("Faculty")
       .delete()
-      .eq("id", params.id)
+      .eq("id", id)
       .select()
       .single();
 

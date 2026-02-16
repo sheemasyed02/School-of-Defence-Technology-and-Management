@@ -2,26 +2,35 @@ import { supabase } from "@/lib/supabase";
 import { FacultyForm } from "@/components/admin/FacultyForm";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
 
-export default async function EditFacultyPage({ params }: PageProps) {
+async function getFaculty(id: string) {
   const { data: faculty, error } = await supabase
     .from("Faculty")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
-  if (error || !faculty) {
+  if (error) {
+    console.error("Error fetching faculty:", error);
+    return null;
+  }
+  return faculty;
+}
+
+export default async function EditFacultyPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const faculty = await getFaculty(id);
+
+  if (!faculty) {
     notFound();
   }
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
-       {/* @ts-ignore: Supabase return type matches Faculty interface structurally */}
       <FacultyForm initialData={faculty} />
     </div>
   );
