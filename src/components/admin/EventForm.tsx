@@ -4,10 +4,10 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Calendar, MapPin, Image as ImageIcon, Shield, Plus, Trash2, Settings2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { Loader2, Calendar, MapPin, Image as ImageIcon, Shield, Plus, Trash2, Settings2, Upload, X } from "lucide-react";
+import { createRecord, updateRecord } from "@/app/actions";
 import { eventSchema, EventFormValues } from "@/lib/validations";
 
 interface EventFormProps {
@@ -18,6 +18,10 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.imageUrl || null);
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const title = initialData ? "Edit Event" : "Create Event";
   const action = initialData ? "Save changes" : "Create Event";
@@ -63,32 +67,88 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
 
       const payload = {
         ...data,
-        date: new Date(data.date).toISOString(),
+        date: data.date ? new Date(data.date).toISOString() : null,
         updatedAt: new Date().toISOString()
       };
 
       if (initialData) {
-        const { error: updateError } = await supabase
-            .from("Event")
-            .update(payload)
-            .eq("id", initialData.id);
-        if (updateError) throw updateError;
+        const result = await updateRecord("Event", initialData.id, payload, "/admin/events");
+        if (!result.success) throw new Error(result.error);
       } else {
-        const { error: insertError } = await supabase
-            .from("Event")
-            .insert([payload]);
-        if (insertError) throw insertError;
+        const result = await createRecord("Event", payload, "/admin/events");
+        if (!result.success) throw new Error(result.error);
       }
 
       router.refresh();
       router.push("/admin/events");
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Something went wrong. Please check if database columns exist (type, registration_enabled, form_config).");
+      setError(err.message || "Something went wrong. Please check your network and permissions.");
     } finally {
       setLoading(false);
     }
   }
+
+  const handleImageUpload = useCallback(async (file: File) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowedTypes.includes(file.type)) {
+      setError("Invalid file type. Allowed: JPEG, PNG, WebP, GIF");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("File too large. Maximum size is 5MB");
+      return;
+    }
+
+    try {
+      setUploading(true);
+      setError("");
+      const localPreview = URL.createObjectURL(file);
+      setImagePreview(localPreview);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("folder", "events");
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Upload failed");
+
+      const data = await res.json();
+      setValue("imageUrl", data.url);
+      setImagePreview(data.url);
+      URL.revokeObjectURL(localPreview);
+    } catch (err: any) {
+      console.error(err);
+      setError("Failed to upload image");
+      setImagePreview(initialData?.imageUrl || null);
+    } finally {
+      setUploading(false);
+    }
+  }, [setValue, initialData?.imageUrl]);
+
+  const handleRemoveImage = () => {
+    setImagePreview(null);
+    setValue("imageUrl", "");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleDrag = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+    else if (e.type === "dragleave") setDragActive(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files?.[0]) handleImageUpload(e.dataTransfer.files[0]);
+  }, [handleImageUpload]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-10">
@@ -139,7 +199,7 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
                         </select>
                     </div>
                     <div>
-                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Date & Time *</label>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Date & Time</label>
                         <div className="relative">
                             <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40" />
                             <Input type="datetime-local" disabled={loading} className="pl-10 focus-visible:ring-primary h-11" {...register("date")} />
@@ -157,11 +217,58 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
                         </div>
                     </div>
                     <div>
-                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Image Preview URL</label>
-                        <div className="relative">
-                            <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40" />
-                            <Input disabled={loading} placeholder="https://..." className="pl-10 focus-visible:ring-primary h-11" {...register("imageUrl")} />
-                        </div>
+                         <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Image</label>
+                         <div className="flex items-start gap-4">
+                            {imagePreview ? (
+                              <div className="relative group w-24 h-24 sm:w-32 sm:h-32">
+                                <img
+                                  src={imagePreview}
+                                  alt="Event preview"
+                                  className="w-full h-full rounded-xl object-cover border-2 border-gray-200 shadow-sm"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={handleRemoveImage}
+                                  disabled={uploading}
+                                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600 shadow-md"
+                                >
+                                  <X className="w-3.5 h-3.5" />
+                                </button>
+                                {uploading && (
+                                  <div className="absolute inset-0 bg-black/40 rounded-xl flex items-center justify-center">
+                                    <Loader2 className="w-6 h-6 text-white animate-spin" />
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <div
+                                onDragEnter={handleDrag}
+                                onDragLeave={handleDrag}
+                                onDragOver={handleDrag}
+                                onDrop={handleDrop}
+                                onClick={() => fileInputRef.current?.click()}
+                                className={`
+                                  flex-1 cursor-pointer rounded-xl border-2 border-dashed p-6 text-center transition-all duration-200
+                                  ${dragActive ? "border-primary bg-primary/5" : "border-gray-200 hover:border-primary/30 hover:bg-gray-50"}
+                                  ${uploading ? "pointer-events-none opacity-60" : ""}
+                                `}
+                              >
+                                <input
+                                  ref={fileInputRef}
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) handleImageUpload(file);
+                                  }}
+                                />
+                                <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                                <p className="text-xs font-medium text-gray-600">Click or drag image to upload</p>
+                              </div>
+                            )}
+                            <input type="hidden" {...register("imageUrl")} />
+                         </div>
                     </div>
                 </div>
 

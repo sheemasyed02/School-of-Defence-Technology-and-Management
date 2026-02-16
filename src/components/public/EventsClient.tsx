@@ -12,7 +12,7 @@ interface Event {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: string | null;
   venue: string;
   imageUrl: string;
   type: string;
@@ -35,12 +35,16 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
   const now = new Date();
 
   const upcomingEvents = events
-    .filter(e => new Date(e.date) >= now)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .filter(e => !e.date || new Date(e.date) >= now)
+    .sort((a, b) => {
+      if (!a.date) return -1;
+      if (!b.date) return 1;
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
 
   const pastEvents = events
-    .filter(e => new Date(e.date) < now)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .filter(e => e.date && new Date(e.date) < now)
+    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
 
   const displayedPastEvents = pastEvents.slice(0, pastLimit);
 
@@ -203,8 +207,8 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
                         </span>
                         <h3 className="text-3xl font-heading font-black text-primary leading-tight tracking-tight">{selectedEvent.title}</h3>
                         <div className="mt-4 flex flex-wrap items-center gap-6 text-xs font-bold text-foreground-muted uppercase tracking-widest">
-                            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-gold" /> {formatDate(selectedEvent.date, { dateStyle: 'long' })}</span>
-                            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gold" /> {selectedEvent.venue}</span>
+                            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-gold" /> {selectedEvent.date ? formatDate(selectedEvent.date, { dateStyle: 'long' }) : "Date To Be Announced"}</span>
+                            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gold" /> {selectedEvent.venue || "Venue To Be Announced"}</span>
                         </div>
                     </div>
 
@@ -275,7 +279,6 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
 };
 
 const EventCard = ({ evt, index, isPast, onRegister, formatDate }: { evt: Event, index: number, isPast?: boolean, onRegister?: () => void, formatDate: any }) => {
-    const eventDate = new Date(evt.date);
 
     return (
         <AnimateIn type={index % 2 === 0 ? "slideLeft" : "slideRight"}>
@@ -287,17 +290,29 @@ const EventCard = ({ evt, index, isPast, onRegister, formatDate }: { evt: Event,
                     </span>
                     <div className="flex flex-col items-center">
                         <p className={`text-6xl font-heading font-black leading-none tracking-tighter ${isPast ? 'text-slate-300' : 'text-white'}`}>
-                            {formatDate(evt.date, { day: '2-digit' })}
+                            {evt.date ? formatDate(evt.date, { day: '2-digit' }) : "–"}
                         </p>
                         <p className={`text-sm font-black uppercase tracking-[0.25em] mt-3 ${isPast ? 'text-slate-400' : 'text-gold'}`}>
-                            {formatDate(evt.date, { month: 'long', year: 'numeric' })}
+                            {evt.date ? formatDate(evt.date, { month: 'short', year: 'numeric' }) : "To Be Announced"}
                         </p>
                     </div>
                     <div className="mt-8 flex items-center gap-2 pt-6 border-t border-white/10 w-full justify-center">
                         <MapPin className={`w-4 h-4 ${isPast ? 'text-slate-300' : 'text-gold/80 animate-pulse'}`} />
-                        <span className={`text-[10px] font-black uppercase tracking-widest max-w-[140px] truncate ${isPast ? 'text-slate-400' : 'text-white/70'}`}>{evt.venue}</span>
+                        <span className={`text-[10px] font-black uppercase tracking-widest max-w-[140px] truncate ${isPast ? 'text-slate-400' : 'text-white/70'}`}>{evt.venue || "Venue TBA"}</span>
                     </div>
                 </div>
+
+                {/* Image section */}
+                {evt.imageUrl && (
+                    <div className="md:w-48 lg:w-64 h-48 md:h-auto overflow-hidden shrink-0 border-r border-border-light relative">
+                        <img
+                            src={evt.imageUrl}
+                            alt={evt.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                )}
 
                 {/* Content */}
                 <div className="p-8 sm:p-10 flex-1 flex flex-col justify-center relative bg-white">
@@ -313,7 +328,9 @@ const EventCard = ({ evt, index, isPast, onRegister, formatDate }: { evt: Event,
 
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-auto pt-6 gap-6 border-t border-gray-50">
                         <div className="flex items-center gap-6 text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
-                            <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full"><Clock className="w-3.5 h-3.5" /> {formatDate(evt.date, { hour: 'numeric', minute: '2-digit', hour12: true })}</span>
+                            <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
+                                <Clock className="w-3.5 h-3.5" /> {evt.date ? formatDate(evt.date, { hour: 'numeric', minute: '2-digit', hour12: true }) : "TBA"}
+                            </span>
                         </div>
 
                         {!isPast && (

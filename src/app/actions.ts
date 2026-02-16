@@ -88,6 +88,7 @@ export async function createRecord(
 
     await logAudit("CREATE", table, result.id, data);
     revalidatePath(path);
+    revalidatePath(`/${resource}`);
     return { success: true, data: result };
   } catch (error: any) {
     console.error(`Create ${table} Error:`, error);
@@ -115,6 +116,7 @@ export async function updateRecord(
 
     await logAudit("UPDATE", table, id, data);
     revalidatePath(path);
+    revalidatePath(`/${resource}`);
     return { success: true };
   } catch (error: any) {
     console.error(`Update ${table} Error:`, error);
@@ -141,6 +143,7 @@ export async function deleteRecord(
 
     await logAudit("DELETE", table, id, { deletedAt: new Date() });
     revalidatePath(path);
+    revalidatePath(`/${resource}`);
     return { success: true };
   } catch (error: any) {
     console.error(`Delete ${table} Error:`, error);

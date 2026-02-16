@@ -3,8 +3,8 @@ import ProgramsClient from "./ProgramsClient";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Academic Programs | School of Defence Technology and Management",
-  description: "Explore our Master of Technology and PhD programs in Defence Technology Management, designed for future leaders.",
+  title: "Academic Programs | School of Defence Technology",
+  description: "Explore our Master of Technology and PhD programs in Defence Technology, designed for future leaders.",
 };
 
 // Revalidate every 60 seconds (ISR) or on-demand via actions

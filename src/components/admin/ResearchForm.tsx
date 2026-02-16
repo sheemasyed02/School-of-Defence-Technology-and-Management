@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, BookOpen, FlaskConical, Lightbulb, ExternalLink, Shield } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { createRecord, updateRecord } from "@/app/actions";
 import { researchSchema, ResearchFormValues } from "@/lib/validations";
 
 interface ResearchFormProps {
@@ -83,23 +83,18 @@ export const ResearchForm: React.FC<ResearchFormProps> = ({ initialData }) => {
       };
 
       if (initialData) {
-        const { error } = await supabase
-            .from("Research")
-            .update(payload)
-            .eq("id", initialData.id);
-        if (error) throw error;
+        const result = await updateRecord("Research", initialData.id, payload, "/admin/research");
+        if (!result.success) throw new Error(result.error);
       } else {
-        const { error } = await supabase
-            .from("Research")
-            .insert([payload]);
-        if (error) throw error;
+        const result = await createRecord("Research", payload, "/admin/research");
+        if (!result.success) throw new Error(result.error);
       }
 
       router.refresh();
       router.push("/admin/research");
     } catch (error: any) {
       console.error(error);
-      setError(error.message || "Something went wrong. Please check if database columns exist (type, status, startDate, endDate).");
+      setError(error.message || "Something went wrong. Please check your network or permissions.");
     } finally {
       setLoading(false);
     }

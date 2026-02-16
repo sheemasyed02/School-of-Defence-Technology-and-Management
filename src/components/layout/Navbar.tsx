@@ -68,7 +68,7 @@ export default function Navbar() {
               "font-heading font-bold tracking-wide transition-colors text-sm md:text-lg lg:text-xl xl:text-2xl leading-tight text-primary hidden md:block"
             )}
           >
-            School of Defence Technology and Management
+            {SITE.name}
           </span>
         </Link>
 
@@ -163,7 +163,7 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            
+
             {/* Mobile menu footer */}
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border-light">
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">

@@ -3,15 +3,15 @@
    ═══════════════════════════════════════════════════════ */
 
 export const SITE = {
-  name: "School of Defence Technology and Management",
+  name: "School of Defence Technology",
   tagline: "Excellence in Defence Education & Research",
   description:
-    "The School of Defence Technology and Management is a premier institution dedicated to advancing defence education, research, and strategic management for national security.",
+    "The School of Defence Technology is a premier institution dedicated to advancing defence education, research, and strategic management for national security.",
   url: "https://sdtm.edu.in",
   logo: "/logo.png",
-  email: "info@sdtm.edu.in",
-  phone: "+91-XXXX-XXXXXX",
-  address: "New Delhi, India",
+  email: "director_sdt@diat.ac.in",
+  phone: "+91-20-24304000",
+  address: "School of Defence Technology, DIAT (DU), Girinagar, Pune - 411025",
   socials: {
     twitter: "#",
     linkedin: "#",

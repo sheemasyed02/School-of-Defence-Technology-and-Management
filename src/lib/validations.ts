@@ -22,7 +22,7 @@ export type FacultyFormValues = z.infer<typeof facultySchema>;
 export const eventSchema = z.object({
   title: z.string().min(2, "Title is required"),
   description: z.string().optional().or(z.literal('')),
-  date: z.string().min(1, "Date is required"),
+  date: z.string().optional().or(z.literal('')),
   venue: z.string().optional().or(z.literal('')),
   imageUrl: z.string().url().optional().or(z.literal('')),
   type: z.string().optional().default("Workshop"),

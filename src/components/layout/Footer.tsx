@@ -26,7 +26,7 @@ export default function Footer() {
                 />
               </div>
               <span className="text-sm sm:text-base font-heading font-bold text-foreground-inverted tracking-wide leading-tight max-w-[200px] sm:max-w-none">
-                School of Defence Technology and Management
+                {SITE.name}
               </span>
             </Link>
             <p className="text-sm sm:text-base text-foreground-inverted/70 leading-relaxed mb-4 sm:mb-5 md:mb-6 max-w-sm mx-auto sm:mx-0">
@@ -166,4 +166,3 @@ export default function Footer() {
     </footer>
   );
 }
-             

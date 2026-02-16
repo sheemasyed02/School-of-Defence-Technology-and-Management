@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     q: "What research facilities are available?",
-    a: "The department houses five specialized labs — Advanced Computing Lab, AI & ML Lab, IoT Research Lab, Cybersecurity Lab, and Innovation & Entrepreneurship Lab — all equipped with state-of-the-art infrastructure.",
+    a: "The department houses several specialized labs including the Military Vehicle Power Plant Lab, Shock Tube Laboratory, Rocket Propellant Laboratory, Combat Vehicle Shed, and Polymer/Composite Processing Laboratories, all equipped with state-of-the-art infrastructure.",
   },
 ];
 
@@ -98,7 +98,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2">Address</h3>
                 <p className="text-sm sm:text-base text-foreground-muted leading-relaxed">
-                  Technology Management Department, University Campus, Building A, Room 301, City, State 12345
+                  School of Defence Technology, DIAT (DU), Girinagar, Pune - 411025
                 </p>
               </div>
             </AnimateIn>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2">Email</h3>
-                <p className="text-sm sm:text-base text-foreground-muted break-all">techmanagement@university.edu</p>
+                <p className="text-sm sm:text-base text-foreground-muted break-all">director_sdt@diat.ac.in</p>
               </div>
             </AnimateIn>
 
@@ -125,7 +125,7 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <h3 className="text-base sm:text-lg font-heading font-bold text-primary mb-2">Phone</h3>
-                <p className="text-sm sm:text-base text-foreground-muted">+1 (555) 123-4500</p>
+                <p className="text-sm sm:text-base text-foreground-muted">+91-20-24389445</p>
               </div>
             </AnimateIn>
 
@@ -166,7 +166,7 @@ export default function ContactPage() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="University Campus Location"
+                    title="School of Defence Technology, DIAT Location"
                   />
                 </div>
               </div>

@@ -4,13 +4,13 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "Repositories",
-  description: "Download application forms, academic documents, and institutional resources from the School of Defence Technology and Management.",
+  description: "Download application forms, academic documents, and institutional resources from the School of Defence Technology.",
 });
 
 const APPLICATION_FORMS = [
   {
     title: "M.Tech Admission Application Form",
-    desc: "Application form for M.Tech in Technology Management program. Includes personal details, academic history, and statement of purpose sections.",
+    desc: "Application form for M.Tech in Defence Technology program. Includes personal details, academic history, and statement of purpose sections.",
     format: "PDF",
     size: "245 KB",
     category: "Admissions",
@@ -66,7 +66,7 @@ const APPLICATION_FORMS = [
   },
   {
     title: "Research Lab Access Request",
-    desc: "Request access to specialized research laboratories including Advanced Computing, AI/ML, IoT, and Cybersecurity labs.",
+    desc: "Request access to specialized research laboratories including Military Vehicle, Shock Tube, Rocket Propellant, and Polymer Labs.",
     format: "PDF",
     size: "135 KB",
     category: "Research",

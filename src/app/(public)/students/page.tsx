@@ -5,8 +5,8 @@ import { supabase } from "@/lib/supabase";
 import { User, Award, BookOpen } from "lucide-react"; // Icons
 
 export const metadata = createMetadata({
-  title: "Students | School of Defence Technology and Management",
-  description: "Meet our talented students pursuing M.Tech and Ph.D. in Defence Technology Management.",
+  title: "Students | School of Defence Technology",
+  description: "Meet our talented students pursuing M.Tech and Ph.D. in Defence Technology.",
 });
 
 // Revalidate every 60 seconds
@@ -66,7 +66,7 @@ export default async function StudentsPage() {
           <div className="container-site max-w-4xl text-center space-y-4">
                <AnimateIn type="fadeUp">
                   <p className="text-lg text-foreground-muted leading-relaxed">
-                     Our department is home to a diverse group of scholars and researchers dedicated to advancing the field of technology management.
+                     Our department is home to a diverse group of scholars and researchers dedicated to advancing the field of defence technology.
                   </p>
                </AnimateIn>
           </div>

@@ -131,7 +131,7 @@ export default function ProgramsClient({ initialPrograms }: { initialPrograms: a
     <>
       <PageHeader
         title="Academic Programs"
-        subtitle="Discover our comprehensive programs designed to prepare you for leadership in technology-driven industries."
+        subtitle="Discover our comprehensive programs designed to impart education and training in modern defence technologies."
         breadcrumb="Programs"
       />
 

@@ -4,7 +4,7 @@ import { AnimateIn, StaggerGroup } from "@/components/animation";
 
 export const metadata = createMetadata({
   title: "About",
-  description: "Learn about the School of Defence Technology and Management â€” our vision, mission, history, leadership, achievements, and infrastructure.",
+  description: "Learn about the School of Defence Technology — our vision, mission, history, leadership, achievements, and infrastructure.",
 });
 
 const OBJECTIVES = [
@@ -31,12 +31,22 @@ const ACCREDITATIONS = [
 ];
 
 const INFRASTRUCTURE = [
-  { name: "Advanced Computer Labs with latest hardware and software", icon: "M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" },
-  { name: "Innovation and Entrepreneurship Center", icon: "M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" },
-  { name: "Technology Research Labs", icon: "M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" },
-  { name: "Smart Classrooms with interactive learning tools", icon: "M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342" },
-  { name: "Digital Library with access to international journals", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
-  { name: "Collaborative workspaces and project rooms", icon: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" },
+  { name: "Military Vehicle Power Plant Lab", icon: "M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" },
+  { name: "Shock Tube Laboratory", icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" },
+  { name: "Rocket Propellant Laboratory", icon: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8l2.5-1.92.84 1.34zm.34-3.4l.74.74-2.82 2.82-1.48-1.48zm4.56-4.56a11.38 11.38 0 00-4.96-3.59 7.64 7.64 0 01-6.06 6.06 11.38 11.38 0 00-3.59 4.96 11.33 11.33 0 001.3 8.35v-1l4.42-3.4a7 7 0 017.3-7.3l3.4-4.42h1a11.38 11.38 0 00-8.35-1.3z" },
+  { name: "Combat Vehicle Shed", icon: "M8.25 18.75a1.5 1.5 0 01-3 0 1.5 1.5 0 013 0ZM18.75 18.75a1.5 1.5 0 01-3 0 1.5 1.5 0 013 0ZM3.75 6.75h1.5m1.5 0h13.5a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25v-7.5a2.25 2.25 0 012.25-2.25Zm0 0v-1.5a2.25 2.25 0 012.25-2.25h3.75" },
+  { name: "Polymer Technology Laboratory", icon: "M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-5.25v9" },
+  { name: "Composite Processing Laboratory", icon: "M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25ZM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8.25V6ZM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25Z" },
+  { name: "Small Angle X-ray Scattering (SAXS) Laboratory", icon: "M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196 7.5 7.5 0 0016.304 16.304Z" },
+];
+
+const RESEARCH_AREAS = [
+  { name: "Combat Vehicle", icon: "M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" },
+  { name: "Aircraft Failure Analysis", icon: "M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" },
+  { name: "High Energy Materials", icon: "M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" },
+  { name: "Terramechanics", icon: "M20.893 13.393l-1.135-1.135a2.25 2.25 0 01-1.135-1.135V11.25H18V9.75h-1.5V11.25H15v1.5h1.5V15h0.75v-1.125l0.75-0.75L19.125 15H20.25l-0.75-0.75 1.393-0.857z" },
+  { name: "Polymer for Defence Applications", icon: "M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" },
+  { name: "Integrated Vehicle Health Management", icon: "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" },
 ];
 
 const INDUSTRY_COLLABORATIONS = [
@@ -52,8 +62,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="About the Department"
-        subtitle="A premier centre of excellence dedicated to advancing technology management education, applied research, and strategic leadership."
+        title="School of Defence Technology"
+        subtitle="A premier centre of excellence dedicated to imparting education and training in modern defence technologies to the DRDO workforce and tri-services."
         breadcrumb="About"
       />
 
@@ -65,8 +75,8 @@ export default function AboutPage() {
             <AnimateIn type="scaleIn">
               <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg mx-auto md:mx-0">
                 <div className="text-center">
-                  <p className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-gold leading-none">1995</p>
-                  <p className="text-xs text-white/70 font-semibold uppercase tracking-wide mt-1">Established</p>
+                  <p className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-gold leading-none">2020</p>
+                  <p className="text-xs text-white/70 font-semibold uppercase tracking-wide mt-1">Launched</p>
                 </div>
               </div>
             </AnimateIn>
@@ -75,7 +85,7 @@ export default function AboutPage() {
               <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-primary mb-3 md:mb-4 text-center md:text-left">Our History</h2>
               <div className="section-divider mb-4 md:mb-6 mx-auto md:mx-0" />
               <p className="text-sm sm:text-base text-foreground-muted leading-relaxed text-center md:text-left">
-                Established in 1995, the Technology Management Department has grown from a small program to one of the premier departments in the university. Over the past three decades, we have consistently evolved our curriculum to meet the changing demands of the technology industry while maintaining our commitment to academic excellence and research innovation.
+                The School of Defence Technology in DIAT was launched in 2020 to impart education and train specially to the DRDO workforce & tri-services into Defence Technology. The school focuses on teaching and research in advanced areas of defence technologies and futuristic technology programs. The school’s focus areas are design, development, testing military weapons and systems, armament, and combat vehicles. Advanced technologies in mechatronics, electro-optics, aerospace engineering, materials engineering, military metallurgy, and high energy materials are pursued. The School of Defence Technology started following Post-Graduate programmes from AY 2022.
               </p>
             </AnimateIn>
           </div>
@@ -104,7 +114,7 @@ export default function AboutPage() {
                   <h3 className="text-xl md:text-2xl font-heading font-bold text-primary">Vision</h3>
                 </div>
                 <p className="text-sm md:text-base text-foreground-muted leading-relaxed">
-                  To be a globally recognized center of excellence in technology management education and research, shaping the future of technology-driven industries through innovative pedagogy and cutting-edge research.
+                  To be a globally recognized center of excellence in defence technology education and research, shaping the future of military-driven technologies through innovative pedagogy and cutting-edge research.
                 </p>
               </div>
             </AnimateIn>
@@ -120,7 +130,7 @@ export default function AboutPage() {
                   <h3 className="text-xl md:text-2xl font-heading font-bold text-primary">Mission</h3>
                 </div>
                 <p className="text-sm md:text-base text-foreground-muted leading-relaxed">
-                  To provide world-class education in technology management, fostering innovation, research excellence, and industry collaboration to develop leaders who drive technological advancement and sustainable business practices.
+                  To provide world-class education in defence technology, fostering innovation, research excellence, and industry collaboration to develop leaders who drive technological advancement and national security.
                 </p>
               </div>
             </AnimateIn>
@@ -177,7 +187,7 @@ export default function AboutPage() {
                       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
                     </svg>
                     <p className="pl-6 md:pl-8 text-sm md:text-base">
-                      Welcome to the Technology Management Department. As we navigate an era of unprecedented technological change, our department stands at the forefront of preparing the next generation of technology leaders. Our faculty, students, and alumni form a vibrant community dedicated to innovation, excellence, and positive impact. I invite you to explore our programs and join us in shaping the future of technology management.
+                      Welcome to the School of Defence Technology. As we navigate an era of unprecedented technological change in the defence sector, our school stands at the forefront of preparing the next generation of defence researchers and engineers. Our faculty, students, and alumni form a vibrant community dedicated to national excellence, innovation, and strategic impact. I invite you to explore our programs and join us in shaping the future of defence technology.
                     </p>
                   </blockquote>
                 </div>
@@ -234,22 +244,52 @@ export default function AboutPage() {
       </section>
 
       {/* Infrastructure */}
-      <section className="section-padding bg-background overflow-hidden">
+      <section className="section-padding bg-background overflow-hidden border-b border-border-light">
         <div className="container-site">
           <AnimateIn type="fadeUp" className="section-heading">
             <p className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Our Facilities</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl">Infrastructure</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Available Infrastructure</h2>
             <div className="section-divider mx-auto mt-3 md:mt-4" />
           </AnimateIn>
-          <StaggerGroup className="grid grid-responsive-3 gap-5 md:gap-6">
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {INFRASTRUCTURE.map((item) => (
-              <div key={item.name} className="group bg-background-paper rounded-lg md:rounded-xl shadow-brand border border-border-light p-5 md:p-6 flex items-start gap-3 md:gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center flex-shrink-0 group-hover:from-primary/20 transition-all">
-                  <svg className="w-6 h-6 md:w-7 md:h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div key={item.name} className="group bg-background-paper rounded-xl md:rounded-2xl shadow-brand border border-border-light p-6 md:p-8 flex flex-col items-center text-center gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 transition-all ring-1 ring-primary/10">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                   </svg>
                 </div>
-                <p className="text-sm sm:text-base md:text-lg text-foreground-muted font-medium pt-2 md:pt-3">{item.name}</p>
+                <h3 className="text-sm sm:text-base md:text-lg font-heading font-bold text-primary leading-tight">{item.name}</h3>
+              </div>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      {/* Areas of Research */}
+      <section className="section-padding bg-background-muted relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-64 h-64 dot-pattern opacity-20 -translate-x-1/2 translate-y-1/2" />
+        <div className="container-site">
+          <AnimateIn type="fadeUp" className="section-heading">
+            <p className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Innovation & Impact</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl">Areas of Research</h2>
+            <div className="section-divider mx-auto mt-3 md:mt-4" />
+          </AnimateIn>
+          <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {RESEARCH_AREAS.map((area) => (
+              <div key={area.name} className="group relative bg-background-paper rounded-2xl shadow-brand-lg border border-border-light p-6 md:p-8 transition-all duration-300 hover:shadow-brand-2xl hover:-translate-y-1.5 overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gold/5 rounded-bl-[100px] transition-all duration-300 group-hover:bg-gold/10 group-hover:w-28 group-hover:h-28" />
+                <div className="flex items-start gap-4 md:gap-6 relative z-10">
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-gold to-gold-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-brand group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-6 h-6 md:w-7 md:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d={area.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-base md:text-xl font-heading font-bold text-primary mb-2 leading-snug">{area.name}</h3>
+                    <div className="w-8 h-1 bg-gold/30 rounded-full group-hover:w-12 transition-all duration-300" />
+                  </div>
+                </div>
               </div>
             ))}
           </StaggerGroup>

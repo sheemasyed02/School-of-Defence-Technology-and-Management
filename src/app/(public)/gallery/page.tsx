@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "@/animations/gsap-setup";
 import { supabase } from "@/lib/supabase";
-import { Loader2 } from "lucide-react";
+import { Loader2, X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 /* ── Helpers ── */
 
@@ -29,6 +30,7 @@ export default function GalleryPage() {
   const [active, setActive] = useState<Category>("all");
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedPhoto, setSelectedPhoto] = useState<any | null>(null);
 
   const gridRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
@@ -144,23 +146,35 @@ export default function GalleryPage() {
                 </div>
             ) : (
                 <>
-                    {filteredImages.map((photo) => (
-                        <div key={photo.id} className="gallery-item group">
-                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-brand border border-border-light transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1">
-                            <Image
-                                src={photo.url}
-                                alt={photo.title || "Gallery Photo"}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                                <h3 className="text-sm font-heading font-bold text-white mb-1">{photo.title}</h3>
-                                <span className="inline-block self-start rounded-full bg-gold/20 px-2.5 py-0.5 text-[10px] font-bold text-gold uppercase tracking-wider">
-                                {photo.category}
-                                </span>
-                            </div>
+                    {filteredImages.map((photo, index) => (
+                        <div
+                          key={photo.id}
+                          className="gallery-item group cursor-pointer"
+                          onClick={() => setSelectedPhoto({ ...photo, index })}
+                        >
+                            <div className="relative aspect-[3/2] rounded-2xl overflow-hidden shadow-brand border border-border-light transition-all duration-500 hover:shadow-brand-2xl hover:-translate-y-1.5 bg-background-muted">
+                              <Image
+                                  src={photo.url}
+                                  alt={photo.title || "Gallery Photo"}
+                                  fill
+                                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              />
+
+                              {/* Glassmorphic Overlay */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-6 backdrop-blur-[2px]">
+                                  <div className="flex justify-end">
+                                      <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                          <Maximize2 className="w-5 h-5 text-white" />
+                                      </div>
+                                  </div>
+                                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                      <span className="inline-block rounded-full bg-gold px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest mb-3 shadow-sm">
+                                          {photo.category}
+                                      </span>
+                                      <h3 className="text-base font-heading font-bold text-white leading-tight drop-shadow-md">{photo.title}</h3>
+                                  </div>
+                              </div>
                             </div>
                         </div>
                     ))}
@@ -223,6 +237,96 @@ export default function GalleryPage() {
             </div>
         </section>
       )}
+      {/* ─── Lightbox ─────────────────────────────────── */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-8"
+            onClick={() => setSelectedPhoto(null)}
+          >
+            {/* Controls */}
+            <div className="absolute top-6 right-6 z-[110] flex items-center gap-4">
+              <button
+                className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors border border-white/10"
+                onClick={(e: React.MouseEvent) => {
+                  e.stopPropagation();
+                  setSelectedPhoto(null);
+                }}
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
+            </div>
+
+            {/* Main Image Container */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative w-full h-full max-w-6xl max-h-[85vh] flex items-center justify-center"
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src={selectedPhoto.url}
+                  alt={selectedPhoto.title || "Gallery Item"}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* Navigation */}
+              {filteredImages.length > 1 && (
+                <>
+                  <button
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full pr-4 hidden lg:block hover:text-gold transition-colors"
+                    onClick={(e: React.MouseEvent) => {
+                      e.stopPropagation();
+                      const prevIdx = (selectedPhoto.index - 1 + filteredImages.length) % filteredImages.length;
+                      setSelectedPhoto({ ...filteredImages[prevIdx], index: prevIdx });
+                    }}
+                  >
+                    <ChevronLeft className="w-12 h-12" />
+                  </button>
+                  <button
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full pl-4 hidden lg:block hover:text-gold transition-colors"
+                    onClick={(e: React.MouseEvent) => {
+                      e.stopPropagation();
+                      const nextIdx = (selectedPhoto.index + 1) % filteredImages.length;
+                      setSelectedPhoto({ ...filteredImages[nextIdx], index: nextIdx });
+                    }}
+                  >
+                    <ChevronRight className="w-12 h-12" />
+                  </button>
+                </>
+              )}
+            </motion.div>
+
+            {/* Info Footer */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="mt-8 text-center max-w-2xl"
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+            >
+              <span className="inline-block rounded-full bg-gold px-4 py-1.5 text-[10px] font-bold text-white uppercase tracking-widest mb-3">
+                {selectedPhoto.category}
+              </span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-white leading-tight">
+                {selectedPhoto.title}
+              </h2>
+              {selectedPhoto.date && (
+                <p className="text-white/50 text-xs mt-3 uppercase tracking-widest">
+                  {new Date(selectedPhoto.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                </p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
