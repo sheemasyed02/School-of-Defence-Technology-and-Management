@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Search, Pencil, Trash2, Award, Briefcase } from "lucide-react";
 
-type Alumni = {
+export type Alumni = {
   id: string;
   name: string;
   image_url: string | null;

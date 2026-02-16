@@ -1,4 +1,4 @@
-import { AdminAlumniGrid } from "@/components/admin/AdminAlumniGrid";
+import { AdminAlumniGrid, Alumni } from "@/components/admin/AdminAlumniGrid";
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 
 export const dynamic = 'force-dynamic';
 
-async function getData() {
+async function getData(): Promise<Alumni[]> {
   const { data, error } = await supabase
     .from("Alumni")
     .select("*")
@@ -16,7 +16,7 @@ async function getData() {
     console.error(error);
     return [];
   }
-  return data;
+  return (data as Alumni[]) || [];
 }
 
 export default async function AlumniPage() {

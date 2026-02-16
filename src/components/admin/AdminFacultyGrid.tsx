@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 // Matches DB schema
-type Faculty = {
+export type Faculty = {
   id: string;
   name: string;
   designation: string;

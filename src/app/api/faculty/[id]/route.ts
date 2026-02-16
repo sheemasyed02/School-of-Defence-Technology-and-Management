@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { facultySchema } from "@/lib/validations";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 
 export async function PUT(
@@ -36,6 +37,8 @@ export async function PUT(
     if (error) {
       throw error;
     }
+
+    revalidatePath("/faculty");
 
     return NextResponse.json(faculty);
   } catch (error) {
@@ -74,6 +77,8 @@ export async function DELETE(
     if (error) {
         throw error;
     }
+
+    revalidatePath("/faculty");
 
     return NextResponse.json(faculty);
   } catch (error) {

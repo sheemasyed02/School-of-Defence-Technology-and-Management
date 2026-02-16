@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { facultySchema } from "@/lib/validations";
 import { z } from "zod";
+import { revalidatePath } from "next/cache";
 
 export async function GET(req: Request) {
   try {
@@ -35,7 +36,7 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    
+
     const userRole = session.user.role;
     if (!["SUPER_ADMIN", "EDITOR", "FACULTY_ADMIN"].includes(userRole)) {
       return new NextResponse("Forbidden", { status: 403 });
@@ -53,6 +54,8 @@ export async function POST(req: Request) {
     if (error) {
       throw error;
     }
+
+    revalidatePath("/faculty");
 
     return NextResponse.json(faculty);
   } catch (error) {

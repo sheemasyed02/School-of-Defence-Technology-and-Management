@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/admin/DataTable";
-import { columns } from "./columns";
+import { columns, Placement } from "./columns";
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { supabase } from "@/lib/supabase";
 
 export const dynamic = 'force-dynamic';
 
-async function getData() {
+async function getData(): Promise<Placement[]> {
   const { data: placements, error } = await supabase
     .from("Placement")
     .select("*")
@@ -17,7 +17,7 @@ async function getData() {
     console.error(error);
     return [];
   }
-  return placements;
+  return (placements as Placement[]) || [];
 }
 
 export default async function PlacementsPage() {
@@ -39,8 +39,7 @@ export default async function PlacementsPage() {
       </div>
 
       <div className="bg-white rounded-lg border shadow-sm p-4">
-        {/* @ts-ignore */}
-        <DataTable columns={columns} data={data || []} searchKey="studentName" />
+        <DataTable columns={columns} data={data} searchKey="studentName" />
       </div>
     </div>
   );

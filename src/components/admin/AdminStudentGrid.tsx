@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Search, Pencil, Trash2, GraduationCap } from "lucide-react";
 
-type Student = {
+export type Student = {
   id: string;
   name: string;
   image_url: string | null;

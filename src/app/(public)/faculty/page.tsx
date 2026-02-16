@@ -27,8 +27,8 @@ const parseList = (jsonStr: string | null): string[] => {
   }
 };
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Revalidate every minute
+export const revalidate = 60;
 
 export default async function FacultyPage() {
   const { data: faculty, error } = await supabase
