@@ -19,6 +19,7 @@ import {
   Cpu,
   MonitorCheck
 } from "lucide-react";
+import { ToggleList } from "@/components/public/ToggleList";
 
 export const metadata = createMetadata({
   title: "Research",
@@ -203,48 +204,50 @@ export default async function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <div className="max-w-5xl mx-auto space-y-6">
-            {projects.map((proj, i) => {
-              const duration = formatDuration(proj.startDate, proj.endDate);
-              const hasSidebar = proj.status || duration || proj.authors;
+          <div className="max-w-5xl mx-auto">
+            <ToggleList initialLimit={3} buttonLabel="View All Projects">
+              {projects.map((proj, i) => {
+                const duration = formatDuration(proj.startDate, proj.endDate);
+                const hasSidebar = proj.status || duration || proj.authors;
 
-              return (
-                <AnimateIn key={proj.id} type={i % 2 === 0 ? "slideLeft" : "slideRight"}>
-                  <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
-                    <div className="flex flex-col md:flex-row">
-                      {/* Side panel */}
-                      {hasSidebar && (
-                        <div className="md:w-56 lg:w-64 bg-gradient-to-br from-primary to-secondary p-6 sm:p-8 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-3 md:gap-0">
-                          {proj.status && (
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-green-300 uppercase tracking-wider mb-3">
-                              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                              {proj.status}
-                            </span>
-                          )}
-                          {duration && <p className="text-sm font-heading font-bold text-white mb-3">{duration}</p>}
-                          {proj.authors && (
-                            <>
-                              <div className="w-8 h-px bg-gold/40 my-3" />
-                              <div className="flex items-center gap-1.5 justify-center">
-                                <svg className="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                </svg>
-                                <span className="text-xs text-white/80 font-medium">{proj.authors}</span>
-                              </div>
-                            </>
-                          )}
+                return (
+                  <AnimateIn key={proj.id} type={i % 2 === 0 ? "slideLeft" : "slideRight"}>
+                    <div className="group bg-background-paper rounded-2xl shadow-brand border border-border-light overflow-hidden transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5">
+                      <div className="flex flex-col md:flex-row">
+                        {/* Side panel */}
+                        {hasSidebar && (
+                          <div className="md:w-56 lg:w-64 bg-gradient-to-br from-primary to-secondary p-6 sm:p-8 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-3 md:gap-0">
+                            {proj.status && (
+                              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold text-green-300 uppercase tracking-wider mb-3">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                                {proj.status}
+                              </span>
+                            )}
+                            {duration && <p className="text-sm font-heading font-bold text-white mb-3">{duration}</p>}
+                            {proj.authors && (
+                              <>
+                                <div className="w-8 h-px bg-gold/40 my-3" />
+                                <div className="flex items-center gap-1.5 justify-center">
+                                  <svg className="w-3.5 h-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                  </svg>
+                                  <span className="text-xs text-white/80 font-medium">{proj.authors}</span>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                        )}
+                        {/* Content */}
+                        <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-center bg-white">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-primary leading-tight group-hover:text-gold transition-colors duration-300">{proj.title}</h3>
+                          {proj.abstract && <p className="text-sm sm:text-base text-foreground-muted leading-relaxed mt-4 opacity-80 font-medium">{proj.abstract}</p>}
                         </div>
-                      )}
-                      {/* Content */}
-                      <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col justify-center bg-white">
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-black text-primary leading-tight group-hover:text-gold transition-colors duration-300">{proj.title}</h3>
-                        {proj.abstract && <p className="text-sm sm:text-base text-foreground-muted leading-relaxed mt-4 opacity-80 font-medium">{proj.abstract}</p>}
                       </div>
                     </div>
-                  </div>
-                </AnimateIn>
-              );
-            })}
+                  </AnimateIn>
+                );
+              })}
+            </ToggleList>
           </div>
         </div>
       </section>
@@ -258,33 +261,35 @@ export default async function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="max-w-4xl mx-auto space-y-4">
-            {publications.map((pub) => {
-              const year = formatYear(pub.publicationDate);
-              return (
-                <div
-                  key={pub.id}
-                  className="bg-background-paper rounded-xl shadow-brand border border-border-light p-6 card-stripe transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-5 h-5 text-primary/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.4}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        {year && <span className="inline-block rounded-full bg-gold/10 px-2.5 py-0.5 text-[10px] font-bold text-gold">{year}</span>}
-                        {pub.journal && <span className="text-xs text-foreground-muted italic">{pub.journal}</span>}
+          <div className="max-w-4xl mx-auto">
+            <ToggleList initialLimit={10} buttonLabel="View All Publications">
+              {publications.map((pub) => {
+                const year = formatYear(pub.publicationDate);
+                return (
+                  <div
+                    key={pub.id}
+                    className="bg-background-paper rounded-xl shadow-brand border border-border-light p-6 card-stripe transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-5 h-5 text-primary/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.4}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                        </svg>
                       </div>
-                      <h3 className="text-sm font-heading font-bold text-primary mb-1.5">{pub.title}</h3>
-                      <p className="text-xs text-foreground-muted">{pub.authors}</p>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          {year && <span className="inline-block rounded-full bg-gold/10 px-2.5 py-0.5 text-[10px] font-bold text-gold">{year}</span>}
+                          {pub.journal && <span className="text-xs text-foreground-muted italic">{pub.journal}</span>}
+                        </div>
+                        <h3 className="text-sm font-heading font-bold text-primary mb-1.5">{pub.title}</h3>
+                        <p className="text-xs text-foreground-muted">{pub.authors}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </StaggerGroup>
+                );
+              })}
+            </ToggleList>
+          </div>
         </div>
       </section>
 
@@ -297,37 +302,39 @@ export default async function ResearchPage() {
             <div className="section-divider mx-auto mt-4" />
           </AnimateIn>
 
-          <StaggerGroup className="max-w-3xl mx-auto space-y-4">
-            {patents.map((pat) => {
-              const year = formatYear(pat.publicationDate);
-              return (
-                <div
-                  key={pat.id}
-                  className="bg-background-paper rounded-xl shadow-brand border border-border-light p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <svg className="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <h3 className="text-sm font-heading font-bold text-primary">{pat.title}</h3>
-                      {year && <span className="inline-block rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold text-gold">{year}</span>}
+          <div className="max-w-3xl mx-auto">
+            <ToggleList initialLimit={5} buttonLabel="View All Patents">
+              {patents.map((pat) => {
+                const year = formatYear(pat.publicationDate);
+                return (
+                  <div
+                    key={pat.id}
+                    className="bg-background-paper rounded-xl shadow-brand border border-border-light p-6 flex items-start gap-4 transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-0.5"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <svg className="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                      </svg>
                     </div>
-                    {pat.authors && (
-                      <div className="flex items-center gap-1.5 text-xs text-foreground-muted">
-                        <svg className="w-3.5 h-3.5 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                        </svg>
-                        {pat.authors}
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                        <h3 className="text-sm font-heading font-bold text-primary">{pat.title}</h3>
+                        {year && <span className="inline-block rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold text-gold">{year}</span>}
                       </div>
-                    )}
+                      {pat.authors && (
+                        <div className="flex items-center gap-1.5 text-xs text-foreground-muted">
+                          <svg className="w-3.5 h-3.5 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                          </svg>
+                          {pat.authors}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </StaggerGroup>
+                );
+              })}
+            </ToggleList>
+          </div>
         </div>
       </section>
 
