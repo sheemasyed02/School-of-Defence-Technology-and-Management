@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { deleteRecord } from "@/app/actions";
 import { ConfirmModal } from "@/components/admin/ConfirmModal";
-import { supabase } from "@/lib/supabase";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction } from "@/components/ui/alert-dialog";
 
 export type Research = {
@@ -36,8 +36,8 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.from("Research").delete().eq("id", data.id);
-      if (error) throw error;
+      const result = await deleteRecord("Research", data.id, "/admin/research");
+      if (!result.success) throw new Error(result.error);
       router.refresh();
       setOpen(false);
     } catch (error: any) {

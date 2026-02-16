@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { deleteRecord } from "@/app/actions";
 import { ConfirmModal } from "@/components/admin/ConfirmModal";
-import { supabase } from "@/lib/supabase";
 
 export type Event = {
   id: string;
@@ -31,8 +31,8 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.from("Event").delete().eq("id", data.id);
-      if (error) throw error;
+      const result = await deleteRecord("Event", data.id, "/admin/events");
+      if (!result.success) throw new Error(result.error);
       router.refresh();
     } catch (error) {
       console.error(error);

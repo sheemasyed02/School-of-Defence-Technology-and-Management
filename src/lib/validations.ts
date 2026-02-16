@@ -26,6 +26,7 @@ export const eventSchema = z.object({
   venue: z.string().optional().or(z.literal('')),
   imageUrl: z.string().url().optional().or(z.literal('')),
   type: z.string().optional().default("Workshop"),
+  status: z.enum(["UPCOMING", "PAST"]).default("UPCOMING"),
   registration_enabled: z.boolean().optional().default(false),
   form_config: z.array(z.object({
     label: z.string(),

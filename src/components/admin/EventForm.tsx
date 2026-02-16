@@ -47,6 +47,7 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
       venue: "",
       imageUrl: "",
       type: "Workshop",
+      status: "UPCOMING", // Added status default value
       registration_enabled: false,
       form_config: [],
       isVisible: true,
@@ -182,7 +183,7 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
                     {errors.title && <p className="text-xs text-accent mt-1.5 font-medium">{errors.title.message}</p>}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div>
                         <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Type</label>
                         <select
@@ -196,6 +197,17 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
                             <option value="Conference">Conference</option>
                             <option value="Panel Discussion">Panel Discussion</option>
                             <option value="Hackathon">Hackathon</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Status</label>
+                        <select
+                            className="flex h-11 w-full rounded-brand border border-input bg-background px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%228%22%20viewBox%3D%220%200%2014%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L7%207L13%201%22%20stroke%3D%22%23667085%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat"
+                            {...register("status")}
+                            disabled={loading}
+                        >
+                            <option value="UPCOMING">Upcoming Event</option>
+                            <option value="PAST">Past Event (Archive)</option>
                         </select>
                     </div>
                     <div>

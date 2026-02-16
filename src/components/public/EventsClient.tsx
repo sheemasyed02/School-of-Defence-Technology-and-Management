@@ -16,6 +16,7 @@ interface Event {
   venue: string;
   imageUrl: string;
   type: string;
+  status?: "UPCOMING" | "PAST";
   registration_enabled: boolean;
   form_config: any[];
 }
@@ -35,7 +36,7 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
   const now = new Date();
 
   const upcomingEvents = events
-    .filter(e => !e.date || new Date(e.date) >= now)
+    .filter(e => e.status === "UPCOMING" || (!e.status && (!e.date || new Date(e.date) >= now)))
     .sort((a, b) => {
       if (!a.date) return -1;
       if (!b.date) return 1;
@@ -43,8 +44,12 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
     });
 
   const pastEvents = events
-    .filter(e => e.date && new Date(e.date) < now)
-    .sort((a, b) => new Date(b.date!).getTime() - new Date(a.date!).getTime());
+    .filter(e => e.status === "PAST" || (!e.status && e.date && new Date(e.date) < now))
+    .sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+    });
 
   const displayedPastEvents = pastEvents.slice(0, pastLimit);
 
@@ -207,8 +212,8 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
                         </span>
                         <h3 className="text-3xl font-heading font-black text-primary leading-tight tracking-tight">{selectedEvent.title}</h3>
                         <div className="mt-4 flex flex-wrap items-center gap-6 text-xs font-bold text-foreground-muted uppercase tracking-widest">
-                            <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-gold" /> {selectedEvent.date ? formatDate(selectedEvent.date, { dateStyle: 'long' }) : "Date To Be Announced"}</span>
-                            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gold" /> {selectedEvent.venue || "Venue To Be Announced"}</span>
+                            {selectedEvent.date && <span className="flex items-center gap-2"><Calendar className="w-4 h-4 text-gold" /> {formatDate(selectedEvent.date, { dateStyle: 'long' })}</span>}
+                            {selectedEvent.venue && <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gold" /> {selectedEvent.venue}</span>}
                         </div>
                     </div>
 
@@ -279,28 +284,39 @@ export const EventsClient: React.FC<EventsClientProps> = ({ events }) => {
 };
 
 const EventCard = ({ evt, index, isPast, onRegister, formatDate }: { evt: Event, index: number, isPast?: boolean, onRegister?: () => void, formatDate: any }) => {
+    const hasSidebar = evt.date || evt.venue;
 
     return (
         <AnimateIn type={index % 2 === 0 ? "slideLeft" : "slideRight"}>
             <div className={`group bg-white rounded-3xl shadow-brand border border-border-light overflow-hidden flex flex-col md:flex-row transition-all duration-500 relative ${!isPast ? 'hover:shadow-brand-2xl hover:-translate-y-1' : 'opacity-70 saturate-50'}`}>
                 {/* Date panel */}
-                <div className={`md:w-56 lg:w-64 p-8 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-4 md:gap-0 ${isPast ? 'bg-slate-50 border-r border-border-light' : 'bg-gradient-to-br from-primary via-primary/90 to-secondary text-white'}`}>
-                    <span className={`inline-block rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] mb-4 ${isPast ? 'bg-slate-200 text-slate-500' : 'bg-white/10 text-gold border border-white/5 shadow-brand'}`}>
-                        {evt.type}
-                    </span>
-                    <div className="flex flex-col items-center">
-                        <p className={`text-6xl font-heading font-black leading-none tracking-tighter ${isPast ? 'text-slate-300' : 'text-white'}`}>
-                            {evt.date ? formatDate(evt.date, { day: '2-digit' }) : "–"}
-                        </p>
-                        <p className={`text-sm font-black uppercase tracking-[0.25em] mt-3 ${isPast ? 'text-slate-400' : 'text-gold'}`}>
-                            {evt.date ? formatDate(evt.date, { month: 'short', year: 'numeric' }) : "To Be Announced"}
-                        </p>
+                {hasSidebar && (
+                    <div className={`md:w-56 lg:w-64 p-8 flex flex-row md:flex-col items-center justify-center text-center shrink-0 gap-4 md:gap-0 ${isPast ? 'bg-slate-50 border-r border-border-light' : 'bg-gradient-to-br from-primary via-primary/90 to-secondary text-white'}`}>
+                        {evt.type && (
+                            <span className={`inline-block rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] mb-4 ${isPast ? 'bg-slate-200 text-slate-500' : 'bg-white/10 text-gold border border-white/5 shadow-brand'}`}>
+                                {evt.type}
+                            </span>
+                        )}
+                        <div className="flex flex-col items-center">
+                            {evt.date && (
+                                <>
+                                    <p className={`text-6xl font-heading font-black leading-none tracking-tighter ${isPast ? 'text-slate-300' : 'text-white'}`}>
+                                        {formatDate(evt.date, { day: '2-digit' })}
+                                    </p>
+                                    <p className={`text-sm font-black uppercase tracking-[0.25em] mt-3 ${isPast ? 'text-slate-400' : 'text-gold'}`}>
+                                        {formatDate(evt.date, { month: 'short', year: 'numeric' })}
+                                    </p>
+                                </>
+                            )}
+                        </div>
+                        {evt.venue && (
+                            <div className="mt-8 flex items-center gap-2 pt-6 border-t border-white/10 w-full justify-center">
+                                <MapPin className={`w-4 h-4 ${isPast ? 'text-slate-300' : 'text-gold/80 animate-pulse'}`} />
+                                <span className={`text-[10px] font-black uppercase tracking-widest max-w-[140px] truncate ${isPast ? 'text-slate-400' : 'text-white/70'}`}>{evt.venue}</span>
+                            </div>
+                        )}
                     </div>
-                    <div className="mt-8 flex items-center gap-2 pt-6 border-t border-white/10 w-full justify-center">
-                        <MapPin className={`w-4 h-4 ${isPast ? 'text-slate-300' : 'text-gold/80 animate-pulse'}`} />
-                        <span className={`text-[10px] font-black uppercase tracking-widest max-w-[140px] truncate ${isPast ? 'text-slate-400' : 'text-white/70'}`}>{evt.venue || "Venue TBA"}</span>
-                    </div>
-                </div>
+                )}
 
                 {/* Image section */}
                 {evt.imageUrl && (
@@ -319,36 +335,40 @@ const EventCard = ({ evt, index, isPast, onRegister, formatDate }: { evt: Event,
                     {!isPast && (
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-3xl pointer-events-none group-hover:bg-gold/10 transition-colors duration-500" />
                     )}
-                    <h3 className={`text-2xl sm:text-3xl font-heading font-black mb-4 transition-colors ${isPast ? 'text-slate-500' : 'text-primary group-hover:text-primary-600'}`}>
+                    <h3 className={`text-2xl sm:text-3xl font-heading font-black transition-colors ${evt.description ? 'mb-4' : 'mb-0'} ${isPast ? 'text-slate-500' : 'text-primary group-hover:text-primary-600'}`}>
                         {evt.title}
                     </h3>
-                    <p className="text-base text-foreground-muted leading-relaxed mb-8 line-clamp-3 font-medium opacity-80">
-                        {evt.description}
-                    </p>
+                    {evt.description && (
+                        <p className="text-base text-foreground-muted leading-relaxed mb-8 line-clamp-3 font-medium opacity-80">
+                            {evt.description}
+                        </p>
+                    )}
 
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-auto pt-6 gap-6 border-t border-gray-50">
-                        <div className="flex items-center gap-6 text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
-                            <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
-                                <Clock className="w-3.5 h-3.5" /> {evt.date ? formatDate(evt.date, { hour: 'numeric', minute: '2-digit', hour12: true }) : "TBA"}
-                            </span>
+                    {(evt.date || (evt.registration_enabled && !isPast) || isPast) && (
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-auto pt-6 gap-6 border-t border-gray-50">
+                            <div className="flex items-center gap-6 text-[11px] font-black text-primary/30 uppercase tracking-[0.2em]">
+                                {evt.date && (
+                                    <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
+                                        <Clock className="w-3.5 h-3.5" /> {formatDate(evt.date, { hour: 'numeric', minute: '2-digit', hour12: true })}
+                                    </span>
+                                )}
+                            </div>
+
+                            {!isPast && (
+                                evt.registration_enabled && (
+                                    <Button
+                                        onClick={onRegister}
+                                        className="bg-primary hover:bg-primary-600 text-white h-12 px-8 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-brand transition-all hover:scale-110 active:scale-95 border-b-4 border-primary-800"
+                                    >
+                                        Register Now
+                                    </Button>
+                                )
+                            )}
+                            {isPast && (
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] bg-slate-100 px-6 py-3 rounded-full">Archive View Only</span>
+                            )}
                         </div>
-
-                        {!isPast && (
-                             evt.registration_enabled ? (
-                                <Button
-                                    onClick={onRegister}
-                                    className="bg-primary hover:bg-primary-600 text-white h-12 px-8 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-brand transition-all hover:scale-110 active:scale-95 border-b-4 border-primary-800"
-                                >
-                                    Register Now
-                                </Button>
-                             ) : (
-                                <span className="text-[10px] font-black text-primary/40 uppercase tracking-[0.2em] bg-primary/5 px-6 py-3 rounded-full border border-primary/10">Coming Soon</span>
-                             )
-                        )}
-                        {isPast && (
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] bg-slate-100 px-6 py-3 rounded-full">Archive View Only</span>
-                        )}
-                    </div>
+                    )}
                 </div>
             </div>
         </AnimateIn>
