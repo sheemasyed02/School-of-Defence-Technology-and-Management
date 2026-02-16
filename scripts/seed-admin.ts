@@ -1,7 +1,3 @@
-// Seed script to create the initial Super Admin user
-// Run: npx tsx scripts/seed-admin.ts
-
-
 import fs from 'fs';
 import path from 'path';
 import { createClient } from '@supabase/supabase-js';
