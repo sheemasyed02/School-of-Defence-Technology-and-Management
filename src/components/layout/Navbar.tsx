@@ -70,6 +70,15 @@ export default function Navbar() {
           >
             {SITE.name}
           </span>
+          <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex-shrink-0 ml-2 hidden md:block">
+            <Image
+              src="/drdologo.webp"
+              alt="DRDO Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Mobile hamburger — absolute right */}
