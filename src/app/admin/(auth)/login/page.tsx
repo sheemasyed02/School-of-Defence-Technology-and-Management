@@ -60,6 +60,14 @@ export default function LoginPage() {
 
     setLoading(true);
 
+    // Safety timeout to prevent infinite "Verifying..." hang
+    const timeoutId = setTimeout(() => {
+      if (loading) {
+        setLoading(false);
+        setErrorDialog("The server is taking too long to respond. Please check your internet connection and try again.");
+      }
+    }, 15000); // 15 seconds
+
     try {
       const result = await signIn("credentials", {
         redirect: false,
@@ -68,6 +76,8 @@ export default function LoginPage() {
         captchaId: captcha?.id,
         captchaAnswer: formData.captchaAnswer,
       });
+
+      clearTimeout(timeoutId);
 
       if (result?.error) {
         if (result.error.includes("BLOCK_SCREEN:")) {
@@ -83,7 +93,9 @@ export default function LoginPage() {
         router.push("/admin");
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error(error);
+      setErrorDialog("An unexpected error occurred. Please try again.");
       setLoading(false);
     }
   };

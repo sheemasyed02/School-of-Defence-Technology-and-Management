@@ -166,18 +166,18 @@ async function getGeoLocation(ip: string): Promise<GeoData> {
   }
 
   try {
-    // Using free ip-api.com service (no API key needed, limit: 45 req/min)
-    const res = await fetch(`http://ip-api.com/json/${ip}?fields=city,regionName,country,lat,lon`, {
-      signal: AbortSignal.timeout(3000), // 3 second timeout
+    // Using ipapi.co (HTTPS supported, free tier available)
+    const res = await fetch(`https://ipapi.co/${ip}/json/`, {
+      signal: AbortSignal.timeout(2000), // 2 second timeout
     });
     if (!res.ok) return {};
     const data = await res.json();
     return {
       city: data.city,
-      region: data.regionName,
-      country: data.country,
-      latitude: data.lat,
-      longitude: data.lon,
+      region: data.region,
+      country: data.country_name,
+      latitude: data.latitude,
+      longitude: data.longitude,
     };
   } catch {
     return {};
@@ -192,17 +192,17 @@ export async function logLoginAttempt(params: {
   status: "SUCCESS" | "FAILED" | "BLOCKED";
   failReason?: string;
 }): Promise<void> {
-  const geo = await getGeoLocation(params.ipAddress);
+  const geo = await getGeoLocation(params.ipAddress).catch(() => ({}));
 
   await supabase.from("LoginLog").insert({
     userId: params.userId || null,
     email: params.email,
     ipAddress: params.ipAddress,
-    city: geo.city || null,
-    region: geo.region || null,
-    country: geo.country || null,
-    latitude: geo.latitude || null,
-    longitude: geo.longitude || null,
+    city: (geo as any).city || null,
+    region: (geo as any).region || null,
+    country: (geo as any).country || null,
+    latitude: (geo as any).latitude || null,
+    longitude: (geo as any).longitude || null,
     userAgent: params.userAgent || null,
     status: params.status,
     failReason: params.failReason || null,
