@@ -37,8 +37,9 @@ export function createMetadata(overrides: Partial<Metadata> = {}): Metadata {
       googleBot: { index: true, follow: true },
     },
     icons: {
-      icon: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
+      icon: "/logo.png",
+      shortcut: "/logo.png",
+      apple: "/logo.png",
     },
     ...overrides,
   };
