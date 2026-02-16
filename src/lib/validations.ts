@@ -109,7 +109,7 @@ export const settingsSchema = z.object({
 
 export const studentSchema = z.object({
   name: z.string().min(2, "Name is required"),
-  program_type: z.enum(["M.Tech", "Ph.D"]),
+  program_type: z.string().min(1, "Program stream is required"),
   imageUrl: z.string().optional().or(z.literal('')),
   order: z.coerce.number().int().optional().default(0),
 });

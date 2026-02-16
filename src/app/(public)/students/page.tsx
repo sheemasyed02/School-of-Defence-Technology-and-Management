@@ -33,25 +33,26 @@ export default async function StudentsPage() {
 
   const allStudents = (students as Student[]) || [];
 
-  const mtechStudents = allStudents.filter((s) => s.program_type === "M.Tech");
-  const phdStudents = allStudents.filter((s) => s.program_type === "Ph.D");
+  // Group students by program type
+  const groupedStudents = allStudents.reduce((acc, student) => {
+    const type = student.program_type;
+    if (!acc[type]) acc[type] = [];
+    acc[type].push(student);
+    return acc;
+  }, {} as Record<string, Student[]>);
 
-  const studentGroups = [
-    {
-      label: "M.Tech Students",
-      badge: "Postgraduate",
-      students: mtechStudents,
-      color: "from-primary to-secondary",
-      icon: BookOpen
-    },
-    {
-      label: "Ph.D. Students",
-      badge: "Doctoral",
-      students: phdStudents,
-      color: "from-gold to-gold-500",
-      icon: Award
-    },
-  ].filter(g => g.students.length > 0);
+  const studentGroups = Object.entries(groupedStudents).map(([type, students]) => {
+    const isMTech = type.toLowerCase().includes("mtech") || type.toLowerCase().includes("m.tech");
+    const isPhd = type.toLowerCase().includes("ph.d") || type.toLowerCase().includes("phd");
+
+    return {
+      label: type,
+      badge: isPhd ? "Doctoral" : isMTech ? "Postgraduate" : "Student",
+      students,
+      color: isPhd ? "from-gold to-gold-500" : "from-primary to-secondary",
+      icon: isPhd ? Award : BookOpen
+    };
+  });
 
   return (
     <>

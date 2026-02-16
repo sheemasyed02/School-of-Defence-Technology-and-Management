@@ -207,26 +207,7 @@ export const StudentForm: React.FC<StudentFormProps> = ({ initialData }) => {
             </div>
              <div>
               <label className="text-sm font-medium">Program Stream *</label>
-              <div className="flex gap-4 mt-2">
-                 <label className="flex items-center gap-2 cursor-pointer">
-                   <input
-                    type="radio"
-                    value="M.Tech"
-                    {...register("program_type")}
-                    className="w-4 h-4 text-primary"
-                   />
-                   <span>M.Tech</span>
-                 </label>
-                 <label className="flex items-center gap-2 cursor-pointer">
-                   <input
-                    type="radio"
-                    value="Ph.D"
-                    {...register("program_type")}
-                    className="w-4 h-4 text-primary"
-                   />
-                   <span>Ph.D</span>
-                 </label>
-              </div>
+              <Input disabled={loading} placeholder="e.g. MTech Technology Management 1st year" {...register("program_type")} />
               {errors.program_type && <p className="text-xs text-red-500 mt-1">{errors.program_type.message}</p>}
             </div>
             <div>

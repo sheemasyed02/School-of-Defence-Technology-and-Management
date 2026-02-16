@@ -36,8 +36,13 @@ export function AdminStudentGrid({ initialData }: AdminStudentGridProps) {
     s.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const mtechStudents = filteredData.filter(s => s.program_type === "M.Tech");
-  const phdStudents = filteredData.filter(s => s.program_type === "Ph.D");
+  // Group students by program type
+  const groupedData = filteredData.reduce((acc, student) => {
+    const type = student.program_type;
+    if (!acc[type]) acc[type] = [];
+    acc[type].push(student);
+    return acc;
+  }, {} as Record<string, Student[]>);
 
   const handleDeleteClick = (id: string) => {
     setDeleteId(id);
@@ -94,7 +99,7 @@ export function AdminStudentGrid({ initialData }: AdminStudentGridProps) {
         {/* Info */}
         <div>
           <h4 className="font-semibold text-gray-900">{student.name}</h4>
-          <p className="text-xs text-gray-500">{student.program_type} Student</p>
+          <p className="text-xs text-gray-500">{student.program_type}</p>
         </div>
       </div>
     );
@@ -136,41 +141,28 @@ export function AdminStudentGrid({ initialData }: AdminStudentGridProps) {
         />
       </div>
 
-      {/* M.Tech Section */}
-      <section>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="bg-red-700 text-white px-3 py-1 rounded text-xs font-bold flex items-center gap-1">
-            <GraduationCap className="w-3 h-3" />
-            {mtechStudents.length} Students
+      {Object.entries(groupedData).map(([type, groupStudents]) => (
+        <section key={type} className="pt-4 first:pt-0">
+          <div className="flex items-center gap-3 mb-4">
+            <div className={`px-3 py-1 rounded text-xs font-bold flex items-center gap-1 ${
+              type.toLowerCase().includes("ph.d") ? "bg-blue-900" : "bg-red-700"
+            } text-white`}>
+              <GraduationCap className="w-3 h-3" />
+              {groupStudents.length} Students
+            </div>
+            <h2 className="text-xl font-bold text-primary">{type}</h2>
           </div>
-          <h2 className="text-xl font-bold text-primary">M.Tech Students</h2>
-        </div>
-        {mtechStudents.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {mtechStudents.map(s => <StudentCard key={s.id} student={s} />)}
+            {groupStudents.map(s => <StudentCard key={s.id} student={s} />)}
           </div>
-        ) : (
-          <div className="text-sm text-gray-500 italic px-1">No M.Tech students found.</div>
-        )}
-      </section>
+        </section>
+      ))}
 
-      {/* Ph.D Section */}
-      <section>
-        <div className="flex items-center gap-3 mb-4 pt-4 border-t border-dashed">
-          <div className="bg-blue-900 text-white px-3 py-1 rounded text-xs font-bold flex items-center gap-1">
-            <GraduationCap className="w-3 h-3" />
-            {phdStudents.length} Students
-          </div>
-          <h2 className="text-xl font-bold text-primary">Ph.D. Students</h2>
+      {filteredData.length === 0 && (
+        <div className="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed">
+          <p className="text-gray-500">No students found matching your search.</p>
         </div>
-        {phdStudents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {phdStudents.map(s => <StudentCard key={s.id} student={s} />)}
-          </div>
-        ) : (
-          <div className="text-sm text-gray-500 italic px-1">No Ph.D. students found.</div>
-        )}
-      </section>
+      )}
     </div>
   );
 }
