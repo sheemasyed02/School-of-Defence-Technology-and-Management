@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import { Loader2, Calendar, MapPin, Image as ImageIcon, Shield, Plus, Trash2, Settings2, Upload, X } from "lucide-react";
 import { createRecord, updateRecord } from "@/app/actions";
 import { eventSchema, EventFormValues } from "@/lib/validations";
+import CreatableSelect from "@/components/admin/CreatableSelect";
+
+const DEFAULT_EVENT_TYPES = ["Workshop", "Symposium", "Seminar", "Conference", "Panel Discussion", "Hackathon"];
 
 interface EventFormProps {
   initialData?: any;
@@ -186,18 +189,13 @@ export const EventForm: React.FC<EventFormProps> = ({ initialData }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div>
                         <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Type</label>
-                        <select
-                            className="flex h-11 w-full rounded-brand border border-input bg-background px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2214%22%20height%3D%228%22%20viewBox%3D%220%200%2014%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L7%207L13%201%22%20stroke%3D%22%23667085%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E')] bg-[length:12px_8px] bg-[right_1rem_center] bg-no-repeat"
-                            {...register("type")}
+                        <CreatableSelect
+                            settingsKey="custom_event_types"
+                            defaultOptions={DEFAULT_EVENT_TYPES}
+                            value={watch("type") || "Workshop"}
+                            onChange={(v) => setValue("type", v)}
                             disabled={loading}
-                        >
-                            <option value="Workshop">Workshop</option>
-                            <option value="Symposium">Symposium</option>
-                            <option value="Seminar">Seminar</option>
-                            <option value="Conference">Conference</option>
-                            <option value="Panel Discussion">Panel Discussion</option>
-                            <option value="Hackathon">Hackathon</option>
-                        </select>
+                        />
                     </div>
                     <div>
                         <label className="text-sm font-semibold text-primary/80 block mb-1.5 uppercase tracking-wider">Event Status</label>

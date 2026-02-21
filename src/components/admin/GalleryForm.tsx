@@ -7,6 +7,9 @@ import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Upload, X, ImageIcon, Video } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import CreatableSelect from "@/components/admin/CreatableSelect";
+
+const DEFAULT_GALLERY_CATEGORIES = ["CAMPUS", "EVENTS", "LABS", "VISITS"];
 
 type GalleryFormValues = {
   title: string;
@@ -173,16 +176,13 @@ export const GalleryForm: React.FC<GalleryFormProps> = ({ initialData }) => {
             </div>
             <div className="space-y-2">
                 <label className="text-sm font-medium">Category</label>
-                <select
-                    {...register("category")}
-                    className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                <CreatableSelect
+                    settingsKey="custom_gallery_categories"
+                    defaultOptions={DEFAULT_GALLERY_CATEGORIES}
+                    value={watch("category") || "EVENTS"}
+                    onChange={(v) => setValue("category", v as any)}
                     disabled={loading}
-                >
-                    <option value="CAMPUS">Campus Highlights</option>
-                    <option value="EVENTS">Events</option>
-                    <option value="LABS">Labs</option>
-                    <option value="VISITS">Visits</option>
-                </select>
+                />
             </div>
         </div>
 
@@ -225,10 +225,13 @@ export const GalleryForm: React.FC<GalleryFormProps> = ({ initialData }) => {
            </div>
         )}
 
-        <div className="space-y-2">
-            <label className="text-sm font-medium text-red-800">Media URL {mediaType === "video" && "(YouTube Link)"}</label>
-            <Input disabled={loading || (mediaType === "image" && uploading)} placeholder={mediaType === "video" ? "https://youtube.com/watch?v=..." : "Uploaded URL will appear here..."} {...register("url", { required: true })} />
-        </div>
+        {mediaType === "video" && (
+          <div className="space-y-2">
+            <label className="text-sm font-medium">YouTube Link</label>
+            <Input disabled={loading} placeholder="https://youtube.com/watch?v=..." {...register("url", { required: true })} />
+          </div>
+        )}
+        {mediaType === "image" && <input type="hidden" {...register("url")} />}
 
         <div className="space-y-2">
             <label className="text-sm font-medium">Date</label>

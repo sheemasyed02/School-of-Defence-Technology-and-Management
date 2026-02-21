@@ -37,7 +37,12 @@ export default async function HomePage() {
       ];
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString();
+    return new Date(dateStr).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "Asia/Kolkata",
+    });
   };
   return (
     <>
